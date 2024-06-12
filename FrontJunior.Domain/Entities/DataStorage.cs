@@ -15,7 +15,6 @@
         public string Column8 { get; set; }
         public string Column9 { get; set; }
         public string Column10 { get; set; }
-        public string Column10 { get; set; }
         public string Column11 { get; set; }
         public string Column12 { get; set; }
         public string Column13 { get; set; }
@@ -26,6 +25,5 @@
         public string Column18 { get; set; }
         public string Column19 { get; set; }
         public string Column20 { get; set; }
-
     }
 }
