@@ -22,8 +22,6 @@
     <Folder Include="UseCases\DataStorageCases\Handlers\CommandHandlers\" />
     <Folder Include="UseCases\DataStorageCases\Handlers\QueryHandlers\" />
     <Folder Include="UseCases\DataStorageCases\Queries\" />
-    <Folder Include="UseCases\TableCases\Handlers\CommandHandlers\" />
-    <Folder Include="UseCases\TableCases\Handlers\QueryHandlers\" />
   </ItemGroup>
 
 </Project>

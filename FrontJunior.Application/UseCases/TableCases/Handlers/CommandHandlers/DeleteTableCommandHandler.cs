@@ -1,46 +1,46 @@
 ﻿using FrontJunior.Application.Abstractions;
-using FrontJunior.Application.UseCases.UserCases.Commands;
+using FrontJunior.Application.UseCases.TableCases.Commands;
 using FrontJunior.Domain.Entities;
 using FrontJunior.Domain.Entities.DTOs;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 
-namespace FrontJunior.Application.UseCases.UserCases.Handlers.CommandHandlers
+namespace FrontJunior.Application.UseCases.TableCases.Handlers.CommandHandlers
 {
-    public class DeleteUserCommandHandler : IRequestHandler<DeleteUserCommand, ResponseModel>
+    public class DeleteTableCommandHandler : IRequestHandler<DeleteTableCommand, ResponseModel>
     {
         private readonly IApplicationDbContext _applicationDbContext;
 
-        public DeleteUserCommandHandler(IApplicationDbContext applicationDbContext)
+        public DeleteTableCommandHandler(IApplicationDbContext applicationDbContext)
         {
             _applicationDbContext = applicationDbContext;
         }
 
-        public async Task<ResponseModel> Handle(DeleteUserCommand request, CancellationToken cancellationToken)
+        public async Task<ResponseModel> Handle(DeleteTableCommand request, CancellationToken cancellationToken)
         {
             try
             {
-                User user = await _applicationDbContext.Users.FirstOrDefaultAsync(u=> u.Id == request.Id);
+                Table table = await _applicationDbContext.Tables.FirstOrDefaultAsync(t => t.Id == request.Id);
 
-                if (user == null)
+                if(table == null)
                 {
                     return new ResponseModel
                     {
                         IsSuccess = false,
                         StatusCode = 404,
-                        Message = "User not found!"
+                        Message = "Table not found!"
                     };
                 }
 
-                user.IsDeleted=true;
-                user.DeletedDate = DateTime.UtcNow;
+                table.IsDeleted=true;
+
                 await _applicationDbContext.SaveChangesAsync(cancellationToken);
 
                 return new ResponseModel
                 {
                     IsSuccess = true,
                     StatusCode = 200,
-                    Message = "User deleted successfully!"
+                    Message = "Table successfully deleted!"
                 };
             }
             catch (Exception ex)

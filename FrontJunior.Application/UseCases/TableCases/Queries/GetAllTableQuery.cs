@@ -1,12 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using FrontJunior.Domain.Entities;
+using MediatR;
 
 namespace FrontJunior.Application.UseCases.TableCases.Queries
 {
-    internal class GetAllTableQuery
+    public class GetAllTableQuery:IRequest<IEnumerable<Table>>
     {
+        public int Page { get; set; }
+        public int Count { get; set; }
     }
 }

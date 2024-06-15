@@ -1,12 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using FrontJunior.Domain.Entities;
+using MediatR;
 
 namespace FrontJunior.Application.UseCases.TableCases.Queries
 {
-    internal class GetTableByIdQuery
+    public class GetTableByIdQuery:IRequest<Table>
     {
+        public Guid Id { get; set; }
     }
 }

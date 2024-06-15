@@ -60,7 +60,7 @@ namespace FrontJunior.Application.UseCases.UserCases.Handlers.CommandHandlers
                 user.SecurityKey=Guid.NewGuid();
                 user.IsDeleted = false;
 
-                _applicationDbContext.Users.Add(user);
+                await _applicationDbContext.Users.AddAsync(user);
                 await _applicationDbContext.SaveChangesAsync(cancellationToken);
 
                 return new ResponseModel

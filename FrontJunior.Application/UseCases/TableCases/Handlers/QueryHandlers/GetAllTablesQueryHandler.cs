@@ -1,25 +1,25 @@
 ﻿using FrontJunior.Application.Abstractions;
-using FrontJunior.Application.UseCases.UserCases.Queries;
+using FrontJunior.Application.UseCases.TableCases.Queries;
 using FrontJunior.Domain.Entities;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 
-namespace FrontJunior.Application.UseCases.UserCases.Handlers.QueryHandlers
+namespace FrontJunior.Application.UseCases.TableCases.Handlers.QueryHandlers
 {
-    public class GetAllUsersQueryHandler : IRequestHandler<GetAllUsersQuery, IEnumerable<User>>
+    public class GetAllTablesQueryHandler : IRequestHandler<GetAllTableQuery, IEnumerable<Table>>
     {
         private readonly IApplicationDbContext _applicationDbContext;
 
-        public GetAllUsersQueryHandler(IApplicationDbContext applicationDbContext)
+        public GetAllTablesQueryHandler(IApplicationDbContext applicationDbContext)
         {
             _applicationDbContext = applicationDbContext;
         }
 
-        public async Task<IEnumerable<User>> Handle(GetAllUsersQuery request, CancellationToken cancellationToken)
+        public async Task<IEnumerable<Table>> Handle(GetAllTableQuery request, CancellationToken cancellationToken)
         {
             try
             {
-                return await _applicationDbContext.Users.Where(u=>u.IsDeleted==false)
+                return await _applicationDbContext.Tables.Where(t => t.IsDeleted == false)
                                                         .Skip(request.Page)
                                                         .Take(request.Count)
                                                         .ToListAsync(cancellationToken);
