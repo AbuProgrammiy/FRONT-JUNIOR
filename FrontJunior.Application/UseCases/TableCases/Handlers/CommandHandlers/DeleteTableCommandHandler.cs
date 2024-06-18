@@ -20,7 +20,7 @@ namespace FrontJunior.Application.UseCases.TableCases.Handlers.CommandHandlers
         {
             try
             {
-                Table table = await _applicationDbContext.Tables.FirstOrDefaultAsync(t => t.Id == request.Id);
+                Table table = await _applicationDbContext.Tables.Where(t=>t.IsDeleted==false).FirstOrDefaultAsync(t => t.Id == request.Id);
 
                 if(table == null)
                 {
@@ -33,6 +33,7 @@ namespace FrontJunior.Application.UseCases.TableCases.Handlers.CommandHandlers
                 }
 
                 table.IsDeleted=true;
+                table.DeletedDate=DateTime.UtcNow;
 
                 await _applicationDbContext.SaveChangesAsync(cancellationToken);
 

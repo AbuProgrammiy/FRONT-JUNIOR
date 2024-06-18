@@ -1,10 +1,12 @@
-﻿namespace FrontJunior.Domain.Entities
+﻿using FrontJunior.Domain.Entities.DTOs;
+using MediatR;
+
+namespace FrontJunior.Application.UseCases.DataStorageCases.Commands
 {
-    public class DataStorage
+    public class CreateDataStorageCommand:IRequest<ResponseModel>
     {
-        public Guid Id { get; set; }
         public bool IsData { get; set; }
-        public Table Table { get; set; }
+        public Guid TableId { get; set; }
         public string? Column1 { get; set; }
         public string? Column2 { get; set; }
         public string? Column3 { get; set; }

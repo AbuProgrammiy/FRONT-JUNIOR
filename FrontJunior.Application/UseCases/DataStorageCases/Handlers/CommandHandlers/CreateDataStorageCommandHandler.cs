@@ -1,27 +1,27 @@
 ﻿using FrontJunior.Application.Abstractions;
-using FrontJunior.Application.UseCases.TableCases.Commands;
+using FrontJunior.Application.UseCases.DataStorageCases.Commands;
 using FrontJunior.Domain.Entities;
 using FrontJunior.Domain.Entities.DTOs;
 using Mapster;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 
-namespace FrontJunior.Application.UseCases.TableCases.Handlers.CommandHandlers
+namespace FrontJunior.Application.UseCases.DataStorageCases.Handlers.CommandHandlers
 {
-    public class UpdateTableCommandHandler : IRequestHandler<UpdateTableCommand, ResponseModel>
+    public class CreateDataStorageCommandHandler : IRequestHandler<CreateDataStorageCommand, ResponseModel>
     {
         private readonly IApplicationDbContext _applicationDbContext;
 
-        public UpdateTableCommandHandler(IApplicationDbContext applicationDbContext)
+        public CreateDataStorageCommandHandler(IApplicationDbContext applicationDbContext)
         {
             _applicationDbContext = applicationDbContext;
         }
 
-        public async Task<ResponseModel> Handle(UpdateTableCommand request, CancellationToken cancellationToken)
+        public async Task<ResponseModel> Handle(CreateDataStorageCommand request, CancellationToken cancellationToken)
         {
             try
             {
-                Table table = await _applicationDbContext.Tables.Where(t=>t.IsDeleted==false).FirstOrDefaultAsync(t => t.Id == request.Id);
+                Table table = await _applicationDbContext.Tables.Where(t => t.IsDeleted == false).FirstOrDefaultAsync(t => t.Id == request.TableId);
 
                 if (table == null)
                 {
@@ -29,22 +29,24 @@ namespace FrontJunior.Application.UseCases.TableCases.Handlers.CommandHandlers
                     {
                         IsSuccess = false,
                         StatusCode = 404,
-                        Message = "Table not found!"
+                        Message = "Table is not found!"
                     };
                 }
 
-                table = request.Adapt<Table>();
+                DataStorage dataStorage = request.Adapt<DataStorage>();
+                dataStorage.Table = table;
 
+                await _applicationDbContext.DataStorage.AddAsync(dataStorage);
                 await _applicationDbContext.SaveChangesAsync(cancellationToken);
 
                 return new ResponseModel
                 {
                     IsSuccess = true,
                     StatusCode = 200,
-                    Message = "Table updated successfuly!"
+                    Message = "DataStorage successfully created!"
                 };
             }
-            catch (Exception ex)
+            catch(Exception ex)
             {
                 return new ResponseModel
                 {

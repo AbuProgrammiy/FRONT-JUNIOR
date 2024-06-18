@@ -17,11 +17,4 @@
     <ProjectReference Include="..\FrontJunior.Domain\FrontJunior.Domain.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="UseCases\DataStorageCases\Commands\" />
-    <Folder Include="UseCases\DataStorageCases\Handlers\CommandHandlers\" />
-    <Folder Include="UseCases\DataStorageCases\Handlers\QueryHandlers\" />
-    <Folder Include="UseCases\DataStorageCases\Queries\" />
-  </ItemGroup>
-
 </Project>

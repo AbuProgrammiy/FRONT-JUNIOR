@@ -4,6 +4,7 @@ using FrontJunior.Domain.Entities;
 using FrontJunior.Domain.Entities.DTOs;
 using Mapster;
 using MediatR;
+using Microsoft.EntityFrameworkCore;
 
 namespace FrontJunior.Application.UseCases.TableCases.Handlers.CommandHandlers
 {
@@ -20,7 +21,9 @@ namespace FrontJunior.Application.UseCases.TableCases.Handlers.CommandHandlers
         {
             try
             {
-                if(_applicationDbContext.Tables.Where(t=>t.User.Id==request.UserId).FirstOrDefault(t=>t.Name==request.Name) != null)
+                Table table = await _applicationDbContext.Tables.Where(t => t.User.Id == request.UserId&&t.IsDeleted==false).FirstOrDefaultAsync(t => t.Name == request.Name);
+
+                if (table != null)
                 {
                     return new ResponseModel
                     {
@@ -30,12 +33,24 @@ namespace FrontJunior.Application.UseCases.TableCases.Handlers.CommandHandlers
                     };
                 }
 
-                Table table=request.Adapt<Table>();
+                User user = await _applicationDbContext.Users.FirstOrDefaultAsync(u => u.Id == request.UserId);
+
+                if (user == null)
+                {
+                    return new ResponseModel
+                    {
+                        IsSuccess = false,
+                        StatusCode = 400,
+                        Message = "User not found!"
+                    };
+                }
+
+                table =request.Adapt<Table>();
                 table.IsDeleted = false;
-                table.User = _applicationDbContext.Users.FirstOrDefault(u => u.Id == request.UserId);
+                table.User = user;
 
                 await _applicationDbContext.Tables.AddAsync(table);
-                _applicationDbContext.SaveChangesAsync(cancellationToken);
+                await _applicationDbContext.SaveChangesAsync(cancellationToken);
 
                 return new ResponseModel
                 {

@@ -1,47 +1,45 @@
 ﻿using FrontJunior.Application.Abstractions;
-using FrontJunior.Application.UseCases.TableCases.Commands;
+using FrontJunior.Application.UseCases.DataStorageCases.Commands;
 using FrontJunior.Domain.Entities;
 using FrontJunior.Domain.Entities.DTOs;
-using Mapster;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 
-namespace FrontJunior.Application.UseCases.TableCases.Handlers.CommandHandlers
+namespace FrontJunior.Application.UseCases.DataStorageCases.Handlers.CommandHandlers
 {
-    public class UpdateTableCommandHandler : IRequestHandler<UpdateTableCommand, ResponseModel>
+    public class DeleteDataStorageCommandHandler : IRequestHandler<DeleteDataStorageCommand, ResponseModel>
     {
         private readonly IApplicationDbContext _applicationDbContext;
 
-        public UpdateTableCommandHandler(IApplicationDbContext applicationDbContext)
+        public DeleteDataStorageCommandHandler(IApplicationDbContext applicationDbContext)
         {
             _applicationDbContext = applicationDbContext;
         }
 
-        public async Task<ResponseModel> Handle(UpdateTableCommand request, CancellationToken cancellationToken)
+        public async Task<ResponseModel> Handle(DeleteDataStorageCommand request, CancellationToken cancellationToken)
         {
             try
             {
-                Table table = await _applicationDbContext.Tables.Where(t=>t.IsDeleted==false).FirstOrDefaultAsync(t => t.Id == request.Id);
+                DataStorage dataStorage = await _applicationDbContext.DataStorage.FirstOrDefaultAsync(d => d.Id == request.Id);
 
-                if (table == null)
+                if (dataStorage == null)
                 {
                     return new ResponseModel
                     {
                         IsSuccess = false,
                         StatusCode = 404,
-                        Message = "Table not found!"
+                        Message = "DataStorage is not found!"
                     };
                 }
 
-                table = request.Adapt<Table>();
-
+                _applicationDbContext.DataStorage.Remove(dataStorage);
                 await _applicationDbContext.SaveChangesAsync(cancellationToken);
 
                 return new ResponseModel
                 {
                     IsSuccess = true,
                     StatusCode = 200,
-                    Message = "Table updated successfuly!"
+                    Message = "DataStorage is successfully deleted!"
                 };
             }
             catch (Exception ex)
