@@ -20,7 +20,8 @@ namespace FrontJunior.Application.UseCases.UserCases.Handlers.QueryHandlers
             try
             {
                 return await _applicationDbContext.Users.Where(u=>u.IsDeleted==false)
-                                                        .Skip(request.Page)
+                                                        .OrderBy(u=>u.CreatedDate)
+                                                        .Skip((request.Page-1)*request.Count)
                                                         .Take(request.Count)
                                                         .ToListAsync(cancellationToken);
             }

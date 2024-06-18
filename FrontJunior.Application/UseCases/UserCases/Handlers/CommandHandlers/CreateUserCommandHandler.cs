@@ -23,8 +23,8 @@ namespace FrontJunior.Application.UseCases.UserCases.Handlers.CommandHandlers
         {
             try
             {
-
-                if (_applicationDbContext.Users.FirstOrDefaultAsync(u => u.Email == request.Email) != null)
+                var rex = await _applicationDbContext.Users.FirstOrDefaultAsync(u => u.Email == request.Email);
+                if (await _applicationDbContext.Users.FirstOrDefaultAsync(u => u.Email == request.Email) != null)
                 {
                     return new ResponseModel
                     {
@@ -34,7 +34,7 @@ namespace FrontJunior.Application.UseCases.UserCases.Handlers.CommandHandlers
                     };
                 }
 
-                if(_applicationDbContext.Users.FirstOrDefaultAsync(u=>u.Username == request.Username) != null)
+                if(await _applicationDbContext.Users.FirstOrDefaultAsync(u=>u.Username == request.Username) != null)
                 {
                     return new ResponseModel
                     {

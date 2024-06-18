@@ -16,3 +16,5 @@ D:\Confidential Station\FrontJunior.Infrastructure\obj\Debug\net8.0\FrontJunior.
 D:\Confidential Station\FrontJunior.Infrastructure\obj\Debug\net8.0\refint\FrontJunior.Infrastructure.dll
 D:\Confidential Station\FrontJunior.Infrastructure\obj\Debug\net8.0\FrontJunior.Infrastructure.pdb
 D:\Confidential Station\FrontJunior.Infrastructure\obj\Debug\net8.0\ref\FrontJunior.Infrastructure.dll
+D:\Confidential Station\FrontJunior.Infrastructure\bin\Debug\net8.0\FrontJunior.Infrastructure.runtimeconfig.json
+D:\Confidential Station\FrontJunior.Infrastructure\obj\Debug\net8.0\FrontJunior.Infrastructure.genruntimeconfig.cache

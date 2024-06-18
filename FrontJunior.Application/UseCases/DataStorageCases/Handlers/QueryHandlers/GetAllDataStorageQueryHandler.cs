@@ -19,7 +19,7 @@ namespace FrontJunior.Application.UseCases.DataStorageCases.Handlers.QueryHandle
         {
             try
             {
-                return await _applicationDbContext.DataStorage.Skip(request.Page)
+                return await _applicationDbContext.DataStorage.Skip((request.Page - 1) * request.Count)
                                                               .Take(request.Count)
                                                               .ToListAsync();
             }

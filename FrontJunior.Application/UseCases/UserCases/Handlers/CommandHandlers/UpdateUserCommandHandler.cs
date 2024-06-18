@@ -23,7 +23,7 @@ namespace FrontJunior.Application.UseCases.UserCases.Handlers.CommandHandlers
         {
             try
             {
-                User user = await _applicationDbContext.Users.FirstOrDefaultAsync(u => u.Id == request.Id);
+                User user = await _applicationDbContext.Users.AsNoTracking().FirstOrDefaultAsync(u => u.Id == request.Id);
            
                 if(user == null)
                 {
@@ -46,6 +46,7 @@ namespace FrontJunior.Application.UseCases.UserCases.Handlers.CommandHandlers
                         HashAlgorithmName.SHA512,
                         64));
 
+                _applicationDbContext.Users.Update(user);
                 await _applicationDbContext.SaveChangesAsync(cancellationToken);
 
                 return new ResponseModel

@@ -19,14 +19,7 @@ namespace FrontJunior.Application.UseCases.DataStorageCases.Handlers.QueryHandle
         {
             try
             {
-                DataStorage dataStorage = await _applicationDbContext.DataStorage.FirstOrDefaultAsync(d => d.Id == request.Id);
-
-                if (dataStorage==null)
-                {
-                    return null;
-                }
-
-                return dataStorage;
+                return await _applicationDbContext.DataStorage.FirstOrDefaultAsync(d => d.Id == request.Id);
             }
             catch (Exception ex)
             {
