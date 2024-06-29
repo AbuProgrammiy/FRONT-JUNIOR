@@ -2,9 +2,6 @@
 {
     public class DataStorage
     {
-        public Guid Id { get; set; }
-        public bool IsData { get; set; }
-        public Table Table { get; set; }
         public string? Column1 { get; set; }
         public string? Column2 { get; set; }
         public string? Column3 { get; set; }
@@ -25,5 +22,8 @@
         public string? Column18 { get; set; }
         public string? Column19 { get; set; }
         public string? Column20 { get; set; }
+        public Guid Id { get; set; }
+        public bool IsData { get; set; }
+        public Table Table { get; set; }
     }
 }

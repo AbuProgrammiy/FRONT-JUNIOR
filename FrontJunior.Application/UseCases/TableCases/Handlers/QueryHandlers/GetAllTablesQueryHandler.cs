@@ -20,9 +20,10 @@ namespace FrontJunior.Application.UseCases.TableCases.Handlers.QueryHandlers
             try
             {
                 return await _applicationDbContext.Tables.Where(t => t.IsDeleted == false)
-                                                        .Skip((request.Page-1)*request.Count)
-                                                        .Take(request.Count)
-                                                        .ToListAsync(cancellationToken);
+                                                         .OrderBy(t => t.CreatedDate)
+                                                         .Skip((request.Page-1)*request.Count)
+                                                         .Take(request.Count)
+                                                         .ToListAsync(cancellationToken);
             }
             catch (Exception ex)
             {

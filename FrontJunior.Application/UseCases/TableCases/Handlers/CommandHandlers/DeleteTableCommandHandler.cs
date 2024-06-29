@@ -32,8 +32,15 @@ namespace FrontJunior.Application.UseCases.TableCases.Handlers.CommandHandlers
                     };
                 }
 
+                List<DataStorage> dataStorages=await _applicationDbContext.DataStorage.Where(d=>d.Table==table).ToListAsync();
+
                 table.IsDeleted=true;
                 table.DeletedDate=DateTime.UtcNow;
+
+                for (int i = 0; i < dataStorages.Count; i++)
+                {
+                    _applicationDbContext.DataStorage.Remove(dataStorages[i]);
+                }
 
                 await _applicationDbContext.SaveChangesAsync(cancellationToken);
 

@@ -46,6 +46,7 @@ namespace FrontJunior.Application.UseCases.TableCases.Handlers.CommandHandlers
                 }
 
                 table =request.Adapt<Table>();
+                table.CreatedDate=DateTime.UtcNow;
                 table.IsDeleted = false;
                 table.User = user;
 
