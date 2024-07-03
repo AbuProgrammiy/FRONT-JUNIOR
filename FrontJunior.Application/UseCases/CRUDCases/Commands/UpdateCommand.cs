@@ -1,11 +1,11 @@
-﻿using FrontJunior.Domain.Entities.DTOs;
+﻿using FrontJunior.Domain.Entities.Models;
 using MediatR;
 
-namespace FrontJunior.Application.UseCases.CRUDCase.Commands
+namespace FrontJunior.Application.UseCases.CRUDCases.Commands
 {
     public class UpdateCommand:IRequest<ResponseModel>
     {
-        public Guid SecurityKey { get; set; }
+        public string SecurityKey { get; set; }
         public string TableName { get; set; }
         public string ColumnName { get; set; }
         public string ColumnValue { get; set; }

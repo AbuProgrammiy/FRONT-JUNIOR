@@ -1,7 +1,7 @@
 ﻿using FrontJunior.Application.Abstractions;
 using FrontJunior.Application.UseCases.TableCases.Commands;
 using FrontJunior.Domain.Entities;
-using FrontJunior.Domain.Entities.DTOs;
+using FrontJunior.Domain.Entities.Models;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 

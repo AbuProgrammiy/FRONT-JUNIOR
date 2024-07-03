@@ -1,11 +1,39 @@
 {
   "Version": 1,
-  "Hash": "PG3SgyDP5q+PdJhrj918fiVjES+fimCi//Fig66VQ0Q=",
+  "Hash": "hnymwiJoARf7CxmkzsNjbxU1xMguDIPtYOAmEfXh8ZU=",
   "Source": "FrontJunior.API",
   "BasePath": "_content/FrontJunior.API",
   "Mode": "Default",
   "ManifestType": "Build",
   "ReferencedProjectsConfiguration": [],
-  "DiscoveryPatterns": [],
-  "Assets": []
+  "DiscoveryPatterns": [
+    {
+      "Name": "FrontJunior.API\\wwwroot",
+      "Source": "FrontJunior.API",
+      "ContentRoot": "D:\\Confidential Station\\FrontJunior.API\\wwwroot\\",
+      "BasePath": "_content/FrontJunior.API",
+      "Pattern": "**"
+    }
+  ],
+  "Assets": [
+    {
+      "Identity": "D:\\Confidential Station\\FrontJunior.API\\wwwroot\\Email\\message.html",
+      "SourceId": "FrontJunior.API",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\Confidential Station\\FrontJunior.API\\wwwroot\\",
+      "BasePath": "_content/FrontJunior.API",
+      "RelativePath": "Email/message.html",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\Email\\message.html"
+    }
+  ]
 }

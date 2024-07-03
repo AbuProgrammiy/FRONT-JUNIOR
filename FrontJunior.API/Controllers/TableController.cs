@@ -1,12 +1,9 @@
-﻿using FrontJunior.Application.UseCases.UserCases.Commands;
-using FrontJunior.Application.UseCases.UserCases.Queries;
-using FrontJunior.Domain.Entities.DTOs;
-using FrontJunior.Domain.Entities;
-using MediatR;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
+﻿using FrontJunior.Application.UseCases.TableCases.Commands;
 using FrontJunior.Application.UseCases.TableCases.Queries;
-using FrontJunior.Application.UseCases.TableCases.Commands;
+using FrontJunior.Domain.Entities;
+using FrontJunior.Domain.Entities.Models;
+using MediatR;
+using Microsoft.AspNetCore.Mvc;
 
 namespace FrontJunior.API.Controllers
 {
@@ -33,6 +30,18 @@ namespace FrontJunior.API.Controllers
         public async Task<Table> GetById(Guid id)
         {
             return await _mediator.Send(new GetTableByIdQuery { Id = id });
+        }
+
+        [HttpGet]
+        [Route("{userId}/{page}/{count}")]
+        public async Task<IEnumerable<Table>> GetTablesByUserId(Guid userId, int page, int count)
+        {
+            return await _mediator.Send(new GetTablesByUserIdQuery
+            {
+                UserId = userId,
+                Page = page,
+                Count = count
+            });
         }
 
         [HttpPost]

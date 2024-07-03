@@ -1,7 +1,7 @@
 ﻿using FrontJunior.Application.Abstractions;
 using FrontJunior.Application.UseCases.DataStorageCases.Commands;
 using FrontJunior.Domain.Entities;
-using FrontJunior.Domain.Entities.DTOs;
+using FrontJunior.Domain.Entities.Models;
 using Mapster;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
@@ -42,7 +42,7 @@ namespace FrontJunior.Application.UseCases.DataStorageCases.Handlers.CommandHand
                 return new ResponseModel
                 {
                     IsSuccess = true,
-                    StatusCode = 200,
+                    StatusCode = 201,
                     Message = "DataStorage successfully created!"
                 };
             }

@@ -1,13 +1,13 @@
 ﻿using FrontJunior.Application.Abstractions;
-using FrontJunior.Application.UseCases.CRUDCase.Commands;
+using FrontJunior.Application.UseCases.CRUDCases.Commands;
 using FrontJunior.Domain.Entities;
-using FrontJunior.Domain.Entities.DTOs;
+using FrontJunior.Domain.Entities.Models;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json.Linq;
 using System.Reflection;
 
-namespace FrontJunior.Application.UseCases.CRUDCase.Handlers.CommandHandlers
+namespace FrontJunior.Application.UseCases.CRUDCases.Handlers.CommandHandlers
 {
     public class CreateComandHandler : IRequestHandler<CreateCommand, ResponseModel>
     {
@@ -62,7 +62,7 @@ namespace FrontJunior.Application.UseCases.CRUDCase.Handlers.CommandHandlers
 
                 for (byte i=0;i<table.ColumnCount;i++)
                 {
-                    value = body.GetValue(columns.GetType().GetProperty(properties[i].Name).GetValue(columns).ToString()).ToString();
+                    value = body.GetValue(columns.GetType().GetProperty(properties[i].Name).GetValue(columns).ToString())?.ToString();
 
                     if (value != null)
                     {

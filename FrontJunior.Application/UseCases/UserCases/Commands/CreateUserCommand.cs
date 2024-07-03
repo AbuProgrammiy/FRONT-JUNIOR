@@ -1,4 +1,4 @@
-﻿using FrontJunior.Domain.Entities.DTOs;
+﻿using FrontJunior.Domain.Entities.Models;
 using MediatR;
 
 namespace FrontJunior.Application.UseCases.UserCases.Commands
@@ -10,6 +10,6 @@ namespace FrontJunior.Application.UseCases.UserCases.Commands
         public string? Username { get; set; }
         public string Email { get; set; }
         public string Password { get; set; }
-        public string Role { get; set; }
+        public string? Role { get; set; }
     }
 }

@@ -1,7 +1,7 @@
 ﻿using FrontJunior.Application.UseCases.UserCases.Commands;
 using FrontJunior.Application.UseCases.UserCases.Queries;
 using FrontJunior.Domain.Entities;
-using FrontJunior.Domain.Entities.DTOs;
+using FrontJunior.Domain.Entities.Models;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
@@ -30,6 +30,24 @@ namespace FrontJunior.API.Controllers
         public async Task<User> GetById(Guid id)
         {
             return await _mediator.Send(new GetUserByIdQuery { Id = id });
+        }
+
+        [HttpPost]
+        public async Task<ResponseModel> VerifyUser(VerifyUserCommand request)
+        {
+            return await _mediator.Send(request);
+        }
+
+        [HttpPost]
+        public async Task<object> Register(RegisterUserCommand request)
+        {
+            return await _mediator.Send(request);
+        }
+
+        [HttpPost]
+        public async Task<object> LogIn(LogUserInCommand request)
+        {
+            return await _mediator.Send(request);
         }
 
         [HttpPost]

@@ -1,4 +1,4 @@
-﻿namespace FrontJunior.Domain.Entities.DTOs
+﻿namespace FrontJunior.Domain.Entities.Models
 {
     public class ResponseModel
     {

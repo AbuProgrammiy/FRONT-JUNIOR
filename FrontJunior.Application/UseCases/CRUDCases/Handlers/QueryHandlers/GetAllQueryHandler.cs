@@ -1,12 +1,12 @@
 ﻿using FrontJunior.Application.Abstractions;
-using FrontJunior.Application.UseCases.CRUDCase.Queries;
+using FrontJunior.Application.UseCases.CRUDCases.Queries;
 using FrontJunior.Domain.Entities;
-using FrontJunior.Domain.Entities.DTOs;
+using FrontJunior.Domain.Entities.Models;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 using System.Reflection;
 
-namespace FrontJunior.Application.UseCases.CRUDCase.Handlers.QueryHandlers
+namespace FrontJunior.Application.UseCases.CRUDCases.Handlers.QueryHandlers
 {
     public class GetAllQueryHandler : IRequestHandler<GetAllQuery, object>
     {
@@ -47,7 +47,18 @@ namespace FrontJunior.Application.UseCases.CRUDCase.Handlers.QueryHandlers
 
                 DataStorage columns = await _applicationDbContext.DataStorage.Where(d => d.IsData == false).FirstOrDefaultAsync(d => d.Table == table);
 
-                List<DataStorage> dataStorages= await _applicationDbContext.DataStorage.Where(d=>d.IsData==true).Skip((request.Page-1)*request.Count).Take(request.Count).ToListAsync();
+                List<DataStorage> dataStorages;
+
+                if (request.Page != null && request.Count != null)
+                {
+                    dataStorages = await _applicationDbContext.DataStorage.Where(d => d.Table == table && d.IsData == true)
+                                                                                            .Skip((request.Page.Value - 1) * request.Count.Value)
+                                                                                            .Take(request.Count.Value).ToListAsync();
+                }
+                else
+                {
+                    dataStorages = await _applicationDbContext.DataStorage.Where(d => d.Table == table && d.IsData == true).ToListAsync();
+                }
 
                 if (dataStorages == null)
                 {
@@ -63,9 +74,10 @@ namespace FrontJunior.Application.UseCases.CRUDCase.Handlers.QueryHandlers
                 {
                     for(byte j=0;j<table.ColumnCount;j++)
                     {
-                        data.Add(properties[j].GetValue(columns).ToString(), properties[j].GetValue(dataStorages[i]).ToString());
+                        data.Add(properties[j].GetValue(columns).ToString(), properties[j].GetValue(dataStorages[i])?.ToString());
                     }
                     datas.Add(data);
+                    data = new Dictionary<string, string>();
                 }
 
                 return datas;

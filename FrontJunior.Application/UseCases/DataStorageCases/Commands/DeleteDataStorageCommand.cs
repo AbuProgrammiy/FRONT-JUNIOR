@@ -1,4 +1,4 @@
-﻿using FrontJunior.Domain.Entities.DTOs;
+﻿using FrontJunior.Domain.Entities.Models;
 using MediatR;
 
 namespace FrontJunior.Application.UseCases.DataStorageCases.Commands

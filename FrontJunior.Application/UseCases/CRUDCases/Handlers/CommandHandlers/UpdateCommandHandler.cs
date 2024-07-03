@@ -1,23 +1,24 @@
 ﻿using FrontJunior.Application.Abstractions;
-using FrontJunior.Application.UseCases.CRUDCase.Queries;
+using FrontJunior.Application.UseCases.CRUDCases.Commands;
 using FrontJunior.Domain.Entities;
-using FrontJunior.Domain.Entities.DTOs;
+using FrontJunior.Domain.Entities.Models;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
+using Newtonsoft.Json.Linq;
 using System.Reflection;
 
-namespace FrontJunior.Application.UseCases.CRUDCase.Handlers.QueryHandlers
+namespace FrontJunior.Application.UseCases.CRUDCases.Handlers.CommandHandlers
 {
-    public class GetByAnyQueryHandler : IRequestHandler<GetByAny, object>
+    public class UpdateCommandHandler : IRequestHandler<UpdateCommand, ResponseModel>
     {
         private readonly IApplicationDbContext _applicationDbContext;
 
-        public GetByAnyQueryHandler(IApplicationDbContext applicationDbContext)
+        public UpdateCommandHandler(IApplicationDbContext applicationDbContext)
         {
             _applicationDbContext = applicationDbContext;
         }
 
-        public async Task<object> Handle(GetByAny request, CancellationToken cancellationToken)
+        public async Task<ResponseModel> Handle(UpdateCommand request, CancellationToken cancellationToken)
         {
             try
             {
@@ -49,13 +50,13 @@ namespace FrontJunior.Application.UseCases.CRUDCase.Handlers.QueryHandlers
 
                 PropertyInfo[] properties = columns.GetType().GetProperties();
 
-                PropertyInfo property = null;
+                PropertyInfo property=null;
 
                 for (byte i = 0; i < table.ColumnCount; i++)
                 {
                     property = columns.GetType()
                                       .GetProperty(properties[i].Name)
-                                      .GetValue(columns) == request.ColumnName ? properties[i] : null;
+                                      .GetValue(columns).ToString() == request.ColumnName ? properties[i] : null;
 
                     if (property != null)
                     {
@@ -73,24 +74,44 @@ namespace FrontJunior.Application.UseCases.CRUDCase.Handlers.QueryHandlers
                     };
                 }
 
-                DataStorage dataStorage = await _applicationDbContext.DataStorage.Where(d => d.IsData == true)
-                                                                                 .FirstOrDefaultAsync(d => d.GetType()
-                                                                                                                      .GetProperty(property.Name)
-                                                                                                                      .GetValue(d) == request.ColumnValue);
+                DataStorage dataStorage = _applicationDbContext.DataStorage.AsEnumerable()
+                                                                           .Where(d => d.IsData == true)
+                                                                           .FirstOrDefault(d => d.GetType()
+                                                                                                           .GetProperty(property.Name)
+                                                                                                           .GetValue(d).ToString() == request.ColumnValue);
 
-                if (dataStorage != null)
+                if (dataStorage == null)
                 {
-                    return null;
+                    return new ResponseModel
+                    {
+                        IsSuccess = false,
+                        StatusCode = 404,
+                        Message = "Data not found to update!"
+                    };
                 }
 
-                Dictionary<string,string> data= new Dictionary<string,string>();
+                JObject body = JObject.Parse(request.Body.ToString());
 
-                for(byte i = 0;i < table.ColumnCount;i++)
+                string value;
+
+                for (byte i = 0; i < table.ColumnCount; i++)
                 {
-                    data.Add(properties[i].GetValue(columns).ToString(), properties[i].GetValue(dataStorage).ToString());
+                    value = body.GetValue(columns.GetType().GetProperty(properties[i].Name).GetValue(columns).ToString())?.ToString();
+
+                    if (value != null)
+                    {
+                        properties[i].SetValue(dataStorage, value);
+                    }
                 }
 
-                return data;
+                await _applicationDbContext.SaveChangesAsync(cancellationToken);
+
+                return new ResponseModel
+                {
+                    IsSuccess = true,
+                    StatusCode = 200,
+                    Message = "Data successfuly updated!"
+                };
             }
             catch (Exception ex)
             {

@@ -1,12 +1,12 @@
 ﻿using FrontJunior.Application.Abstractions;
-using FrontJunior.Application.UseCases.CRUDCase.Commands;
+using FrontJunior.Application.UseCases.CRUDCases.Commands;
 using FrontJunior.Domain.Entities;
-using FrontJunior.Domain.Entities.DTOs;
+using FrontJunior.Domain.Entities.Models;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 using System.Reflection;
 
-namespace FrontJunior.Application.UseCases.CRUDCase.Handlers.CommandHandlers
+namespace FrontJunior.Application.UseCases.CRUDCases.Handlers.CommandHandlers
 {
     public class DeleteCommandHandler : IRequestHandler<DeleteCommand, ResponseModel>
     {
@@ -55,7 +55,7 @@ namespace FrontJunior.Application.UseCases.CRUDCase.Handlers.CommandHandlers
                 {
                     property = columns.GetType()
                                       .GetProperty(properties[i].Name)
-                                      .GetValue(columns) == request.ColumnName ? properties[i] : null;
+                                      .GetValue(columns).ToString() == request.ColumnName ? properties[i] : null;
 
                     if (property != null)
                     {
@@ -73,12 +73,12 @@ namespace FrontJunior.Application.UseCases.CRUDCase.Handlers.CommandHandlers
                     };
                 }
 
-                DataStorage dataStorage = await _applicationDbContext.DataStorage.Where(d => d.IsData == true)
-                                                                                 .FirstOrDefaultAsync(d => d.GetType()
-                                                                                                                     .GetProperty(property.Name)
-                                                                                                                     .GetValue(d) == request.ColumnValue);
+                DataStorage dataStorage = _applicationDbContext.DataStorage.AsEnumerable().Where(d => d.IsData == true)
+                                                                                 .FirstOrDefault(d => d.GetType()
+                                                                                                                 .GetProperty(property.Name)
+                                                                                                                 .GetValue(d).ToString() == request.ColumnValue);
 
-                if (dataStorage != null)
+                if (dataStorage == null)
                 {
                     return new ResponseModel
                     {

@@ -170,8 +170,9 @@ namespace FrontJunior.Infrastructure.Migrations
                         .IsRequired()
                         .HasColumnType("text");
 
-                    b.Property<Guid>("SecurityKey")
-                        .HasColumnType("uuid");
+                    b.Property<string>("SecurityKey")
+                        .IsRequired()
+                        .HasColumnType("text");
 
                     b.Property<string>("Username")
                         .HasColumnType("text");
@@ -179,6 +180,25 @@ namespace FrontJunior.Infrastructure.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Users");
+                });
+
+            modelBuilder.Entity("FrontJunior.Domain.Entities.Verification", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid");
+
+                    b.Property<string>("Email")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("SentPassword")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Verifications");
                 });
 
             modelBuilder.Entity("FrontJunior.Domain.Entities.DataStorage", b =>

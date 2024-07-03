@@ -19,14 +19,8 @@ namespace FrontJunior.Application.UseCases.TableCases.Handlers.QueryHandlers
         {
             try
             {
-                Table table = await _applicationDbContext.Tables.Where(t=>t.IsDeleted==false).FirstOrDefaultAsync(t => t.Id == request.Id);
-
-                if (table == null)
-                {
-                    return null;
-                }
-
-                return table;
+                return await _applicationDbContext.Tables.Where(t=>t.IsDeleted==false)
+                                                           .FirstOrDefaultAsync(t => t.Id == request.Id);
             }
 
             catch (Exception ex)

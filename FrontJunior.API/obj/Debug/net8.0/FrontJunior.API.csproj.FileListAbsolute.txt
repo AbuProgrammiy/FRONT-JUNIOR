@@ -114,3 +114,10 @@ D:\Confidential Station\FrontJunior.API\bin\Debug\net8.0\FrontJunior.Infrastruct
 D:\Confidential Station\FrontJunior.API\bin\Debug\net8.0\FrontJunior.Infrastructure.pdb
 D:\Confidential Station\FrontJunior.API\bin\Debug\net8.0\FrontJunior.Application.pdb
 D:\Confidential Station\FrontJunior.API\bin\Debug\net8.0\FrontJunior.Domain.pdb
+D:\Confidential Station\FrontJunior.API\bin\Debug\net8.0\Newtonsoft.Json.dll
+D:\Confidential Station\FrontJunior.API\bin\Debug\net8.0\FrontJunior.API.staticwebassets.runtime.json
+D:\Confidential Station\FrontJunior.API\bin\Debug\net8.0\Microsoft.IdentityModel.Abstractions.dll
+D:\Confidential Station\FrontJunior.API\bin\Debug\net8.0\Microsoft.IdentityModel.JsonWebTokens.dll
+D:\Confidential Station\FrontJunior.API\bin\Debug\net8.0\Microsoft.IdentityModel.Logging.dll
+D:\Confidential Station\FrontJunior.API\bin\Debug\net8.0\Microsoft.IdentityModel.Tokens.dll
+D:\Confidential Station\FrontJunior.API\bin\Debug\net8.0\System.IdentityModel.Tokens.Jwt.dll
