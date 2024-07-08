@@ -1,6 +1,5 @@
 ﻿using FrontJunior.Application.Abstractions;
 using FrontJunior.Application.Services.AuthServices;
-using FrontJunior.Application.Services.PasswordServices;
 using FrontJunior.Application.UseCases.UserCases.Commands;
 using FrontJunior.Domain.Entities;
 using FrontJunior.Domain.Entities.Models;
@@ -35,6 +34,16 @@ namespace FrontJunior.Application.UseCases.UserCases.Handlers.CommandHandlers
                         IsSuccess = false,
                         StatusCode = 404,
                         Message = "Email not found!"
+                    };
+                }
+
+                if(verification.SentPassword!=request.SentPassword)
+                {
+                    return new ResponseModel
+                    {
+                        IsSuccess = false,
+                        StatusCode = 400,
+                        Message = "Password is incorrect!"
                     };
                 }
 

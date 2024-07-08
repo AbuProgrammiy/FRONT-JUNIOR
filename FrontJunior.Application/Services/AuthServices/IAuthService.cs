@@ -1,9 +1,10 @@
 ﻿using FrontJunior.Domain.Entities;
+using FrontJunior.Domain.Entities.Models;
 
 namespace FrontJunior.Application.Services.AuthServices
 {
     public interface IAuthService
     {
-        public string GenerateToken(User user);
+        public TokenModel GenerateToken(User user);
     }
 }

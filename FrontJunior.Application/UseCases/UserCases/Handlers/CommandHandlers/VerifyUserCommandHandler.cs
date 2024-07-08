@@ -36,6 +36,13 @@ namespace FrontJunior.Application.UseCases.UserCases.Handlers.CommandHandlers
                 };
             }
 
+            Verification verification=await _applicationDbContext.Verifications.FirstOrDefaultAsync(v=>v.Email == request.Email);
+
+            if (verification!=null)
+            {
+                _applicationDbContext.Verifications.Remove(verification);
+            }
+
             Random random = new Random();
 
             string password = random.Next(100000, 999999).ToString();

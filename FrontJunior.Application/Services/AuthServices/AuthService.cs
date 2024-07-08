@@ -4,7 +4,8 @@ using System.Globalization;
 using System.Security.Claims;
 using System.Text;
 using System.IdentityModel.Tokens.Jwt;
-using Microsoft.IdentityModel.Tokens;     
+using Microsoft.IdentityModel.Tokens;
+using FrontJunior.Domain.Entities.Models;
 
 namespace FrontJunior.Application.Services.AuthServices
 {
@@ -16,7 +17,7 @@ namespace FrontJunior.Application.Services.AuthServices
             _config = config;
         }
 
-        public string GenerateToken(User user)
+        public TokenModel GenerateToken(User user)
         {
             SymmetricSecurityKey securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_config["JWT:SecretKey"]!));
             SigningCredentials credentials = new SigningCredentials(securityKey, SecurityAlgorithms.HmacSha256);
@@ -38,7 +39,11 @@ namespace FrontJunior.Application.Services.AuthServices
                 expires: DateTime.UtcNow.AddMinutes(expirePeriod),
                 signingCredentials: credentials);
 
-            return new JwtSecurityTokenHandler().WriteToken(token);
+            return new TokenModel
+            {
+                Token = new JwtSecurityTokenHandler().WriteToken(token)
+            };
+
         }
     }
 }
