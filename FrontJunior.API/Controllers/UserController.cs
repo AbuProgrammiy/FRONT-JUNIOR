@@ -33,7 +33,7 @@ namespace FrontJunior.API.Controllers
         }
 
         [HttpPost]
-        public async Task<ResponseModel> VerifyUser(VerifyUserCommand request)
+        public async Task<ResponseModel> SendVerificationToUser(SendVerificationToUserCommand request)
         {
             return await _mediator.Send(request);
         }
@@ -46,6 +46,12 @@ namespace FrontJunior.API.Controllers
 
         [HttpPost]
         public async Task<object> LogIn(LogUserInCommand request)
+        {
+            return await _mediator.Send(request);
+        }
+
+        [HttpPost]
+        public async Task<object> ResetPassword(ResetUserPasswordCommand request)
         {
             return await _mediator.Send(request);
         }
