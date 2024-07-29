@@ -32,7 +32,7 @@ namespace FrontJunior.Application.UseCases.UserCases.Handlers.CommandHandlers
                     {
                         IsSuccess = false,
                         StatusCode = 404,
-                        Message = "User not found!"
+                        Response = "User not found!"
                     };
                 }
 
@@ -50,7 +50,7 @@ namespace FrontJunior.Application.UseCases.UserCases.Handlers.CommandHandlers
                 {
                     IsSuccess = true,
                     StatusCode = 200,
-                    Message = "User updated successfully!"
+                    Response = "User updated successfully!"
                 };
             }
             catch (Exception ex)
@@ -59,7 +59,7 @@ namespace FrontJunior.Application.UseCases.UserCases.Handlers.CommandHandlers
                 {
                     IsSuccess = false,
                     StatusCode = 500,
-                    Message = $"Something went wrong: {ex.Message}"
+                    Response = $"Something went wrong: {ex.Message}"
                 };
             }
         }

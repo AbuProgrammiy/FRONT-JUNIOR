@@ -29,7 +29,7 @@ namespace FrontJunior.Application.UseCases.CRUDCases.Handlers.CommandHandlers
                     {
                         IsSuccess = false,
                         StatusCode = 404,
-                        Message = "User not found!"
+                        Response = "User not found!"
                     };
                 }
 
@@ -41,7 +41,7 @@ namespace FrontJunior.Application.UseCases.CRUDCases.Handlers.CommandHandlers
                     {
                         IsSuccess = false,
                         StatusCode = 404,
-                        Message = "Table not found!"
+                        Response = "Table not found!"
                     };
                 }
 
@@ -69,7 +69,7 @@ namespace FrontJunior.Application.UseCases.CRUDCases.Handlers.CommandHandlers
                     {
                         IsSuccess = false,
                         StatusCode = 404,
-                        Message = "Column of data not found to delete!"
+                        Response = "Column of data not found to delete!"
                     };
                 }
 
@@ -84,7 +84,7 @@ namespace FrontJunior.Application.UseCases.CRUDCases.Handlers.CommandHandlers
                     {
                         IsSuccess = false,
                         StatusCode = 404,
-                        Message = "Data not found to delete!"
+                        Response = "Data not found to delete!"
                     };
                 }
 
@@ -95,7 +95,7 @@ namespace FrontJunior.Application.UseCases.CRUDCases.Handlers.CommandHandlers
                 {
                     IsSuccess = true,
                     StatusCode = 200,
-                    Message = "Data successfuly deleted!"
+                    Response = "Data successfuly deleted!"
                 };
             }
             catch (Exception ex)
@@ -104,7 +104,7 @@ namespace FrontJunior.Application.UseCases.CRUDCases.Handlers.CommandHandlers
                 {
                     IsSuccess = false,
                     StatusCode = 500,
-                    Message = $"Something went wrong!: {ex.Message}"
+                    Response = $"Something went wrong!: {ex.Message}"
                 };
             }
         }

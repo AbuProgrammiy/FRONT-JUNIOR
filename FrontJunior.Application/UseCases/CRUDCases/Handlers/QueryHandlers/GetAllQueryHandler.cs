@@ -29,7 +29,7 @@ namespace FrontJunior.Application.UseCases.CRUDCases.Handlers.QueryHandlers
                     {
                         IsSuccess = false,
                         StatusCode = 404,
-                        Message = "User not found!"
+                        Response = "User not found!"
                     };
                 }
 
@@ -41,7 +41,7 @@ namespace FrontJunior.Application.UseCases.CRUDCases.Handlers.QueryHandlers
                     {
                         IsSuccess = false,
                         StatusCode = 404,
-                        Message = "Table not found!"
+                        Response = "Table not found!"
                     };
                 }
 
@@ -88,7 +88,7 @@ namespace FrontJunior.Application.UseCases.CRUDCases.Handlers.QueryHandlers
                 {
                     IsSuccess = false,
                     StatusCode = 500,
-                    Message = $"Something went wrong!: {ex.Message}"
+                    Response = $"Something went wrong!: {ex.Message}"
                 };
             }
         }

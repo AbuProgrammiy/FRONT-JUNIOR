@@ -29,7 +29,7 @@ namespace FrontJunior.Application.UseCases.UserCases.Handlers.CommandHandlers
                     {
                         IsSuccess = false,
                         StatusCode = 404,
-                        Message = "Email not found!"
+                        Response = "Email not found!"
                     };
                 }
 
@@ -39,7 +39,7 @@ namespace FrontJunior.Application.UseCases.UserCases.Handlers.CommandHandlers
                     {
                         IsSuccess = false,
                         StatusCode = 400,
-                        Message = "Password is incorrect!"
+                        Response = "Password is incorrect!"
                     };
                 }
 
@@ -47,7 +47,7 @@ namespace FrontJunior.Application.UseCases.UserCases.Handlers.CommandHandlers
                 {
                     IsSuccess = true,
                     StatusCode = 200,
-                    Message = "User is successfully verified!"
+                    Response = "User is successfully verified!"
                 };
             }
             catch (Exception ex)
@@ -56,7 +56,7 @@ namespace FrontJunior.Application.UseCases.UserCases.Handlers.CommandHandlers
                 {
                     IsSuccess = false,
                     StatusCode = 500,
-                    Message = $"Something went wrong: {ex.Message}"
+                    Response = $"Something went wrong: {ex.Message}"
                 };
             }
         }

@@ -58,7 +58,7 @@ namespace FrontJunior.Application.UseCases.UserCases.Handlers.CommandHandlers
                 {
                     IsSuccess = false,
                     StatusCode = 500,
-                    Message = $"Something went wrong: {ex.Message}"
+                    Response = $"Something went wrong: {ex.Message}"
                 };
             }
         }

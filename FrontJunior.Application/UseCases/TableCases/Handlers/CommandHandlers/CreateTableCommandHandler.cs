@@ -29,7 +29,7 @@ namespace FrontJunior.Application.UseCases.TableCases.Handlers.CommandHandlers
                     {
                         IsSuccess = false,
                         StatusCode = 400,
-                        Message = "Table already exists!"
+                        Response = "Table already exists!"
                     };
                 }
 
@@ -41,7 +41,7 @@ namespace FrontJunior.Application.UseCases.TableCases.Handlers.CommandHandlers
                     {
                         IsSuccess = false,
                         StatusCode = 400,
-                        Message = "User not found!"
+                        Response = "User not found!"
                     };
                 }
 
@@ -53,11 +53,13 @@ namespace FrontJunior.Application.UseCases.TableCases.Handlers.CommandHandlers
                 await _applicationDbContext.Tables.AddAsync(table);
                 await _applicationDbContext.SaveChangesAsync(cancellationToken);
 
+                table = await _applicationDbContext.Tables.FirstOrDefaultAsync(t => t.User == table.User && t.Name == table.Name);
+
                 return new ResponseModel
                 {
                     IsSuccess = true,
                     StatusCode = 201,
-                    Message = "Table is succesfully created!"
+                    Response = table.Id.ToString()
                 };
             }
             catch (Exception ex)
@@ -66,7 +68,7 @@ namespace FrontJunior.Application.UseCases.TableCases.Handlers.CommandHandlers
                 {
                     IsSuccess = false,
                     StatusCode = 500,
-                    Message = $"Something went wrong: {ex.Message}"
+                    Response = $"Something went wrong: {ex.Message}"
                 };
             }
         }

@@ -45,7 +45,7 @@ namespace FrontJunior.Application.Services.EmailServices
                 {
                     IsSuccess = true,
                     StatusCode = 200,
-                    Message = "Email Succesfully sent to user!"
+                    Response = "Email Succesfully sent to user!"
                 };
             }
             catch (Exception ex)
@@ -54,7 +54,7 @@ namespace FrontJunior.Application.Services.EmailServices
                 {
                     IsSuccess = false,
                     StatusCode = 500,
-                    Message = $"Something went wrong!: {ex.Message}"
+                    Response = $"Something went wrong!: {ex.Message}"
                 };
             }
         }

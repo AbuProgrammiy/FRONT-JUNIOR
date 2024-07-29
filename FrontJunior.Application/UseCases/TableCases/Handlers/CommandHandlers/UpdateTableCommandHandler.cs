@@ -29,7 +29,7 @@ namespace FrontJunior.Application.UseCases.TableCases.Handlers.CommandHandlers
                     {
                         IsSuccess = false,
                         StatusCode = 404,
-                        Message = "Table not found!"
+                        Response = "Table not found!"
                     };
                 }
 
@@ -41,7 +41,7 @@ namespace FrontJunior.Application.UseCases.TableCases.Handlers.CommandHandlers
                 {
                     IsSuccess = true,
                     StatusCode = 200,
-                    Message = "Table updated successfuly!"
+                    Response = "Table updated successfuly!"
                 };
             }
             catch (Exception ex)
@@ -50,7 +50,7 @@ namespace FrontJunior.Application.UseCases.TableCases.Handlers.CommandHandlers
                 {
                     IsSuccess = false,
                     StatusCode = 500,
-                    Message = $"Something went wrong: {ex.Message}"
+                    Response = $"Something went wrong: {ex.Message}"
                 };
             }
         }

@@ -27,13 +27,13 @@ namespace FrontJunior.Application.UseCases.UserCases.Handlers.CommandHandlers
         {
             User user = await _applicationDbContext.Users.FirstOrDefaultAsync(u => u.Email == request.Email);
 
-            if (request.IsPasswordForgotten==null||request.IsPasswordForgotten==false&&user!=null)
+            if (request.IsPasswordForgotten == null && user != null || request.IsPasswordForgotten == false && user != null)
             {
                 return new ResponseModel
                 {
                     IsSuccess = false,
                     StatusCode = 400,
-                    Message = "Email is already taken!"
+                    Response = "Email is already taken!"
                 };
             }
             else if(request.IsPasswordForgotten==true&&user ==null)
@@ -42,7 +42,7 @@ namespace FrontJunior.Application.UseCases.UserCases.Handlers.CommandHandlers
                 {
                     IsSuccess = false,
                     StatusCode = 404,
-                    Message = "Email not resgistered yet!!"
+                    Response = "Email not resgistered yet!!"
                 };
             }
             

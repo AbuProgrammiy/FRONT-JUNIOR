@@ -32,7 +32,7 @@ namespace FrontJunior.Application.UseCases.UserCases.Handlers.CommandHandlers
                     {
                         IsSuccess = false,
                         StatusCode = 400,
-                        Message = "Email is already taken!"
+                        Response = "Email is already taken!"
                     };
                 }
 
@@ -42,7 +42,7 @@ namespace FrontJunior.Application.UseCases.UserCases.Handlers.CommandHandlers
                     {
                         IsSuccess = false,
                         StatusCode = 400,
-                        Message = "Username is already taken!"
+                        Response = "Username is already taken!"
                     };
                 }
 
@@ -65,7 +65,7 @@ namespace FrontJunior.Application.UseCases.UserCases.Handlers.CommandHandlers
                 {
                     IsSuccess = true,
                     StatusCode = 201,
-                    Message = "Successfuly created!"
+                    Response = "Successfuly created!"
                 };
             }
             catch (Exception ex)
@@ -74,7 +74,7 @@ namespace FrontJunior.Application.UseCases.UserCases.Handlers.CommandHandlers
                 {
                     IsSuccess = false,
                     StatusCode = 500,
-                    Message = $"Something went wrong!: {ex.Message}"
+                    Response = $"Something went wrong!: {ex.Message}"
                 };
             }
         }

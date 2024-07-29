@@ -29,7 +29,7 @@ namespace FrontJunior.Application.UseCases.DataStorageCases.Handlers.CommandHand
                     {
                         IsSuccess = false,
                         StatusCode = 404,
-                        Message = "Table is not found!"
+                        Response = "Table is not found!"
                     };
                 }
 
@@ -43,7 +43,7 @@ namespace FrontJunior.Application.UseCases.DataStorageCases.Handlers.CommandHand
                 {
                     IsSuccess = true,
                     StatusCode = 201,
-                    Message = "DataStorage successfully created!"
+                    Response = "DataStorage successfully created!"
                 };
             }
             catch(Exception ex)
@@ -52,7 +52,7 @@ namespace FrontJunior.Application.UseCases.DataStorageCases.Handlers.CommandHand
                 {
                     IsSuccess = false,
                     StatusCode = 500,
-                    Message = $"Something went wrong: {ex.Message}"
+                    Response = $"Something went wrong: {ex.Message}"
                 };
             }
         }
