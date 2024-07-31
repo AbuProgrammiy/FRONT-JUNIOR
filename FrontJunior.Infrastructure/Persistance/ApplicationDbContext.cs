@@ -1,4 +1,5 @@
-﻿using FrontJunior.Application.Abstractions;
+﻿using Castle.Core.Configuration;
+using FrontJunior.Application.Abstractions;
 using FrontJunior.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 

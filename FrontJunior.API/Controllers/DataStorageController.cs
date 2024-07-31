@@ -41,7 +41,7 @@ namespace FrontJunior.API.Controllers
 
         [HttpGet]
         [Route("{tableId}")]
-        public async Task<IEnumerable<DataStorage>> GetByTableId(Guid tableId)
+        public async Task<DataStorage> GetColumnsByTableId(Guid tableId)
         {
             return await _mediator.Send(new GetDataStorageByTableIdQuery { TableId = tableId });
         }

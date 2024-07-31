@@ -1,10 +1,12 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
+using System.Text.Json.Serialization;
 
 namespace FrontJunior.Domain.Entities
 {
     public class Table
     {
         public Guid Id { get; set; }
+        [JsonIgnore]
         public virtual User User { get; set; }
         public string Name { get; set; }
         public byte ColumnCount { get; set; }

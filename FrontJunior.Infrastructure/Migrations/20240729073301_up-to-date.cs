@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace FrontJunior.Infrastructure.Migrations
 {
     /// <inheritdoc />
-    public partial class first : Migration
+    public partial class uptodate : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -16,14 +16,14 @@ namespace FrontJunior.Infrastructure.Migrations
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uuid", nullable: false),
-                    FirstName = table.Column<string>(type: "text", nullable: false),
-                    LastName = table.Column<string>(type: "text", nullable: false),
-                    Username = table.Column<string>(type: "text", nullable: false),
+                    FirstName = table.Column<string>(type: "text", nullable: true),
+                    LastName = table.Column<string>(type: "text", nullable: true),
+                    Username = table.Column<string>(type: "text", nullable: true),
                     Email = table.Column<string>(type: "text", nullable: false),
                     PasswordHash = table.Column<string>(type: "text", nullable: false),
                     PassworSalt = table.Column<byte[]>(type: "bytea", nullable: false),
                     Role = table.Column<string>(type: "text", nullable: false),
-                    SecurityKey = table.Column<Guid>(type: "uuid", nullable: false),
+                    SecurityKey = table.Column<string>(type: "text", nullable: false),
                     CreatedDate = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
                     DeletedDate = table.Column<DateTime>(type: "timestamp with time zone", nullable: true),
                     IsDeleted = table.Column<bool>(type: "boolean", nullable: false)
@@ -31,6 +31,19 @@ namespace FrontJunior.Infrastructure.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Users", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Verifications",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "uuid", nullable: false),
+                    Email = table.Column<string>(type: "text", nullable: false),
+                    SentPassword = table.Column<string>(type: "text", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Verifications", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -42,7 +55,7 @@ namespace FrontJunior.Infrastructure.Migrations
                     Name = table.Column<string>(type: "text", nullable: false),
                     ColumnCount = table.Column<byte>(type: "smallint", nullable: false),
                     CreatedDate = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
-                    DeletedDate = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
+                    DeletedDate = table.Column<DateTime>(type: "timestamp with time zone", nullable: true),
                     IsDeleted = table.Column<bool>(type: "boolean", nullable: false)
                 },
                 constraints: table =>
@@ -61,8 +74,6 @@ namespace FrontJunior.Infrastructure.Migrations
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uuid", nullable: false),
-                    IsData = table.Column<bool>(type: "boolean", nullable: false),
-                    TableId = table.Column<Guid>(type: "uuid", nullable: false),
                     Column1 = table.Column<string>(type: "text", nullable: true),
                     Column2 = table.Column<string>(type: "text", nullable: true),
                     Column3 = table.Column<string>(type: "text", nullable: true),
@@ -82,7 +93,9 @@ namespace FrontJunior.Infrastructure.Migrations
                     Column17 = table.Column<string>(type: "text", nullable: true),
                     Column18 = table.Column<string>(type: "text", nullable: true),
                     Column19 = table.Column<string>(type: "text", nullable: true),
-                    Column20 = table.Column<string>(type: "text", nullable: true)
+                    Column20 = table.Column<string>(type: "text", nullable: true),
+                    IsData = table.Column<bool>(type: "boolean", nullable: false),
+                    TableId = table.Column<Guid>(type: "uuid", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -111,6 +124,9 @@ namespace FrontJunior.Infrastructure.Migrations
         {
             migrationBuilder.DropTable(
                 name: "DataStorage");
+
+            migrationBuilder.DropTable(
+                name: "Verifications");
 
             migrationBuilder.DropTable(
                 name: "Tables");

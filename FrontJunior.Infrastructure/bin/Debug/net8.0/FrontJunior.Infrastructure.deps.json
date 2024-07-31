@@ -9,12 +9,24 @@
       "FrontJunior.Infrastructure/1.0.0": {
         "dependencies": {
           "FrontJunior.Application": "1.0.0",
+          "Microsoft.EntityFrameworkCore.Proxies": "8.0.7",
           "Microsoft.EntityFrameworkCore.Tools": "8.0.6",
           "Microsoft.Extensions.Configuration": "8.0.0",
           "Npgsql.EntityFrameworkCore.PostgreSQL": "8.0.4"
         },
         "runtime": {
           "FrontJunior.Infrastructure.dll": {}
+        }
+      },
+      "Castle.Core/5.1.1": {
+        "dependencies": {
+          "System.Diagnostics.EventLog": "6.0.0"
+        },
+        "runtime": {
+          "lib/net6.0/Castle.Core.dll": {
+            "assemblyVersion": "5.0.0.0",
+            "fileVersion": "5.1.1.0"
+          }
         }
       },
       "Humanizer.Core/2.14.1": {
@@ -304,29 +316,29 @@
           }
         }
       },
-      "Microsoft.EntityFrameworkCore/8.0.6": {
+      "Microsoft.EntityFrameworkCore/8.0.7": {
         "dependencies": {
-          "Microsoft.EntityFrameworkCore.Abstractions": "8.0.6",
-          "Microsoft.EntityFrameworkCore.Analyzers": "8.0.6",
+          "Microsoft.EntityFrameworkCore.Abstractions": "8.0.7",
+          "Microsoft.EntityFrameworkCore.Analyzers": "8.0.7",
           "Microsoft.Extensions.Caching.Memory": "8.0.0",
           "Microsoft.Extensions.Logging": "8.0.0"
         },
         "runtime": {
           "lib/net8.0/Microsoft.EntityFrameworkCore.dll": {
-            "assemblyVersion": "8.0.6.0",
-            "fileVersion": "8.0.624.26904"
+            "assemblyVersion": "8.0.7.0",
+            "fileVersion": "8.0.724.31404"
           }
         }
       },
-      "Microsoft.EntityFrameworkCore.Abstractions/8.0.6": {
+      "Microsoft.EntityFrameworkCore.Abstractions/8.0.7": {
         "runtime": {
           "lib/net8.0/Microsoft.EntityFrameworkCore.Abstractions.dll": {
-            "assemblyVersion": "8.0.6.0",
-            "fileVersion": "8.0.624.26904"
+            "assemblyVersion": "8.0.7.0",
+            "fileVersion": "8.0.724.31404"
           }
         }
       },
-      "Microsoft.EntityFrameworkCore.Analyzers/8.0.6": {},
+      "Microsoft.EntityFrameworkCore.Analyzers/8.0.7": {},
       "Microsoft.EntityFrameworkCore.Design/8.0.6": {
         "dependencies": {
           "Humanizer.Core": "2.14.1",
@@ -342,9 +354,21 @@
           }
         }
       },
+      "Microsoft.EntityFrameworkCore.Proxies/8.0.7": {
+        "dependencies": {
+          "Castle.Core": "5.1.1",
+          "Microsoft.EntityFrameworkCore": "8.0.7"
+        },
+        "runtime": {
+          "lib/net8.0/Microsoft.EntityFrameworkCore.Proxies.dll": {
+            "assemblyVersion": "8.0.7.0",
+            "fileVersion": "8.0.724.31404"
+          }
+        }
+      },
       "Microsoft.EntityFrameworkCore.Relational/8.0.6": {
         "dependencies": {
-          "Microsoft.EntityFrameworkCore": "8.0.6",
+          "Microsoft.EntityFrameworkCore": "8.0.7",
           "Microsoft.Extensions.Configuration.Abstractions": "8.0.0"
         },
         "runtime": {
@@ -556,8 +580,8 @@
       },
       "Npgsql.EntityFrameworkCore.PostgreSQL/8.0.4": {
         "dependencies": {
-          "Microsoft.EntityFrameworkCore": "8.0.6",
-          "Microsoft.EntityFrameworkCore.Abstractions": "8.0.6",
+          "Microsoft.EntityFrameworkCore": "8.0.7",
+          "Microsoft.EntityFrameworkCore.Abstractions": "8.0.7",
           "Microsoft.EntityFrameworkCore.Relational": "8.0.6",
           "Npgsql": "8.0.3"
         },
@@ -641,6 +665,28 @@
           }
         }
       },
+      "System.Diagnostics.EventLog/6.0.0": {
+        "runtime": {
+          "lib/net6.0/System.Diagnostics.EventLog.dll": {
+            "assemblyVersion": "6.0.0.0",
+            "fileVersion": "6.0.21.52210"
+          }
+        },
+        "runtimeTargets": {
+          "runtimes/win/lib/net6.0/System.Diagnostics.EventLog.Messages.dll": {
+            "rid": "win",
+            "assetType": "runtime",
+            "assemblyVersion": "6.0.0.0",
+            "fileVersion": "0.0.0.0"
+          },
+          "runtimes/win/lib/net6.0/System.Diagnostics.EventLog.dll": {
+            "rid": "win",
+            "assetType": "runtime",
+            "assemblyVersion": "6.0.0.0",
+            "fileVersion": "6.0.21.52210"
+          }
+        }
+      },
       "System.IdentityModel.Tokens.Jwt/7.6.2": {
         "dependencies": {
           "Microsoft.IdentityModel.JsonWebTokens": "7.6.2",
@@ -685,7 +731,7 @@
           "Mapster": "7.4.0",
           "MediatR": "11.0.0",
           "MediatR.Extensions.Microsoft.DependencyInjection": "11.0.0",
-          "Microsoft.EntityFrameworkCore": "8.0.6",
+          "Microsoft.EntityFrameworkCore": "8.0.7",
           "Microsoft.Extensions.Configuration": "8.0.0",
           "Microsoft.IdentityModel.Tokens": "7.6.2",
           "Newtonsoft.Json": "13.0.3",
@@ -707,6 +753,13 @@
       "type": "project",
       "serviceable": false,
       "sha512": ""
+    },
+    "Castle.Core/5.1.1": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-rpYtIczkzGpf+EkZgDr9CClTdemhsrwA/W5hMoPjLkRFnXzH44zDLoovXeKtmxb1ykXK9aJVODSpiJml8CTw2g==",
+      "path": "castle.core/5.1.1",
+      "hashPath": "castle.core.5.1.1.nupkg.sha512"
     },
     "Humanizer.Core/2.14.1": {
       "type": "package",
@@ -792,26 +845,26 @@
       "path": "microsoft.codeanalysis.workspaces.common/4.5.0",
       "hashPath": "microsoft.codeanalysis.workspaces.common.4.5.0.nupkg.sha512"
     },
-    "Microsoft.EntityFrameworkCore/8.0.6": {
+    "Microsoft.EntityFrameworkCore/8.0.7": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-Ms5e5QuBAjVIuQsGumeLvkgMiOpnj6wxPvwBIoe1NfTkseWK4NZYztnhgDlpkCPkrUmJEXLv69kl349Ours30Q==",
-      "path": "microsoft.entityframeworkcore/8.0.6",
-      "hashPath": "microsoft.entityframeworkcore.8.0.6.nupkg.sha512"
+      "sha512": "sha512-UOyPNAgyzw/E4hUCurqvZxi0WWVLQAGZuntFPzkTXtvJLTqRjKvokvhv+XazAUSODLsU1DZ67GjZ4mT9d82+0g==",
+      "path": "microsoft.entityframeworkcore/8.0.7",
+      "hashPath": "microsoft.entityframeworkcore.8.0.7.nupkg.sha512"
     },
-    "Microsoft.EntityFrameworkCore.Abstractions/8.0.6": {
+    "Microsoft.EntityFrameworkCore.Abstractions/8.0.7": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-X7wSSBNFRuN8j8M9HDYG7rPpEeyhY+PdJZR9rftmgvsZH0eK5+bZ3b3As8iO4rLEpjsBzDnrgSIY6q2F3HQatw==",
-      "path": "microsoft.entityframeworkcore.abstractions/8.0.6",
-      "hashPath": "microsoft.entityframeworkcore.abstractions.8.0.6.nupkg.sha512"
+      "sha512": "sha512-DHX6nxcg4/tpWfTjAleKrXveDiNFY/OGOK6nm27GipUXNI2Uofev9cH5SYXmtGIgHWxlvfn754TXN4WnrixOwg==",
+      "path": "microsoft.entityframeworkcore.abstractions/8.0.7",
+      "hashPath": "microsoft.entityframeworkcore.abstractions.8.0.7.nupkg.sha512"
     },
-    "Microsoft.EntityFrameworkCore.Analyzers/8.0.6": {
+    "Microsoft.EntityFrameworkCore.Analyzers/8.0.7": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-fDNtuQ4lAaPaCOlsrwUck/GvnF4QLeDpMmE1L5QtxZpMSmWfnL2/vk8sDL9OVTWcfprooI9V5MNpIx3/Tq5ehg==",
-      "path": "microsoft.entityframeworkcore.analyzers/8.0.6",
-      "hashPath": "microsoft.entityframeworkcore.analyzers.8.0.6.nupkg.sha512"
+      "sha512": "sha512-nerD0vEOYJVhVapamRVH9DrUYbDNMJ5bPfWze4SibDDaDaekzgwQqBht97/tV+8pgdKoPAXmtiJsB+lDajwVrQ==",
+      "path": "microsoft.entityframeworkcore.analyzers/8.0.7",
+      "hashPath": "microsoft.entityframeworkcore.analyzers.8.0.7.nupkg.sha512"
     },
     "Microsoft.EntityFrameworkCore.Design/8.0.6": {
       "type": "package",
@@ -819,6 +872,13 @@
       "sha512": "sha512-4OT+mH+8EB4Kfn1ENpDx2Ssx459j200gvdhDOKq5lkHmHzkRpmEDKS5GfqaLZvBLJKWu1FVGQ7Wnczcjb0hX4g==",
       "path": "microsoft.entityframeworkcore.design/8.0.6",
       "hashPath": "microsoft.entityframeworkcore.design.8.0.6.nupkg.sha512"
+    },
+    "Microsoft.EntityFrameworkCore.Proxies/8.0.7": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-QXaz3KxardLcEc++7nNy35LGTuLxf/bIMV4+gLV+mbvfXMdC2p5yLuW+S0qcX6hNWqtDo7OHEbZ1Jcf2ezh9ZA==",
+      "path": "microsoft.entityframeworkcore.proxies/8.0.7",
+      "hashPath": "microsoft.entityframeworkcore.proxies.8.0.7.nupkg.sha512"
     },
     "Microsoft.EntityFrameworkCore.Relational/8.0.6": {
       "type": "package",
@@ -1022,6 +1082,13 @@
       "sha512": "sha512-iUR1eHrL8Cwd82neQCJ00MpwNIBs4NZgXzrPqx8NJf/k4+mwBO0XCRmHYJT4OLSwDDqh5nBLJWkz5cROnrGhRA==",
       "path": "system.composition.typedparts/6.0.0",
       "hashPath": "system.composition.typedparts.6.0.0.nupkg.sha512"
+    },
+    "System.Diagnostics.EventLog/6.0.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-lcyUiXTsETK2ALsZrX+nWuHSIQeazhqPphLfaRxzdGaG93+0kELqpgEHtwWOlQe7+jSFnKwaCAgL4kjeZCQJnw==",
+      "path": "system.diagnostics.eventlog/6.0.0",
+      "hashPath": "system.diagnostics.eventlog.6.0.0.nupkg.sha512"
     },
     "System.IdentityModel.Tokens.Jwt/7.6.2": {
       "type": "package",

@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace FrontJunior.Application.UseCases.DataStorageCases.Handlers.QueryHandlers
 {
-    public class GetDataStorageByTableIdQueryHandler : IRequestHandler<GetDataStorageByTableIdQuery, IEnumerable<DataStorage>>
+    public class GetDataStorageByTableIdQueryHandler : IRequestHandler<GetDataStorageByTableIdQuery, DataStorage>
     {
         private readonly IApplicationDbContext _applicationDbContext;
 
@@ -15,11 +15,11 @@ namespace FrontJunior.Application.UseCases.DataStorageCases.Handlers.QueryHandle
             _applicationDbContext = applicationDbContext;
         }
 
-        public async Task<IEnumerable<DataStorage>> Handle(GetDataStorageByTableIdQuery request, CancellationToken cancellationToken)
+        public async Task<DataStorage> Handle(GetDataStorageByTableIdQuery request, CancellationToken cancellationToken)
         {
             try
             {
-                return await _applicationDbContext.DataStorage.Where(d => d.Table.Id == request.TableId).ToListAsync();
+                return await _applicationDbContext.DataStorage.FirstOrDefaultAsync(d => d.Table.Id == request.TableId && d.IsData == false);
             }
             catch (Exception ex)
             {

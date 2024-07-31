@@ -1,4 +1,6 @@
-﻿namespace FrontJunior.Domain.Entities
+﻿using System.Text.Json.Serialization;
+
+namespace FrontJunior.Domain.Entities
 {
     public class DataStorage
     {
@@ -24,6 +26,7 @@
         public string? Column20 { get; set; }
         public Guid Id { get; set; }
         public bool IsData { get; set; }
+        [JsonIgnore]
         public Table Table { get; set; }
     }
 }
