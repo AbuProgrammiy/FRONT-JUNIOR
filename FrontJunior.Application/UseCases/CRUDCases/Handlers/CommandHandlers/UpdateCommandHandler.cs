@@ -75,7 +75,7 @@ namespace FrontJunior.Application.UseCases.CRUDCases.Handlers.CommandHandlers
                 }
 
                 DataStorage dataStorage = _applicationDbContext.DataStorage.AsEnumerable()
-                                                                           .Where(d => d.IsData == true)
+                                                                           .Where(d =>d.Table==table && d.IsData == true)
                                                                            .FirstOrDefault(d => d.GetType()
                                                                                                            .GetProperty(property.Name)
                                                                                                            .GetValue(d).ToString() == request.ColumnValue);
