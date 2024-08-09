@@ -3,7 +3,7 @@ using MediatR;
 
 namespace FrontJunior.Application.UseCases.CRUDCases.Commands
 {
-    public class UpdateCommand:IRequest<ResponseModel>
+    public class UpdateByAnyCommand:IRequest<ResponseModel>
     {
         public string SecurityKey { get; set; }
         public string TableName { get; set; }

@@ -9,16 +9,16 @@ using System.Reflection;
 
 namespace FrontJunior.Application.UseCases.CRUDCases.Handlers.CommandHandlers
 {
-    public class UpdateCommandHandler : IRequestHandler<UpdateCommand, ResponseModel>
+    public class UpdateByAnyCommandHandler : IRequestHandler<UpdateByAnyCommand, ResponseModel>
     {
         private readonly IApplicationDbContext _applicationDbContext;
 
-        public UpdateCommandHandler(IApplicationDbContext applicationDbContext)
+        public UpdateByAnyCommandHandler(IApplicationDbContext applicationDbContext)
         {
             _applicationDbContext = applicationDbContext;
         }
 
-        public async Task<ResponseModel> Handle(UpdateCommand request, CancellationToken cancellationToken)
+        public async Task<ResponseModel> Handle(UpdateByAnyCommand request, CancellationToken cancellationToken)
         {
             try
             {

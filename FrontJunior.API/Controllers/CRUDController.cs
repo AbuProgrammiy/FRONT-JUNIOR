@@ -57,9 +57,9 @@ namespace FrontJunior.API.Controllers
 
         [HttpPut]
         [Route("{securityKey}/{tableName}/{columnName}/{columnValue}")]
-        public async Task<ResponseModel> Update(string securityKey, string tableName, string columnName, string columnValue, object body)
+        public async Task<ResponseModel> UpdateByAny(string securityKey, string tableName, string columnName, string columnValue, object body)
         {
-            return await _mediator.Send(new UpdateCommand
+            return await _mediator.Send(new UpdateByAnyCommand
             {
                 SecurityKey = securityKey,
                 TableName = tableName,
