@@ -71,9 +71,9 @@ namespace FrontJunior.API.Controllers
 
         [HttpDelete]
         [Route("{securityKey}/{tableName}/{columnName}/{columnValue}")]
-        public async Task<ResponseModel> Delete(string securityKey, string tableName, string columnName, string columnValue)
+        public async Task<ResponseModel> DeleteByAny(string securityKey, string tableName, string columnName, string columnValue)
         {
-            return await _mediator.Send(new DeleteCommand
+            return await _mediator.Send(new DeleteByAnyCommand
             {
                 SecurityKey = securityKey,
                 TableName = tableName,

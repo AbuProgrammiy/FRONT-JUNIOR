@@ -77,7 +77,7 @@ namespace FrontJunior.Application.UseCases.CRUDCases.Handlers.QueryHandlers
                                                                            .Where(d =>d.Table==table && d.IsData == true)
                                                                            .FirstOrDefault(d => d.GetType()
                                                                                                            .GetProperty(property.Name)
-                                                                                                           .GetValue(d).ToString() == request.ColumnValue);
+                                                                                                           .GetValue(d)?.ToString() == request.ColumnValue);
 
                 if (dataStorage == null)
                 {

@@ -8,16 +8,16 @@ using System.Reflection;
 
 namespace FrontJunior.Application.UseCases.CRUDCases.Handlers.CommandHandlers
 {
-    public class DeleteCommandHandler : IRequestHandler<DeleteCommand, ResponseModel>
+    public class DeleteByAnyCommandHandler : IRequestHandler<DeleteByAnyCommand, ResponseModel>
     {
         private readonly IApplicationDbContext _applicationDbContext;
 
-        public DeleteCommandHandler(IApplicationDbContext applicationDbContext)
+        public DeleteByAnyCommandHandler(IApplicationDbContext applicationDbContext)
         {
             _applicationDbContext = applicationDbContext;
         }
 
-        public async Task<ResponseModel> Handle(DeleteCommand request, CancellationToken cancellationToken)
+        public async Task<ResponseModel> Handle(DeleteByAnyCommand request, CancellationToken cancellationToken)
         {
             try
             {

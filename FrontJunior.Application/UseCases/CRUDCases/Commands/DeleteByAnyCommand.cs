@@ -3,7 +3,7 @@ using MediatR;
 
 namespace FrontJunior.Application.UseCases.CRUDCases.Commands
 {
-    public class DeleteCommand:IRequest<ResponseModel>
+    public class DeleteByAnyCommand:IRequest<ResponseModel>
     {
         public string SecurityKey { get; set; }
         public string TableName { get; set; }
