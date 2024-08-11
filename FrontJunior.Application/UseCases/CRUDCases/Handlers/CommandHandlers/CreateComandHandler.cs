@@ -46,6 +46,18 @@ namespace FrontJunior.Application.UseCases.CRUDCases.Handlers.CommandHandlers
                     };
                 }
 
+                JObject body = JObject.Parse(request.Body.ToString());
+
+                if (body.Properties().Count() == 0)
+                {
+                    return new ResponseModel
+                    {
+                        IsSuccess = false,
+                        StatusCode = 201,
+                        Response = "Body is not filled!"
+                    };
+                }
+
                 DataStorage columns=await _applicationDbContext.DataStorage.Where(d=>d.IsData==false).FirstOrDefaultAsync(d=>d.Table==table);
 
                 DataStorage dataStorage = new DataStorage
@@ -53,8 +65,6 @@ namespace FrontJunior.Application.UseCases.CRUDCases.Handlers.CommandHandlers
                     Table = table,
                     IsData = true,
                 };
-
-                JObject body = JObject.Parse(request.Body.ToString());
 
                 PropertyInfo[] properties = dataStorage.GetType().GetProperties();
 

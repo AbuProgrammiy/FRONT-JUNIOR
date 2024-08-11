@@ -57,6 +57,13 @@ namespace FrontJunior.API.Controllers
         }
 
         [HttpDelete]
+        [Route("{userId}/{tableName}")]
+        public async Task<ResponseModel> DeleteTableByUserId(Guid userId, string tableName)
+        {
+            return await _mediator.Send(new DeleteTableByUserIdCommand { UserId = userId, TableName = tableName });
+        }
+
+        [HttpDelete]
         [Route("{id}")]
         public async Task<ResponseModel> Delete(Guid id)
         {

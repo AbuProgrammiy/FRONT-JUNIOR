@@ -42,6 +42,18 @@ namespace FrontJunior.API.Controllers
                 ColumnValue = columnValue
             });
         }
+        
+        [HttpGet]
+        [Route("{securityKey}/{tableName}/{columnName}")]
+        public async Task<object> GetByAny(string securityKey, string tableName, string columnName)
+        {
+            return await _mediator.Send(new GetByAnyQuery
+            {
+                SecurityKey = securityKey,
+                TableName = tableName,
+                ColumnName = columnName
+            });
+        }
 
         [HttpPost]
         [Route("{securityKey}/{tableName}")]
@@ -68,6 +80,19 @@ namespace FrontJunior.API.Controllers
                 Body = body,
             });
         }
+        
+        [HttpPut]
+        [Route("{securityKey}/{tableName}/{columnName}")]
+        public async Task<ResponseModel> UpdateByAny(string securityKey, string tableName, string columnName, object body)
+        {
+            return await _mediator.Send(new UpdateByAnyCommand
+            {
+                SecurityKey = securityKey,
+                TableName = tableName,
+                ColumnName = columnName,
+                Body = body,
+            });
+        }
 
         [HttpDelete]
         [Route("{securityKey}/{tableName}/{columnName}/{columnValue}")]
@@ -79,6 +104,18 @@ namespace FrontJunior.API.Controllers
                 TableName = tableName,
                 ColumnName = columnName,
                 ColumnValue = columnValue
+            });
+        }
+        
+        [HttpDelete]
+        [Route("{securityKey}/{tableName}/{columnName}")]
+        public async Task<ResponseModel> DeleteByAny(string securityKey, string tableName, string columnName)
+        {
+            return await _mediator.Send(new DeleteByAnyCommand
+            {
+                SecurityKey = securityKey,
+                TableName = tableName,
+                ColumnName = columnName
             });
         }
     }
