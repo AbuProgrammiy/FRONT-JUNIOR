@@ -3,19 +3,20 @@ using FrontJunior.Application.UseCases.TableCases.Commands;
 using FrontJunior.Domain.Entities;
 using FrontJunior.Domain.Entities.Models;
 using MediatR;
+using Microsoft.EntityFrameworkCore;
 
 namespace FrontJunior.Application.UseCases.TableCases.Handlers.CommandHandlers
 {
-    public class DeleteTableByUserIdCommandHandler : IRequestHandler<DeleteTableByUserIdCommand, ResponseModel>
+    public class TruncateTableByUserIdCommandHanlder : IRequestHandler<TruncateTableByUserIdCommand, ResponseModel>
     {
         private readonly IApplicationDbContext _applicationDbContext;
 
-        public DeleteTableByUserIdCommandHandler(IApplicationDbContext applicationDbContext)
+        public TruncateTableByUserIdCommandHanlder(IApplicationDbContext applicationDbContext)
         {
             _applicationDbContext = applicationDbContext;
         }
 
-        public async Task<ResponseModel> Handle(DeleteTableByUserIdCommand request, CancellationToken cancellationToken)
+        public async Task<ResponseModel> Handle(TruncateTableByUserIdCommand request, CancellationToken cancellationToken)
         {
             try
             {
@@ -31,14 +32,20 @@ namespace FrontJunior.Application.UseCases.TableCases.Handlers.CommandHandlers
                     };
                 }
 
-                _applicationDbContext.Tables.Remove(table);
+                List<DataStorage> dataStorages = await _applicationDbContext.DataStorage.Where(d => d.Table == table && d.IsData == true).ToListAsync();
+
+                for (int i = 0;i<dataStorages.Count;i++)
+                {
+                    _applicationDbContext.DataStorage.Remove(dataStorages[i]);
+                }
+
                 await _applicationDbContext.SaveChangesAsync(cancellationToken);
 
                 return new ResponseModel
                 {
                     IsSuccess = true,
                     StatusCode = 200,
-                    Response = "Table successfully deleted!"
+                    Response = "Table successfuly truncated!"
                 };
             }
             catch (Exception ex)

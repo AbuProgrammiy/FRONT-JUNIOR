@@ -44,6 +44,13 @@ namespace FrontJunior.API.Controllers
             });
         }
 
+        [HttpGet]
+        [Route("{userId}/{tableName}")]
+        public async Task<bool> IsTableNameExistsByUserId(Guid userId, string tableName)
+        {
+            return await _mediator.Send(new IsTableNameExistsByUserIdQuery { UserId = userId, TableName = tableName });
+        }
+
         [HttpPost]
         public async Task<ResponseModel> Create(CreateTableCommand request)
         {
@@ -56,6 +63,13 @@ namespace FrontJunior.API.Controllers
             return await _mediator.Send(request);
         }
 
+        [HttpDelete]
+        [Route("{userId}/{tableName}")]
+        public async Task<ResponseModel> TruncateTableByUserId(Guid userId, string tableName)
+        {
+            return await _mediator.Send(new TruncateTableByUserIdCommand { UserId = userId, TableName = tableName });
+        }
+        
         [HttpDelete]
         [Route("{userId}/{tableName}")]
         public async Task<ResponseModel> DeleteTableByUserId(Guid userId, string tableName)
