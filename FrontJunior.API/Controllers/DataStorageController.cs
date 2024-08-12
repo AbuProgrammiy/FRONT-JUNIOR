@@ -40,10 +40,10 @@ namespace FrontJunior.API.Controllers
         }
 
         [HttpGet]
-        [Route("{tableId}")]
-        public async Task<DataStorage> GetColumnsByTableId(Guid tableId)
+        [Route("{userId}/{tableName}")]
+        public async Task<IEnumerable<string>> GetColumnsByTableName(Guid userId, string tableName)
         {
-            return await _mediator.Send(new GetDataStorageByTableIdQuery { TableId = tableId });
+            return await _mediator.Send(new GetColumnsByTableNameQuery { UserId = userId, TableName=tableName }) ;
         }
 
         [HttpPost]
