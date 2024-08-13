@@ -21,7 +21,7 @@ namespace FrontJunior.Application.UseCases.TableCases.Handlers.QueryHandlers
             {
                 List<string> tableNames= new List<string>();
 
-                List<Table> tables = await _applicationDbContext.Tables.Where(t => t.User.Id == request.UserId).Skip((request.Page-1)*request.Count).Take(request.Count).ToListAsync();
+                List<Table> tables = await _applicationDbContext.Tables.Where(t => t.User.Id == request.UserId).ToListAsync();
 
                 for (int i = 0; i < tables.Count; i++)
                 {

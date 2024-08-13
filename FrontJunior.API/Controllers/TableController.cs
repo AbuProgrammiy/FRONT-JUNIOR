@@ -33,14 +33,12 @@ namespace FrontJunior.API.Controllers
         }
 
         [HttpGet]
-        [Route("{userId}/{page}/{count}")]
-        public async Task<IEnumerable<string>> GetTableNamesByUserId(Guid userId, int page, int count)
+        [Route("{userId}")]
+        public async Task<IEnumerable<string>> GetTableNamesByUserId(Guid userId)
         {
             return await _mediator.Send(new GetTableNamesByUserIdQuery
             {
-                UserId = userId,
-                Page = page,
-                Count = count
+                UserId = userId
             });
         }
 
