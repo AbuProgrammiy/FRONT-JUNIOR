@@ -20,7 +20,6 @@ namespace FrontJunior.Application.UseCases.UserCases.Handlers.CommandHandlers
         {
             try
             {
-
                 Verification verification =await _applicationDbContext.Verifications.FirstOrDefaultAsync(v=>v.Email==request.Email);
 
                 if (verification == null)

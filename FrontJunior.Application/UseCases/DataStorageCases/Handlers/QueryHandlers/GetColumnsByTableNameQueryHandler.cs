@@ -24,13 +24,13 @@ namespace FrontJunior.Application.UseCases.DataStorageCases.Handlers.QueryHandle
 
                 Table table = await _applicationDbContext.Tables.FirstOrDefaultAsync(t => t.User.Id == request.UserId && t.Name == request.TableName);
 
-                DataStorage dataStorage = await _applicationDbContext.DataStorage.FirstOrDefaultAsync(d => d.Table.User.Id == request.UserId && d.IsData == false);
+                DataStorage dataStorage = await _applicationDbContext.DataStorage.FirstOrDefaultAsync(d => d.Table.User.Id == request.UserId&&d.Table==table && d.IsData == false);
 
                 PropertyInfo[] properties=dataStorage.GetType().GetProperties();
 
                 for (int i = 0; i < table.ColumnCount; i++)
                 {
-                    columns.Add(properties[i].GetValue(dataStorage).ToString());
+                    columns.Add(properties[i].GetValue(dataStorage)?.ToString());
                 }
 
                 return columns;

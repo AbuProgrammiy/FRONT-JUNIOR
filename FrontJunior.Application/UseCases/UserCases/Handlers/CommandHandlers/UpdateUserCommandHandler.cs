@@ -12,18 +12,34 @@ namespace FrontJunior.Application.UseCases.UserCases.Handlers.CommandHandlers
     public class UpdateUserCommandHandler : IRequestHandler<UpdateUserCommand, ResponseModel>
     {
         private readonly IApplicationDbContext _applicationDbContext;
+        private readonly IMediator _mediator;
         private readonly IPasswordService _passwordService;
 
-        public UpdateUserCommandHandler(IApplicationDbContext applicationDbContext, IPasswordService passwordService)
+        public UpdateUserCommandHandler(IApplicationDbContext applicationDbContext, IPasswordService passwordService, IMediator mediator)
         {
             _applicationDbContext = applicationDbContext;
             _passwordService = passwordService;
+            _mediator = mediator;
         }
 
         public async Task<ResponseModel> Handle(UpdateUserCommand request, CancellationToken cancellationToken)
         {
             try
             {
+                if (request.IsEmailChanged == true)
+                {
+                    ResponseModel response = await _mediator.Send(new VerifyUserCommand
+                    {
+                        Email = request.Email,
+                        SentPassword = request.SentPassword
+                    });
+
+                    if(response.IsSuccess==false)
+                    {
+                        return response;
+                    }
+                }
+
                 User user = await _applicationDbContext.Users.AsNoTracking().FirstOrDefaultAsync(u => u.Id == request.Id);
            
                 if(user == null)
@@ -36,7 +52,12 @@ namespace FrontJunior.Application.UseCases.UserCases.Handlers.CommandHandlers
                     };
                 }
 
-                user = request.Adapt<User>();
+                user.Email=request.FirstName!=null ? request.Email :user.FirstName;
+                user.Email=request.LastName!=null ? request.Email :user.LastName;
+                user.Email=request.Username!=null ? request.Email :user.Username;
+                user.Email=request.Email!=null ? request.Email :user.Email;
+                user.Email=request.Role!=null ? request.Email :user.Role;
+                user.Email=request.SecurityKey!=null ? request.Email :user.SecurityKey;
 
                 PasswordModel passwordModel = _passwordService.HashPassword(request.Password);
 

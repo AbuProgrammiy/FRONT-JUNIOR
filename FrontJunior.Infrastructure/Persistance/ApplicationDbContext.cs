@@ -9,6 +9,7 @@ namespace FrontJunior.Infrastructure.Persistance
     {
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options)
         {
+            Database.Migrate();
         }
 
         public DbSet<User> Users { get; set; }
