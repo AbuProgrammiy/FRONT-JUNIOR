@@ -34,9 +34,9 @@ namespace FrontJunior.API.Controllers
 
         [HttpGet]
         [Route("{userId}")]
-        public async Task<IEnumerable<string>> GetTableNamesByUserId(Guid userId)
+        public async Task<IDictionary<string,IEnumerable<string>>> GetTablesByUserId(Guid userId)
         {
-            return await _mediator.Send(new GetTableNamesByUserIdQuery
+            return await _mediator.Send(new GetTablesByUserIdQuery
             {
                 UserId = userId
             });

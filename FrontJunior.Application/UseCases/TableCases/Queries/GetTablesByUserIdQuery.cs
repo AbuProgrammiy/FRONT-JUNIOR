@@ -3,7 +3,7 @@ using MediatR;
 
 namespace FrontJunior.Application.UseCases.TableCases.Queries
 {
-    public class GetTableNamesByUserIdQuery:IRequest<IEnumerable<string>>
+    public class GetTablesByUserIdQuery:IRequest<IDictionary<string,IEnumerable<string>>>
     {
         public Guid UserId { get; set; }
     }

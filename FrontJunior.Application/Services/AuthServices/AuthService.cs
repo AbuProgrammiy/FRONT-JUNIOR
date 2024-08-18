@@ -29,6 +29,7 @@ namespace FrontJunior.Application.Services.AuthServices
                 new Claim(JwtRegisteredClaimNames.Iat,EpochTime.GetIntDate(DateTime.UtcNow).ToString(CultureInfo.InvariantCulture),ClaimValueTypes.Integer64),
 
                 new Claim("Id",user.Id.ToString()),
+                new Claim("Email",user.Email),
                 new Claim("SecurityKey",user.SecurityKey),
                 new Claim("Role",user.Role),
             };

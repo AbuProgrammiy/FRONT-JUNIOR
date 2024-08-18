@@ -26,20 +26,6 @@ namespace FrontJunior.Application.UseCases.UserCases.Handlers.CommandHandlers
         {
             try
             {
-                if (request.IsEmailChanged == true)
-                {
-                    ResponseModel response = await _mediator.Send(new VerifyUserCommand
-                    {
-                        Email = request.Email,
-                        SentPassword = request.SentPassword
-                    });
-
-                    if(response.IsSuccess==false)
-                    {
-                        return response;
-                    }
-                }
-
                 User user = await _applicationDbContext.Users.AsNoTracking().FirstOrDefaultAsync(u => u.Id == request.Id);
            
                 if(user == null)
@@ -50,6 +36,39 @@ namespace FrontJunior.Application.UseCases.UserCases.Handlers.CommandHandlers
                         StatusCode = 404,
                         Response = "User not found!"
                     };
+                }
+
+                if (request.Email != null)
+                {
+                    ResponseModel response = await _mediator.Send(new VerifyUserCommand
+                    {
+                        Email = request.Email,
+                        SentPassword = request.SentPassword
+                    });
+
+                    if (response.IsSuccess == false)
+                    {
+                        return response;
+                    }
+                }
+
+                if (request.Password != null)
+                {
+                    bool response= _passwordService.CheckPassword(request.Password, new PasswordModel
+                    {
+                        PasswordHash = user.PasswordHash,
+                        PassworSalt = user.PassworSalt
+                    });
+
+                    if(response == false)
+                    {
+                        return new ResponseModel
+                        {
+                            IsSuccess = false,
+                            StatusCode = 400,
+                            Response = "Password is incorrect!"
+                        };
+                    }
                 }
 
                 user.Email=request.FirstName!=null ? request.Email :user.FirstName;
