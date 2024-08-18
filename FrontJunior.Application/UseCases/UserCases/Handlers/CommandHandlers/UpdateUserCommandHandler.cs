@@ -11,14 +11,12 @@ namespace FrontJunior.Application.UseCases.UserCases.Handlers.CommandHandlers
     public class UpdateUserCommandHandler : IRequestHandler<UpdateUserCommand, ResponseModel>
     {
         private readonly IApplicationDbContext _applicationDbContext;
-        private readonly IMediator _mediator;
         private readonly IPasswordService _passwordService;
 
-        public UpdateUserCommandHandler(IApplicationDbContext applicationDbContext, IPasswordService passwordService, IMediator mediator)
+        public UpdateUserCommandHandler(IApplicationDbContext applicationDbContext, IPasswordService passwordService)
         {
             _applicationDbContext = applicationDbContext;
             _passwordService = passwordService;
-            _mediator = mediator;
         }
 
         public async Task<ResponseModel> Handle(UpdateUserCommand request, CancellationToken cancellationToken)
