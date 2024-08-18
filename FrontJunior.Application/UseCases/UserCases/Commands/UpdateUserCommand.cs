@@ -5,7 +5,6 @@ namespace FrontJunior.Application.UseCases.UserCases.Commands
 {
     public class UpdateUserCommand:IRequest<ResponseModel>
     {
-        public string? SentPassword { get; set; }
         public Guid Id { get; set; }
         public string? FirstName { get; set; }
         public string? LastName { get; set; }

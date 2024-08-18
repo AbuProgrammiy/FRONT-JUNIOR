@@ -3,7 +3,6 @@ using FrontJunior.Application.Services.PasswordServices;
 using FrontJunior.Application.UseCases.UserCases.Commands;
 using FrontJunior.Domain.Entities;
 using FrontJunior.Domain.Entities.Models;
-using Mapster;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 
@@ -36,20 +35,6 @@ namespace FrontJunior.Application.UseCases.UserCases.Handlers.CommandHandlers
                         StatusCode = 404,
                         Response = "User not found!"
                     };
-                }
-
-                if (request.Email != null)
-                {
-                    ResponseModel response = await _mediator.Send(new VerifyUserCommand
-                    {
-                        Email = request.Email,
-                        SentPassword = request.SentPassword
-                    });
-
-                    if (response.IsSuccess == false)
-                    {
-                        return response;
-                    }
                 }
 
                 if (request.Password != null)
