@@ -1,6 +1,6 @@
 ﻿using FrontJunior.Application.Abstractions;
 using FrontJunior.Application.UseCases.TableCases.Queries;
-using FrontJunior.Domain.Entities;
+using FrontJunior.Domain.MainModels;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 using System.Reflection;
@@ -20,7 +20,7 @@ namespace FrontJunior.Application.UseCases.TableCases.Handlers.QueryHandlers
         {
             try
             {
-                List<Table> tablesByUserId = await _applicationDbContext.Tables.Where(t => t.User.Id == request.UserId).ToListAsync();
+                List<Table> tablesByUserId = await _applicationDbContext.Tables.Where(t => t.User.Id == request.UserId&&t.IsDeleted==false).ToListAsync();
 
                 Dictionary<string,IEnumerable<string>> tables= new Dictionary<string,IEnumerable<string>>();
 

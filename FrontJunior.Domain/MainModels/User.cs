@@ -1,6 +1,6 @@
-﻿namespace FrontJunior.Domain.Entities
+﻿namespace FrontJunior.Domain.MainModels
 {
-    public class User
+    public abstract class User
     {
         public Guid Id { get; set; }
         public string? FirstName { get; set; }
@@ -12,7 +12,5 @@
         public string Role { get; set; }
         public string SecurityKey { get; set; }
         public DateTime CreatedDate { get; set; }
-        public DateTime? DeletedDate { get; set; }
-        public bool IsDeleted { get; set; }
     }
 }

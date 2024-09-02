@@ -1,8 +1,9 @@
 ﻿using FrontJunior.Application.Abstractions;
 using FrontJunior.Application.UseCases.TableCases.Commands;
-using FrontJunior.Domain.Entities;
-using FrontJunior.Domain.Entities.Models;
+using FrontJunior.Domain.Entities.Views;
+using FrontJunior.Domain.MainModels;
 using MediatR;
+using Microsoft.EntityFrameworkCore;
 
 namespace FrontJunior.Application.UseCases.TableCases.Handlers.CommandHandlers
 {
@@ -31,7 +32,17 @@ namespace FrontJunior.Application.UseCases.TableCases.Handlers.CommandHandlers
                     };
                 }
 
+                IEnumerable<DataStorage> dataStorages = await _applicationDbContext.DataStorage.Where(d => d.Table == table).ToListAsync();
+
+                await _applicationDbContext.DeletedDataStorage.AddRangeAsync(dataStorages);
+                _applicationDbContext.DataStorage.RemoveRange(dataStorages);
+
+                table.IsDeleted = true;
+                table.DeletedDate= DateTime.UtcNow;
+
+                await _applicationDbContext.DeletedTables.AddAsync(table);
                 _applicationDbContext.Tables.Remove(table);
+
                 await _applicationDbContext.SaveChangesAsync(cancellationToken);
 
                 return new ResponseModel

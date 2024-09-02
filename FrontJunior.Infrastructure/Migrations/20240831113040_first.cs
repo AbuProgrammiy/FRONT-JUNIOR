@@ -6,13 +6,13 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace FrontJunior.Infrastructure.Migrations
 {
     /// <inheritdoc />
-    public partial class uptodate : Migration
+    public partial class first : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
-                name: "Users",
+                name: "User",
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uuid", nullable: false),
@@ -30,7 +30,7 @@ namespace FrontJunior.Infrastructure.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Users", x => x.Id);
+                    table.PrimaryKey("PK_User", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -47,7 +47,7 @@ namespace FrontJunior.Infrastructure.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Tables",
+                name: "Table",
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uuid", nullable: false),
@@ -60,11 +60,11 @@ namespace FrontJunior.Infrastructure.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Tables", x => x.Id);
+                    table.PrimaryKey("PK_Table", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Tables_Users_UserId",
+                        name: "FK_Table_User_UserId",
                         column: x => x.UserId,
-                        principalTable: "Users",
+                        principalTable: "User",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -101,9 +101,9 @@ namespace FrontJunior.Infrastructure.Migrations
                 {
                     table.PrimaryKey("PK_DataStorage", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_DataStorage_Tables_TableId",
+                        name: "FK_DataStorage_Table_TableId",
                         column: x => x.TableId,
-                        principalTable: "Tables",
+                        principalTable: "Table",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -114,8 +114,8 @@ namespace FrontJunior.Infrastructure.Migrations
                 column: "TableId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Tables_UserId",
-                table: "Tables",
+                name: "IX_Table_UserId",
+                table: "Table",
                 column: "UserId");
         }
 
@@ -129,10 +129,10 @@ namespace FrontJunior.Infrastructure.Migrations
                 name: "Verifications");
 
             migrationBuilder.DropTable(
-                name: "Tables");
+                name: "Table");
 
             migrationBuilder.DropTable(
-                name: "Users");
+                name: "User");
         }
     }
 }

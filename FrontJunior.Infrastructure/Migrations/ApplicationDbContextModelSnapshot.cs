@@ -130,7 +130,7 @@ namespace FrontJunior.Infrastructure.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("Tables");
+                    b.ToTable("Table");
                 });
 
             modelBuilder.Entity("FrontJunior.Domain.Entities.User", b =>
@@ -179,7 +179,7 @@ namespace FrontJunior.Infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Users");
+                    b.ToTable("User");
                 });
 
             modelBuilder.Entity("FrontJunior.Domain.Entities.Verification", b =>

@@ -2,8 +2,8 @@
 using FrontJunior.Application.Services.AuthServices;
 using FrontJunior.Application.Services.PasswordServices;
 using FrontJunior.Application.UseCases.UserCases.Commands;
-using FrontJunior.Domain.Entities;
-using FrontJunior.Domain.Entities.Models;
+using FrontJunior.Domain.Entities.Views;
+using FrontJunior.Domain.MainModels;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 
@@ -26,7 +26,7 @@ namespace FrontJunior.Application.UseCases.UserCases.Handlers.CommandHandlers
         {
             try
             {
-                User user = await _applicationDbContext.Users.FirstOrDefaultAsync(u => u.Email == request.Email);
+                User user = await _applicationDbContext.Users.Where(u=>u.IsDeleted==false).FirstOrDefaultAsync(u => u.Email == request.Email);
 
                 if (user == null)
                 {

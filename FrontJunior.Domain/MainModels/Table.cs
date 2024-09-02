@@ -1,7 +1,6 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
-using System.Text.Json.Serialization;
+﻿using System.Text.Json.Serialization;
 
-namespace FrontJunior.Domain.Entities
+namespace FrontJunior.Domain.MainModels
 {
     public class Table
     {
@@ -11,7 +10,5 @@ namespace FrontJunior.Domain.Entities
         public string Name { get; set; }
         public byte ColumnCount { get; set; }
         public DateTime CreatedDate { get; set; }
-        public DateTime? DeletedDate { get; set; }
-        public bool IsDeleted { get; set; }
     }
 }

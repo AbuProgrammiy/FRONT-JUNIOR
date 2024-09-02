@@ -12,8 +12,8 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace FrontJunior.Infrastructure.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20240729073301_up-to-date")]
-    partial class uptodate
+    [Migration("20240831113040_first")]
+    partial class first
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -133,7 +133,7 @@ namespace FrontJunior.Infrastructure.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("Tables");
+                    b.ToTable("Table");
                 });
 
             modelBuilder.Entity("FrontJunior.Domain.Entities.User", b =>
@@ -182,7 +182,7 @@ namespace FrontJunior.Infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Users");
+                    b.ToTable("User");
                 });
 
             modelBuilder.Entity("FrontJunior.Domain.Entities.Verification", b =>

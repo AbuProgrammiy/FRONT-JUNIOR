@@ -1,7 +1,7 @@
 ﻿using FrontJunior.Application.Abstractions;
 using FrontJunior.Application.UseCases.UserCases.Commands;
-using FrontJunior.Domain.Entities;
-using FrontJunior.Domain.Entities.Models;
+using FrontJunior.Domain.Entities.Views;
+using FrontJunior.Domain.MainModels;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 
@@ -32,8 +32,28 @@ namespace FrontJunior.Application.UseCases.UserCases.Handlers.CommandHandlers
                     };
                 }
 
+                IEnumerable<Table> tables = await _applicationDbContext.Tables.Where(t => t.User == user).ToListAsync();
+
+                foreach(Table table in tables)
+                {
+                    IEnumerable<DataStorage> dataStorages = await _applicationDbContext.DataStorage.Where(d => d.Table == table).ToListAsync();
+
+                    await _applicationDbContext.DeletedDataStorage.AddRangeAsync(dataStorages);
+                    _applicationDbContext.DataStorage.RemoveRange(dataStorages);
+
+                    table.IsDeleted=true;
+                    table.DeletedDate = DateTime.UtcNow;
+                }
+
+                await _applicationDbContext.DeletedTables.AddRangeAsync(tables);
+                _applicationDbContext.Tables.RemoveRange(tables);
+
                 user.IsDeleted=true;
                 user.DeletedDate = DateTime.UtcNow;
+
+                await _applicationDbContext.DeletedUsers.AddAsync(user);
+                _applicationDbContext.Users.Remove(user);
+
                 await _applicationDbContext.SaveChangesAsync(cancellationToken);
 
                 return new ResponseModel

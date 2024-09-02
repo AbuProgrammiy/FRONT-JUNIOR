@@ -1,9 +1,10 @@
 ﻿using FrontJunior.Application.Abstractions;
 using FrontJunior.Application.Services.EmailServices;
 using FrontJunior.Application.UseCases.UserCases.Commands;
-using FrontJunior.Domain.Entities;
 using FrontJunior.Domain.Entities.DTOs;
 using FrontJunior.Domain.Entities.Models;
+using FrontJunior.Domain.Entities.Views;
+using FrontJunior.Domain.MainModels;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -25,7 +26,7 @@ namespace FrontJunior.Application.UseCases.UserCases.Handlers.CommandHandlers
 
         public async Task<ResponseModel> Handle(SendVerificationToUserCommand request, CancellationToken cancellationToken)
         {
-            User user = await _applicationDbContext.Users.FirstOrDefaultAsync(u => u.Email == request.Email);
+            User user = await _applicationDbContext.Users.Where(u=>u.IsDeleted==false).FirstOrDefaultAsync(u => u.Email == request.Email);
 
             if (request.IsPasswordForgotten == null && user != null || request.IsPasswordForgotten == false && user != null)
             {

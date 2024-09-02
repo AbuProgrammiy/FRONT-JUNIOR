@@ -1,7 +1,7 @@
 ﻿using FrontJunior.Application.UseCases.UserCases.Commands;
 using FrontJunior.Application.UseCases.UserCases.Queries;
-using FrontJunior.Domain.Entities;
-using FrontJunior.Domain.Entities.Models;
+using FrontJunior.Domain.Entities.Views;
+using FrontJunior.Domain.MainModels;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
@@ -58,6 +58,24 @@ namespace FrontJunior.API.Controllers
 
         [HttpPost]
         public async Task<ResponseModel> Create(CreateUserCommand request)
+        {
+            return await _mediator.Send(request);
+        }
+
+        [HttpPatch]
+        public async Task<ResponseModel> UpdateEmail(UpdateUserEmailCommand request)
+        {
+            return await _mediator.Send(request);
+        }
+
+        [HttpPatch]
+        public async Task<ResponseModel> UpdatePassword(UpdateUserPasswordCommand request)
+        {
+            return await _mediator.Send(request);
+        }
+        
+        [HttpPatch]
+        public async Task<ResponseModel> UpdateSecurityKey(UpdateUserSecurityKeyCommand request)
         {
             return await _mediator.Send(request);
         }

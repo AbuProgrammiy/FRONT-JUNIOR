@@ -1,6 +1,6 @@
 ﻿using System.Text.Json.Serialization;
 
-namespace FrontJunior.Domain.Entities
+namespace FrontJunior.Domain.MainModels
 {
     public class DataStorage
     {
