@@ -18,7 +18,7 @@ namespace FrontJunior.Application.UseCases.TableCases.Handlers.QueryHandlers
         {
             try
             {
-                return await _applicationDbContext.Tables.FirstOrDefaultAsync(t => t.User.Id == request.UserId && t.Name == request.TableName)!=null;
+                return await _applicationDbContext.ActiveTables.FirstOrDefaultAsync(t => t.User.Id == request.UserId && t.Name == request.TableName)!=null;
             }
             catch (Exception ex)
             {
