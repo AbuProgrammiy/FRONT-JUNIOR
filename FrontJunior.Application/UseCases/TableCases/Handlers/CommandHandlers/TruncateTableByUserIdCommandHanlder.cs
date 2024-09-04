@@ -1,7 +1,7 @@
 ﻿using FrontJunior.Application.Abstractions;
 using FrontJunior.Application.UseCases.TableCases.Commands;
+using FrontJunior.Domain.Entities.Models;
 using FrontJunior.Domain.Entities.Views;
-using FrontJunior.Domain.MainModels;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 
@@ -20,7 +20,7 @@ namespace FrontJunior.Application.UseCases.TableCases.Handlers.CommandHandlers
         {
             try
             {
-                Table table = _applicationDbContext.Tables.FirstOrDefault(t => t.Name == request.TableName && t.User.Id == request.UserId);
+                ActiveTable table = _applicationDbContext.ActiveTables.FirstOrDefault(t => t.Name == request.TableName && t.User.Id == request.UserId);
 
                 if (table == null)
                 {
@@ -32,12 +32,8 @@ namespace FrontJunior.Application.UseCases.TableCases.Handlers.CommandHandlers
                     };
                 }
 
-                List<DataStorage> dataStorages = await _applicationDbContext.DataStorage.Where(d => d.Table == table && d.IsData == true).ToListAsync();
-
-                for (int i = 0;i<dataStorages.Count;i++)
-                {
-                    _applicationDbContext.DataStorage.Remove(dataStorages[i]);
-                }
+                IEnumerable<ActiveDataStorage> dataStorages = await _applicationDbContext.ActiveDataStorage.Where(d => d.Table == table && d.IsData == true).ToListAsync();
+                _applicationDbContext.ActiveDataStorage.RemoveRange(dataStorages);
 
                 await _applicationDbContext.SaveChangesAsync(cancellationToken);
 
@@ -60,3 +56,4 @@ namespace FrontJunior.Application.UseCases.TableCases.Handlers.CommandHandlers
         }
     }
 }
+
