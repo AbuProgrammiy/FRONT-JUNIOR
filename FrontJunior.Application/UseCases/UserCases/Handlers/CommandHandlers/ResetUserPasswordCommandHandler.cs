@@ -2,9 +2,8 @@
 using FrontJunior.Application.Services.AuthServices;
 using FrontJunior.Application.Services.PasswordServices;
 using FrontJunior.Application.UseCases.UserCases.Commands;
+using FrontJunior.Domain.Entities.Models;
 using FrontJunior.Domain.Entities.Views;
-using FrontJunior.Domain.MainModels;
-using Mapster;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 
@@ -29,7 +28,6 @@ namespace FrontJunior.Application.UseCases.UserCases.Handlers.CommandHandlers
         {
             try
             {
-
                 ResponseModel response = await _mediator.Send(new VerifyUserCommand
                 {
                     Email = request.Email,
@@ -41,7 +39,7 @@ namespace FrontJunior.Application.UseCases.UserCases.Handlers.CommandHandlers
                     return response;
                 }
 
-                User user = await _applicationDbContext.Users.FirstOrDefaultAsync(u => u.Email == request.Email); 
+                ActiveUser user = await _applicationDbContext.ActiveUsers.FirstOrDefaultAsync(u => u.Email == request.Email); 
 
                 if(user == null)
                 {
@@ -61,7 +59,7 @@ namespace FrontJunior.Application.UseCases.UserCases.Handlers.CommandHandlers
                 _applicationDbContext.Verifications.Remove(await _applicationDbContext.Verifications.FirstOrDefaultAsync(v => v.Email == request.Email));
                 await _applicationDbContext.SaveChangesAsync(cancellationToken);
 
-                return _authService.GenerateToken(await _applicationDbContext.Users.FirstOrDefaultAsync(u => u.Email == request.Email));
+                return _authService.GenerateToken(await _applicationDbContext.ActiveUsers.FirstOrDefaultAsync(u => u.Email == request.Email));
             }
             catch (Exception ex)
             {
