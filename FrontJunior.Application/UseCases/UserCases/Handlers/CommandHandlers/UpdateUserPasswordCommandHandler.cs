@@ -1,8 +1,8 @@
 ﻿using FrontJunior.Application.Abstractions;
 using FrontJunior.Application.Services.PasswordServices;
 using FrontJunior.Application.UseCases.UserCases.Commands;
+using FrontJunior.Domain.Entities.Models;
 using FrontJunior.Domain.Entities.Views;
-using FrontJunior.Domain.MainModels;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 
@@ -23,7 +23,7 @@ namespace FrontJunior.Application.UseCases.UserCases.Handlers.CommandHandlers
         {
             try
             {
-                User user = await _applicationDbContext.Users.FirstOrDefaultAsync(s => s.Id == request.Id);
+                ActiveUser user = await _applicationDbContext.ActiveUsers.FirstOrDefaultAsync(s => s.Id == request.Id);
 
                 if (user == null)
                 {
