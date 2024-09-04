@@ -1,7 +1,9 @@
 ﻿using FrontJunior.Application.Abstractions;
 using FrontJunior.Application.UseCases.TableCases.Commands;
+using FrontJunior.Domain.Entities.Models;
 using FrontJunior.Domain.Entities.Views;
 using FrontJunior.Domain.MainModels;
+using Mapster;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 
@@ -20,7 +22,8 @@ namespace FrontJunior.Application.UseCases.TableCases.Handlers.CommandHandlers
         {
             try
             {
-                Table table = _applicationDbContext.Tables.FirstOrDefault(t => t.Name == request.TableName && t.User.Id == request.UserId);
+                ActiveTable table = _applicationDbContext.ActiveTables.FirstOrDefault(t => t.User.Id == request.UserId && t.Name == request.TableName);
+                DeletedTable deletedTable = table.Adapt<DeletedTable>();
 
                 if (table == null)
                 {
@@ -28,20 +31,20 @@ namespace FrontJunior.Application.UseCases.TableCases.Handlers.CommandHandlers
                     {
                         IsSuccess = false,
                         StatusCode = 404,
-                        Response = "Table not found or UserId is incorret!"
+                        Response = "Table or User not found!"
                     };
                 }
 
-                IEnumerable<DataStorage> dataStorages = await _applicationDbContext.DataStorage.Where(d => d.Table == table).ToListAsync();
+                IEnumerable<ActiveDataStorage> dataStorages = await _applicationDbContext.ActiveDataStorage.Where(d => d.Table == table).ToListAsync();
 
-                await _applicationDbContext.DeletedDataStorage.AddRangeAsync(dataStorages);
-                _applicationDbContext.DataStorage.RemoveRange(dataStorages);
+                await _applicationDbContext.DeletedDataStorage.AddRangeAsync(dataStorages.Adapt<IEnumerable<DeletedDataStorage>>());
+                _applicationDbContext.ActiveDataStorage.RemoveRange(dataStorages);
 
-                table.IsDeleted = true;
-                table.DeletedDate= DateTime.UtcNow;
+                deletedTable.IsDeleted = true;
+                deletedTable.DeletedDate= DateTime.UtcNow;
 
-                await _applicationDbContext.DeletedTables.AddAsync(table);
-                _applicationDbContext.Tables.Remove(table);
+                await _applicationDbContext.DeletedTables.AddAsync(deletedTable);
+                _applicationDbContext.ActiveTables.Remove(table);
 
                 await _applicationDbContext.SaveChangesAsync(cancellationToken);
 
