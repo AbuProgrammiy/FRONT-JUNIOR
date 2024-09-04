@@ -1,5 +1,6 @@
 ﻿using FrontJunior.Application.Abstractions;
 using FrontJunior.Application.UseCases.UserCases.Queries;
+using FrontJunior.Domain.Entities.Models;
 using FrontJunior.Domain.MainModels;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
@@ -19,14 +20,7 @@ namespace FrontJunior.Application.UseCases.UserCases.Handlers.QueryHandlers
         {
             try
             {
-                User user = await _applicationDbContext.Users.FirstOrDefaultAsync(u => u.Id == request.Id);
-
-                if (user == null)
-                {
-                    return null;
-                }
-
-                return user;
+                return await _applicationDbContext.ActiveUsers.FirstOrDefaultAsync(u => u.Id == request.Id);
             }
 
             catch (Exception ex)
