@@ -26,7 +26,5 @@ namespace FrontJunior.Domain.MainModels
         public string? Column20 { get; set; }
         public Guid Id { get; set; }
         public bool IsData { get; set; }
-        [JsonIgnore]
-        public Table Table { get; set; }
     }
 }

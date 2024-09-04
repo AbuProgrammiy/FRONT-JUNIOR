@@ -45,18 +45,18 @@ namespace FrontJunior.Application.UseCases.UserCases.Handlers.CommandHandlers
                     };
                 }
 
-                ActiveUser activeUser = request.Adapt<ActiveUser>();
+                ActiveUser user = request.Adapt<ActiveUser>();
 
                 PasswordModel passwordModel = _passwordService.HashPassword(request.Password);
 
-                activeUser.PassworSalt= passwordModel.PassworSalt;
-                activeUser.PasswordHash = passwordModel.PasswordHash;
+                user.PassworSalt= passwordModel.PassworSalt;
+                user.PasswordHash = passwordModel.PasswordHash;
 
-                activeUser.CreatedDate=DateTime.UtcNow;
-                activeUser.Role = activeUser.Role == null ? "SimpleUser": activeUser.Role;
-                activeUser.SecurityKey=Guid.NewGuid().ToString();
+                user.CreatedDate=DateTime.UtcNow;
+                user.Role = user.Role == null ? "SimpleUser": user.Role;
+                user.SecurityKey=Guid.NewGuid().ToString();
 
-                await _applicationDbContext.ActiveUsers.AddAsync(activeUser);
+                await _applicationDbContext.ActiveUsers.AddAsync(user);
                 await _applicationDbContext.SaveChangesAsync(cancellationToken);
 
                 return new ResponseModel

@@ -1,7 +1,9 @@
 ﻿using FrontJunior.Application.Abstractions;
 using FrontJunior.Application.UseCases.UserCases.Commands;
+using FrontJunior.Domain.Entities.Models;
 using FrontJunior.Domain.Entities.Views;
 using FrontJunior.Domain.MainModels;
+using Mapster;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 
@@ -20,7 +22,8 @@ namespace FrontJunior.Application.UseCases.UserCases.Handlers.CommandHandlers
         {
             try
             {
-                User user = await _applicationDbContext.Users.FirstOrDefaultAsync(u=> u.Id == request.Id);
+                ActiveUser user = await _applicationDbContext.ActiveUsers.FirstOrDefaultAsync(u=> u.Id == request.Id);
+                DeletedUser deletedUser = user.Adapt<DeletedUser>();
 
                 if (user == null)
                 {
@@ -32,27 +35,28 @@ namespace FrontJunior.Application.UseCases.UserCases.Handlers.CommandHandlers
                     };
                 }
 
-                IEnumerable<Table> tables = await _applicationDbContext.Tables.Where(t => t.User == user).ToListAsync();
+                List<ActiveTable> tables = await _applicationDbContext.ActiveTables.Where(t => t.User == user).ToListAsync();
+                List<DeletedTable> deletedTables = tables.Adapt<List<DeletedTable>>();
 
-                foreach(Table table in tables)
+                for(int i=0;i<tables.Count;i++)
                 {
-                    IEnumerable<DataStorage> dataStorages = await _applicationDbContext.DataStorage.Where(d => d.Table == table).ToListAsync();
+                    IEnumerable<ActiveDataStorage> dataStorages = await _applicationDbContext.ActiveDataStorage.Where(d => d.Table == tables[i]).ToListAsync();
 
-                    await _applicationDbContext.DeletedDataStorage.AddRangeAsync(dataStorages);
-                    _applicationDbContext.DataStorage.RemoveRange(dataStorages);
+                    await _applicationDbContext.DeletedDataStorage.AddRangeAsync(dataStorages.Adapt<IEnumerable<DeletedDataStorage>>());
+                    _applicationDbContext.ActiveDataStorage.RemoveRange(dataStorages);
 
-                    table.IsDeleted=true;
-                    table.DeletedDate = DateTime.UtcNow;
+                    deletedTables[i].IsDeleted=true;
+                    deletedTables[i].DeletedDate = DateTime.UtcNow;
                 }
 
-                await _applicationDbContext.DeletedTables.AddRangeAsync(tables);
-                _applicationDbContext.Tables.RemoveRange(tables);
+                await _applicationDbContext.DeletedTables.AddRangeAsync(deletedTables);
+                _applicationDbContext.ActiveTables.RemoveRange(tables);
 
-                user.IsDeleted=true;
-                user.DeletedDate = DateTime.UtcNow;
+                deletedUser.IsDeleted=true;
+                deletedUser.DeletedDate = DateTime.UtcNow;
 
-                await _applicationDbContext.DeletedUsers.AddAsync(user);
-                _applicationDbContext.Users.Remove(user);
+                await _applicationDbContext.DeletedUsers.AddAsync(deletedUser);
+                _applicationDbContext.ActiveUsers.Remove(user);
 
                 await _applicationDbContext.SaveChangesAsync(cancellationToken);
 
