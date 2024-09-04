@@ -56,4 +56,3 @@ namespace FrontJunior.Application.UseCases.TableCases.Handlers.CommandHandlers
         }
     }
 }
-
