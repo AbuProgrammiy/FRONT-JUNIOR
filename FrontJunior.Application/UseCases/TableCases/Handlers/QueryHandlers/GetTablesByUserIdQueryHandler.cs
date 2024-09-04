@@ -1,5 +1,6 @@
 ﻿using FrontJunior.Application.Abstractions;
 using FrontJunior.Application.UseCases.TableCases.Queries;
+using FrontJunior.Domain.Entities.Models;
 using FrontJunior.Domain.MainModels;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
@@ -20,24 +21,24 @@ namespace FrontJunior.Application.UseCases.TableCases.Handlers.QueryHandlers
         {
             try
             {
-                List<Table> tablesByUserId = await _applicationDbContext.Tables.Where(t => t.User.Id == request.UserId&&t.IsDeleted==false).ToListAsync();
+                List<ActiveTable> tablesByUserId = await _applicationDbContext.ActiveTables.Where(t => t.User.Id == request.UserId).ToListAsync();
 
                 Dictionary<string,IEnumerable<string>> tables= new Dictionary<string,IEnumerable<string>>();
 
-                for (int i = 0; i < tablesByUserId.Count; i++)
+                foreach(ActiveTable tableByUserId in tablesByUserId)
                 {
                     List<string> columns = new List<string>();
 
-                    DataStorage dataStorage = await _applicationDbContext.DataStorage.FirstOrDefaultAsync(d => d.Table == tablesByUserId[i] && d.IsData == false);
+                    ActiveDataStorage dataStorage = await _applicationDbContext.ActiveDataStorage.FirstOrDefaultAsync(d => d.Table == tableByUserId && d.IsData == false);
 
                     PropertyInfo[] properties = dataStorage.GetType().GetProperties();
 
-                    for (int j = 0; j < tablesByUserId[i].ColumnCount; j++)
+                    foreach(PropertyInfo property in properties)
                     {
-                        columns.Add(properties[j].GetValue(dataStorage)?.ToString());
+                        columns.Add(property.GetValue(dataStorage)?.ToString());
                     }
-
-                    tables.Add(tablesByUserId[i].Name, columns);
+                    
+                    tables.Add(tableByUserId.Name, columns);
                 }
 
                 return tables;
