@@ -1,5 +1,6 @@
 ﻿using FrontJunior.Application.Abstractions;
 using FrontJunior.Application.UseCases.DataStorageCases.Queries;
+using FrontJunior.Domain.Entities.Models;
 using FrontJunior.Domain.MainModels;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
@@ -22,11 +23,11 @@ namespace FrontJunior.Application.UseCases.DataStorageCases.Handlers.QueryHandle
             {
                 List<string> columns = new List<string>();
 
-                Table table = await _applicationDbContext.Tables.FirstOrDefaultAsync(t => t.User.Id == request.UserId && t.Name == request.TableName);
+                ActiveTable table = await _applicationDbContext.ActiveTables.FirstOrDefaultAsync(t => t.User.Id == request.UserId && t.Name == request.TableName);
 
-                DataStorage dataStorage = await _applicationDbContext.DataStorage.FirstOrDefaultAsync(d => d.Table.User.Id == request.UserId&&d.Table==table && d.IsData == false);
+                ActiveDataStorage dataStorage = await _applicationDbContext.ActiveDataStorage.FirstOrDefaultAsync(d => d.Table.User.Id == request.UserId&&d.Table==table && d.IsData == false);
 
-                PropertyInfo[] properties=dataStorage.GetType().GetProperties();
+                PropertyInfo[] properties = dataStorage.GetType().GetProperties();
 
                 for (int i = 0; i < table.ColumnCount; i++)
                 {
