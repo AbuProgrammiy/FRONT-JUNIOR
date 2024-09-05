@@ -1,9 +1,9 @@
-﻿using FrontJunior.Domain.MainModels;
+﻿using FrontJunior.Domain.Entities.Models;
 using MediatR;
 
 namespace FrontJunior.Application.UseCases.UserCases.Queries
 {
-    public class GetUserByIdQuery:IRequest<User>
+    public class GetUserByIdQuery:IRequest<ActiveUser>
     {
         public Guid Id { get; set; }
     }

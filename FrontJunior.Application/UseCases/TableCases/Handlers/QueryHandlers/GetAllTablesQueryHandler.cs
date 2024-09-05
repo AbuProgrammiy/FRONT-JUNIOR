@@ -1,12 +1,12 @@
 ﻿using FrontJunior.Application.Abstractions;
 using FrontJunior.Application.UseCases.TableCases.Queries;
-using FrontJunior.Domain.MainModels;
+using FrontJunior.Domain.Entities.Models;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 
 namespace FrontJunior.Application.UseCases.TableCases.Handlers.QueryHandlers
 {
-    public class GetAllTablesQueryHandler : IRequestHandler<GetAllTableQuery, IEnumerable<Table>>
+    public class GetAllTablesQueryHandler : IRequestHandler<GetAllTableQuery, IEnumerable<ActiveTable>>
     {
         private readonly IApplicationDbContext _applicationDbContext;
 
@@ -15,7 +15,7 @@ namespace FrontJunior.Application.UseCases.TableCases.Handlers.QueryHandlers
             _applicationDbContext = applicationDbContext;
         }
 
-        public async Task<IEnumerable<Table>> Handle(GetAllTableQuery request, CancellationToken cancellationToken)
+        public async Task<IEnumerable<ActiveTable>> Handle(GetAllTableQuery request, CancellationToken cancellationToken)
         {
             try
             {

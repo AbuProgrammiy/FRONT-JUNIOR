@@ -37,7 +37,7 @@ namespace FrontJunior.Application.UseCases.UserCases.Handlers.CommandHandlers
 
                 user.SecurityKey = request.NewSecurityKey;
 
-                await _applicationDbContext.SaveChangesAsync();
+                await _applicationDbContext.SaveChangesAsync(cancellationToken);
 
                 TokenModel tokenModel =_authService.GenerateToken(user);
 

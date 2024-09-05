@@ -1,7 +1,7 @@
 ﻿using FrontJunior.Application.Abstractions;
 using FrontJunior.Application.UseCases.CRUDCases.Queries;
+using FrontJunior.Domain.Entities.Models;
 using FrontJunior.Domain.Entities.Views;
-using FrontJunior.Domain.MainModels;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 using System.Reflection;
@@ -21,7 +21,7 @@ namespace FrontJunior.Application.UseCases.CRUDCases.Handlers.QueryHandlers
         {
             try
             {
-                User user = await _applicationDbContext.Users.FirstOrDefaultAsync(u => u.SecurityKey == request.SecurityKey);
+                ActiveUser user = await _applicationDbContext.ActiveUsers.FirstOrDefaultAsync(u => u.SecurityKey == request.SecurityKey);
 
                 if (user == null)
                 {
@@ -33,7 +33,7 @@ namespace FrontJunior.Application.UseCases.CRUDCases.Handlers.QueryHandlers
                     };
                 }
 
-                Table table = await _applicationDbContext.Tables.Where(t => t.User == user).FirstOrDefaultAsync(t => t.Name == request.TableName);
+                ActiveTable table = await _applicationDbContext.ActiveTables.Where(t => t.User == user).FirstOrDefaultAsync(t => t.Name == request.TableName);
 
                 if (table == null)
                 {
@@ -45,19 +45,19 @@ namespace FrontJunior.Application.UseCases.CRUDCases.Handlers.QueryHandlers
                     };
                 }
 
-                DataStorage columns = await _applicationDbContext.DataStorage.Where(d => d.IsData == false).FirstOrDefaultAsync(d => d.Table == table);
+                ActiveDataStorage columns = await _applicationDbContext.ActiveDataStorage.Where(d => d.IsData == false).FirstOrDefaultAsync(d => d.Table == table);
 
-                List<DataStorage> dataStorages;
+                List<ActiveDataStorage> dataStorages;
 
                 if (request.Page != null && request.Count != null)
                 {
-                    dataStorages = await _applicationDbContext.DataStorage.Where(d => d.Table == table && d.IsData == true)
-                                                                                            .Skip((request.Page.Value - 1) * request.Count.Value)
-                                                                                            .Take(request.Count.Value).ToListAsync();
+                    dataStorages = await _applicationDbContext.ActiveDataStorage.Where(d => d.Table == table && d.IsData == true)
+                                                                                .Skip((request.Page.Value - 1) * request.Count.Value)
+                                                                                .Take(request.Count.Value).ToListAsync();
                 }
                 else
                 {
-                    dataStorages = await _applicationDbContext.DataStorage.Where(d => d.Table == table && d.IsData == true).ToListAsync();
+                    dataStorages = await _applicationDbContext.ActiveDataStorage.Where(d => d.Table == table && d.IsData == true).ToListAsync();
                 }
 
                 if (dataStorages == null)

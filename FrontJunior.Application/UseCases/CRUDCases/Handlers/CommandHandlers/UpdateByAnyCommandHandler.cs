@@ -1,7 +1,7 @@
 ﻿using FrontJunior.Application.Abstractions;
 using FrontJunior.Application.UseCases.CRUDCases.Commands;
+using FrontJunior.Domain.Entities.Models;
 using FrontJunior.Domain.Entities.Views;
-using FrontJunior.Domain.MainModels;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json.Linq;
@@ -22,7 +22,7 @@ namespace FrontJunior.Application.UseCases.CRUDCases.Handlers.CommandHandlers
         {
             try
             {
-                User user = await _applicationDbContext.Users.FirstOrDefaultAsync(u => u.SecurityKey == request.SecurityKey);
+                ActiveUser user = await _applicationDbContext.ActiveUsers.FirstOrDefaultAsync(u => u.SecurityKey == request.SecurityKey);
 
                 if (user == null)
                 {
@@ -34,7 +34,7 @@ namespace FrontJunior.Application.UseCases.CRUDCases.Handlers.CommandHandlers
                     };
                 }
 
-                Table table = await _applicationDbContext.Tables.Where(t => t.User == user).FirstOrDefaultAsync(t => t.Name == request.TableName);
+                ActiveTable table = await _applicationDbContext.ActiveTables.Where(t => t.User == user).FirstOrDefaultAsync(t => t.Name == request.TableName);
 
                 if (table == null)
                 {
@@ -46,7 +46,7 @@ namespace FrontJunior.Application.UseCases.CRUDCases.Handlers.CommandHandlers
                     };
                 }
 
-                DataStorage columns = await _applicationDbContext.DataStorage.Where(d => d.IsData == false).FirstOrDefaultAsync(d => d.Table == table);
+                ActiveDataStorage columns = await _applicationDbContext.ActiveDataStorage.Where(d => d.IsData == false).FirstOrDefaultAsync(d => d.Table == table);
 
                 PropertyInfo[] properties = columns.GetType().GetProperties();
 
@@ -74,7 +74,7 @@ namespace FrontJunior.Application.UseCases.CRUDCases.Handlers.CommandHandlers
                     };
                 }
 
-                DataStorage dataStorage = _applicationDbContext.DataStorage.AsEnumerable()
+                ActiveDataStorage dataStorage = _applicationDbContext.ActiveDataStorage.AsEnumerable()
                                                                            .Where(d =>d.Table==table && d.IsData == true)
                                                                            .FirstOrDefault(d => d.GetType()
                                                                                                            .GetProperty(property.Name)
