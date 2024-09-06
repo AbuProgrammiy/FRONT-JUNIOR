@@ -20,7 +20,7 @@ namespace FrontJunior.Application.UseCases.TableCases.Handlers.CommandHandlers
         {
             try
             {
-                Table table = await _applicationDbContext.Tables.Where(t=>t.IsDeleted==false).FirstOrDefaultAsync(t => t.Id == request.Id);
+                Table table = await _applicationDbContext.Tables.FirstOrDefaultAsync(t => t.Id == request.Id);
 
                 if(table == null)
                 {
@@ -32,15 +32,10 @@ namespace FrontJunior.Application.UseCases.TableCases.Handlers.CommandHandlers
                     };
                 }
 
-                List<DataStorage> dataStorages=await _applicationDbContext.DataStorage.Where(d=>d.Table==table).ToListAsync();
+                IEnumerable<DataStorage> dataStorages=await _applicationDbContext.DataStorage.Where(d=>d.Table==table).ToListAsync();
 
-                table.IsDeleted=true;
-                table.DeletedDate=DateTime.UtcNow;
-
-                for (int i = 0; i < dataStorages.Count; i++)
-                {
-                    _applicationDbContext.DataStorage.Remove(dataStorages[i]);
-                }
+                _applicationDbContext.DataStorage.RemoveRange(dataStorages);
+                _applicationDbContext.Tables.Remove(table);
 
                 await _applicationDbContext.SaveChangesAsync(cancellationToken);
 

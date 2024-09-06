@@ -3,6 +3,7 @@ using FrontJunior.Application.UseCases.TableCases.Commands;
 using FrontJunior.Domain.Entities;
 using FrontJunior.Domain.Entities.Models;
 using MediatR;
+using Microsoft.EntityFrameworkCore;
 
 namespace FrontJunior.Application.UseCases.TableCases.Handlers.CommandHandlers
 {
@@ -31,7 +32,11 @@ namespace FrontJunior.Application.UseCases.TableCases.Handlers.CommandHandlers
                     };
                 }
 
+                IEnumerable<DataStorage> dataStorages = await _applicationDbContext.DataStorage.Where(d => d.Table == table).ToListAsync();
+
+                _applicationDbContext.DataStorage.RemoveRange(dataStorages);
                 _applicationDbContext.Tables.Remove(table);
+
                 await _applicationDbContext.SaveChangesAsync(cancellationToken);
 
                 return new ResponseModel

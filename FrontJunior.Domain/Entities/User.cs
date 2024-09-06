@@ -12,7 +12,5 @@
         public string Role { get; set; }
         public string SecurityKey { get; set; }
         public DateTime CreatedDate { get; set; }
-        public DateTime? DeletedDate { get; set; }
-        public bool IsDeleted { get; set; }
     }
 }

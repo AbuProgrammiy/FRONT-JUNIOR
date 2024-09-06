@@ -56,7 +56,6 @@ namespace FrontJunior.Application.UseCases.UserCases.Handlers.CommandHandlers
                 user.CreatedDate=DateTime.UtcNow;
                 user.Role = user.Role == null ? "SimpleUser":user.Role;
                 user.SecurityKey=Guid.NewGuid().ToString();
-                user.IsDeleted = false;
 
                 await _applicationDbContext.Users.AddAsync(user);
                 await _applicationDbContext.SaveChangesAsync(cancellationToken);

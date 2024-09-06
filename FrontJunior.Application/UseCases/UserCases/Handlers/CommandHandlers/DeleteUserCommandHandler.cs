@@ -32,8 +32,18 @@ namespace FrontJunior.Application.UseCases.UserCases.Handlers.CommandHandlers
                     };
                 }
 
-                user.IsDeleted=true;
-                user.DeletedDate = DateTime.UtcNow;
+                IEnumerable<Table> tables = await _applicationDbContext.Tables.Where(t => t.User == user).ToListAsync();
+
+                foreach (var table in tables)
+                {
+                    IEnumerable<DataStorage> dataStorages = await _applicationDbContext.DataStorage.Where(d => d.Table == table).ToListAsync();
+
+                    _applicationDbContext.DataStorage.RemoveRange(dataStorages);
+                }
+
+                _applicationDbContext.Tables.RemoveRange(tables);
+                _applicationDbContext.Users.Remove(user);
+
                 await _applicationDbContext.SaveChangesAsync(cancellationToken);
 
                 return new ResponseModel

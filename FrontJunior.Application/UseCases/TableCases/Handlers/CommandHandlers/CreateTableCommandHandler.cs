@@ -21,7 +21,7 @@ namespace FrontJunior.Application.UseCases.TableCases.Handlers.CommandHandlers
         {
             try
             {
-                Table table = await _applicationDbContext.Tables.Where(t => t.User.Id == request.UserId&&t.IsDeleted==false).FirstOrDefaultAsync(t => t.Name == request.Name);
+                Table table = await _applicationDbContext.Tables.Where(t => t.User.Id == request.UserId).FirstOrDefaultAsync(t => t.Name == request.Name);
 
                 if (table != null)
                 {
@@ -47,7 +47,6 @@ namespace FrontJunior.Application.UseCases.TableCases.Handlers.CommandHandlers
 
                 table =request.Adapt<Table>();
                 table.CreatedDate=DateTime.UtcNow;
-                table.IsDeleted = false;
                 table.User = user;
 
                 await _applicationDbContext.Tables.AddAsync(table);

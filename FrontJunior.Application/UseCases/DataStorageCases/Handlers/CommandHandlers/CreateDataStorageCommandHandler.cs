@@ -21,7 +21,7 @@ namespace FrontJunior.Application.UseCases.DataStorageCases.Handlers.CommandHand
         {
             try
             {
-                Table table = await _applicationDbContext.Tables.Where(t => t.IsDeleted == false).FirstOrDefaultAsync(t => t.Id == request.TableId);
+                Table table = await _applicationDbContext.Tables.FirstOrDefaultAsync(t => t.Id == request.TableId);
 
                 if (table == null)
                 {
