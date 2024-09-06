@@ -1,9 +1,9 @@
 ﻿using FrontJunior.Application.Abstractions;
 using FrontJunior.Application.Services.AuthServices;
-using FrontJunior.Application.Services.PasswordServices;
 using FrontJunior.Application.UseCases.UserCases.Commands;
+using FrontJunior.Domain.Entities;
 using FrontJunior.Domain.Entities.Models;
-using FrontJunior.Domain.Entities.Views;
+using Mapster;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 
@@ -14,20 +14,19 @@ namespace FrontJunior.Application.UseCases.UserCases.Handlers.CommandHandlers
         private readonly IApplicationDbContext _applicationDbContext;
         private readonly IMediator _mediator;
         private readonly IAuthService _authService;
-        private readonly IPasswordService _passwordService;
 
-        public ResetUserPasswordCommandHandler(IApplicationDbContext applicationDbContext, IMediator mediator, IAuthService authService, IPasswordService passwordService)
+        public ResetUserPasswordCommandHandler(IApplicationDbContext applicationDbContext, IMediator mediator, IAuthService authService)
         {
             _applicationDbContext = applicationDbContext;
             _mediator = mediator;
             _authService = authService;
-            _passwordService = passwordService;
         }
 
         public async Task<object> Handle(ResetUserPasswordCommand request, CancellationToken cancellationToken)
         {
             try
             {
+
                 ResponseModel response = await _mediator.Send(new VerifyUserCommand
                 {
                     Email = request.Email,
@@ -39,7 +38,7 @@ namespace FrontJunior.Application.UseCases.UserCases.Handlers.CommandHandlers
                     return response;
                 }
 
-                ActiveUser user = await _applicationDbContext.ActiveUsers.FirstOrDefaultAsync(u => u.Email == request.Email); 
+                User user = await _applicationDbContext.Users.AsNoTracking().FirstOrDefaultAsync(u => u.Email == request.Email); 
 
                 if(user == null)
                 {
@@ -51,15 +50,21 @@ namespace FrontJunior.Application.UseCases.UserCases.Handlers.CommandHandlers
                     };
                 }
 
-                PasswordModel passwordModel = _passwordService.HashPassword(request.NewPassword);
+                UpdateUserCommand updateUserCommand = user.Adapt<UpdateUserCommand>();
+                updateUserCommand.Email = request.Email;
+                updateUserCommand.Password = request.NewPassword;
 
-                user.PasswordHash= passwordModel.PasswordHash;
-                user.PassworSalt= passwordModel.PassworSalt;
+                response = await _mediator.Send(updateUserCommand);
+
+                if(response.IsSuccess==false)
+                {
+                    return response;
+                }
 
                 _applicationDbContext.Verifications.Remove(await _applicationDbContext.Verifications.FirstOrDefaultAsync(v => v.Email == request.Email));
                 await _applicationDbContext.SaveChangesAsync(cancellationToken);
 
-                return _authService.GenerateToken(await _applicationDbContext.ActiveUsers.FirstOrDefaultAsync(u => u.Email == request.Email));
+                return _authService.GenerateToken(await _applicationDbContext.Users.FirstOrDefaultAsync(u => u.Email == request.Email));
             }
             catch (Exception ex)
             {

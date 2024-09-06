@@ -1,5 +1,5 @@
 ﻿using FrontJunior.Domain.Entities;
-using FrontJunior.Domain.Entities.Views;
+using FrontJunior.Domain.Entities.Models;
 using MediatR;
 using System.Security.Cryptography;
 using System.Text;

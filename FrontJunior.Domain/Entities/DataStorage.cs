@@ -1,6 +1,6 @@
 ﻿using System.Text.Json.Serialization;
 
-namespace FrontJunior.Domain.MainModels
+namespace FrontJunior.Domain.Entities
 {
     public class DataStorage
     {
@@ -26,5 +26,7 @@ namespace FrontJunior.Domain.MainModels
         public string? Column20 { get; set; }
         public Guid Id { get; set; }
         public bool IsData { get; set; }
+        [JsonIgnore]
+        public Table Table { get; set; }
     }
 }

@@ -1,8 +1,7 @@
 ﻿using FrontJunior.Application.Abstractions;
 using FrontJunior.Application.UseCases.CRUDCases.Commands;
+using FrontJunior.Domain.Entities;
 using FrontJunior.Domain.Entities.Models;
-using FrontJunior.Domain.Entities.Views;
-using FrontJunior.Domain.MainModels;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json.Linq;
@@ -23,7 +22,7 @@ namespace FrontJunior.Application.UseCases.CRUDCases.Handlers.CommandHandlers
         {
             try
             {
-                ActiveUser user = await _applicationDbContext.ActiveUsers.FirstOrDefaultAsync(u => u.SecurityKey == request.SecurityKey);
+                User user = await _applicationDbContext.Users.FirstOrDefaultAsync(u => u.SecurityKey == request.SecurityKey);
 
                 if (user == null)
                 {
@@ -35,7 +34,7 @@ namespace FrontJunior.Application.UseCases.CRUDCases.Handlers.CommandHandlers
                     };
                 }
 
-                ActiveTable table = await _applicationDbContext.ActiveTables.Where(t => t.User == user).FirstOrDefaultAsync(t => t.Name == request.TableName);
+                Table table = await _applicationDbContext.Tables.Where(t => t.User == user).FirstOrDefaultAsync(t => t.Name == request.TableName);
 
                 if (table == null)
                 {
@@ -59,9 +58,9 @@ namespace FrontJunior.Application.UseCases.CRUDCases.Handlers.CommandHandlers
                     };
                 }
 
-                ActiveDataStorage columns=await _applicationDbContext.ActiveDataStorage.Where(d=>d.IsData==false).FirstOrDefaultAsync(d=>d.Table==table);
+                DataStorage columns=await _applicationDbContext.DataStorage.Where(d=>d.IsData==false).FirstOrDefaultAsync(d=>d.Table==table);
 
-                ActiveDataStorage dataStorage = new ActiveDataStorage
+                DataStorage dataStorage = new DataStorage
                 {
                     Table = table,
                     IsData = true,
@@ -81,7 +80,7 @@ namespace FrontJunior.Application.UseCases.CRUDCases.Handlers.CommandHandlers
                     }
                 }
 
-                await _applicationDbContext.ActiveDataStorage.AddAsync(dataStorage);
+                await _applicationDbContext.DataStorage.AddAsync(dataStorage);
                 await _applicationDbContext.SaveChangesAsync(cancellationToken);
 
                 return new ResponseModel

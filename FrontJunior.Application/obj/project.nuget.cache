@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "SfFMpMRtS+h7Ww0Fb5TqEJjoku59KrotYIDqo+GpobAAkNIDkmZsZPXYFOrNodlkTNTYz0H2hswsgN7JUhbfrg==",
+  "dgSpecHash": "T8o1XVtPVvptxCSUYjmNY5wafpyqawtTtn0JtN+m/3Jjgj/bLq8HE8nk1tDbZqoyiIiFqnorhMHbnfyw27ZtNA==",
   "success": true,
-  "projectFilePath": "D:\\Confidential Station\\FrontJunior.Application\\FrontJunior.Application.csproj",
+  "projectFilePath": "D:\\Confidential Station\\FRONT-JUNIOR\\FrontJunior.Application\\FrontJunior.Application.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Hp\\.nuget\\packages\\mapster\\7.4.0\\mapster.7.4.0.nupkg.sha512",
     "C:\\Users\\Hp\\.nuget\\packages\\mapster.core\\1.2.1\\mapster.core.1.2.1.nupkg.sha512",

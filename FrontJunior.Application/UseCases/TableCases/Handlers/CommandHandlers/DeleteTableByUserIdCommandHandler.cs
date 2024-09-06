@@ -1,10 +1,8 @@
 ﻿using FrontJunior.Application.Abstractions;
 using FrontJunior.Application.UseCases.TableCases.Commands;
+using FrontJunior.Domain.Entities;
 using FrontJunior.Domain.Entities.Models;
-using FrontJunior.Domain.Entities.Views;
-using Mapster;
 using MediatR;
-using Microsoft.EntityFrameworkCore;
 
 namespace FrontJunior.Application.UseCases.TableCases.Handlers.CommandHandlers
 {
@@ -21,8 +19,7 @@ namespace FrontJunior.Application.UseCases.TableCases.Handlers.CommandHandlers
         {
             try
             {
-                ActiveTable table = _applicationDbContext.ActiveTables.FirstOrDefault(t => t.User.Id == request.UserId && t.Name == request.TableName);
-                DeletedTable deletedTable = table.Adapt<DeletedTable>();
+                Table table = _applicationDbContext.Tables.FirstOrDefault(t => t.Name == request.TableName && t.User.Id == request.UserId);
 
                 if (table == null)
                 {
@@ -30,21 +27,11 @@ namespace FrontJunior.Application.UseCases.TableCases.Handlers.CommandHandlers
                     {
                         IsSuccess = false,
                         StatusCode = 404,
-                        Response = "Table or User not found!"
+                        Response = "Table not found or UserId is incorret!"
                     };
                 }
 
-                IEnumerable<ActiveDataStorage> dataStorages = await _applicationDbContext.ActiveDataStorage.Where(d => d.Table == table).ToListAsync();
-
-                await _applicationDbContext.DeletedDataStorage.AddRangeAsync(dataStorages.Adapt<IEnumerable<DeletedDataStorage>>());
-                _applicationDbContext.ActiveDataStorage.RemoveRange(dataStorages);
-
-                deletedTable.IsDeleted = true;
-                deletedTable.DeletedDate= DateTime.UtcNow;
-
-                await _applicationDbContext.DeletedTables.AddAsync(deletedTable);
-                _applicationDbContext.ActiveTables.Remove(table);
-
+                _applicationDbContext.Tables.Remove(table);
                 await _applicationDbContext.SaveChangesAsync(cancellationToken);
 
                 return new ResponseModel

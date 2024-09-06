@@ -10,3 +10,15 @@ D:\Confidential Station\FrontJunior.Domain\obj\Debug\net8.0\FrontJunior.Domain.d
 D:\Confidential Station\FrontJunior.Domain\obj\Debug\net8.0\refint\FrontJunior.Domain.dll
 D:\Confidential Station\FrontJunior.Domain\obj\Debug\net8.0\FrontJunior.Domain.pdb
 D:\Confidential Station\FrontJunior.Domain\obj\Debug\net8.0\ref\FrontJunior.Domain.dll
+D:\Confidential Station\FRONT-JUNIOR\FrontJunior.Domain\bin\Debug\net8.0\FrontJunior.Domain.deps.json
+D:\Confidential Station\FRONT-JUNIOR\FrontJunior.Domain\bin\Debug\net8.0\FrontJunior.Domain.dll
+D:\Confidential Station\FRONT-JUNIOR\FrontJunior.Domain\bin\Debug\net8.0\FrontJunior.Domain.pdb
+D:\Confidential Station\FRONT-JUNIOR\FrontJunior.Domain\obj\Debug\net8.0\FrontJunior.Domain.GeneratedMSBuildEditorConfig.editorconfig
+D:\Confidential Station\FRONT-JUNIOR\FrontJunior.Domain\obj\Debug\net8.0\FrontJunior.Domain.AssemblyInfoInputs.cache
+D:\Confidential Station\FRONT-JUNIOR\FrontJunior.Domain\obj\Debug\net8.0\FrontJunior.Domain.AssemblyInfo.cs
+D:\Confidential Station\FRONT-JUNIOR\FrontJunior.Domain\obj\Debug\net8.0\FrontJunior.Domain.csproj.CoreCompileInputs.cache
+D:\Confidential Station\FRONT-JUNIOR\FrontJunior.Domain\obj\Debug\net8.0\FrontJunior.Domain.sourcelink.json
+D:\Confidential Station\FRONT-JUNIOR\FrontJunior.Domain\obj\Debug\net8.0\FrontJunior.Domain.dll
+D:\Confidential Station\FRONT-JUNIOR\FrontJunior.Domain\obj\Debug\net8.0\refint\FrontJunior.Domain.dll
+D:\Confidential Station\FRONT-JUNIOR\FrontJunior.Domain\obj\Debug\net8.0\FrontJunior.Domain.pdb
+D:\Confidential Station\FRONT-JUNIOR\FrontJunior.Domain\obj\Debug\net8.0\ref\FrontJunior.Domain.dll

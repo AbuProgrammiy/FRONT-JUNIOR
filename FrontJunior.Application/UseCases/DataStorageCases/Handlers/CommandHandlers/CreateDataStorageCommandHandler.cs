@@ -1,7 +1,7 @@
 ﻿using FrontJunior.Application.Abstractions;
 using FrontJunior.Application.UseCases.DataStorageCases.Commands;
+using FrontJunior.Domain.Entities;
 using FrontJunior.Domain.Entities.Models;
-using FrontJunior.Domain.Entities.Views;
 using Mapster;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
@@ -21,7 +21,7 @@ namespace FrontJunior.Application.UseCases.DataStorageCases.Handlers.CommandHand
         {
             try
             {
-                ActiveTable table = await _applicationDbContext.ActiveTables.FirstOrDefaultAsync(t => t.Id == request.TableId);
+                Table table = await _applicationDbContext.Tables.Where(t => t.IsDeleted == false).FirstOrDefaultAsync(t => t.Id == request.TableId);
 
                 if (table == null)
                 {
@@ -33,10 +33,10 @@ namespace FrontJunior.Application.UseCases.DataStorageCases.Handlers.CommandHand
                     };
                 }
 
-                ActiveDataStorage dataStorage = request.Adapt<ActiveDataStorage>();
+                DataStorage dataStorage = request.Adapt<DataStorage>();
                 dataStorage.Table = table;
 
-                await _applicationDbContext.ActiveDataStorage.AddAsync(dataStorage);
+                await _applicationDbContext.DataStorage.AddAsync(dataStorage);
                 await _applicationDbContext.SaveChangesAsync(cancellationToken);
 
                 return new ResponseModel

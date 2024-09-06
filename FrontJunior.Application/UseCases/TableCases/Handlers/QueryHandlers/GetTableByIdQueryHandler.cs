@@ -1,13 +1,12 @@
 ﻿using FrontJunior.Application.Abstractions;
 using FrontJunior.Application.UseCases.TableCases.Queries;
-using FrontJunior.Domain.Entities.Models;
-using FrontJunior.Domain.MainModels;
+using FrontJunior.Domain.Entities;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 
 namespace FrontJunior.Application.UseCases.TableCases.Handlers.QueryHandlers
 {
-    public class GetTableByIdQueryHandler : IRequestHandler<GetTableByIdQuery, ActiveTable>
+    public class GetTableByIdQueryHandler : IRequestHandler<GetTableByIdQuery, Table>
     {
         private readonly IApplicationDbContext _applicationDbContext;
 
@@ -16,11 +15,12 @@ namespace FrontJunior.Application.UseCases.TableCases.Handlers.QueryHandlers
             _applicationDbContext = applicationDbContext;
         }
 
-        public async Task<ActiveTable> Handle(GetTableByIdQuery request, CancellationToken cancellationToken)
+        public async Task<Table> Handle(GetTableByIdQuery request, CancellationToken cancellationToken)
         {
             try
             {
-                return await _applicationDbContext.ActiveTables.FirstOrDefaultAsync(t => t.Id == request.Id);
+                return await _applicationDbContext.Tables.Where(t=>t.IsDeleted==false)
+                                                           .FirstOrDefaultAsync(t => t.Id == request.Id);
             }
 
             catch (Exception ex)

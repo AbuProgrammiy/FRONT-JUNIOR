@@ -1,8 +1,8 @@
 ﻿using FrontJunior.Application.Abstractions;
 using FrontJunior.Application.Services.PasswordServices;
 using FrontJunior.Application.UseCases.UserCases.Commands;
+using FrontJunior.Domain.Entities;
 using FrontJunior.Domain.Entities.Models;
-using FrontJunior.Domain.Entities.Views;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 
@@ -23,9 +23,9 @@ namespace FrontJunior.Application.UseCases.UserCases.Handlers.CommandHandlers
         {
             try
             {
-                ActiveUser user = await _applicationDbContext.ActiveUsers.FirstOrDefaultAsync(u => u.Id == request.Id);
+                User user = await _applicationDbContext.Users.AsNoTracking().FirstOrDefaultAsync(u => u.Id == request.Id);
            
-                if (user == null)
+                if(user == null)
                 {
                     return new ResponseModel
                     {
@@ -66,6 +66,7 @@ namespace FrontJunior.Application.UseCases.UserCases.Handlers.CommandHandlers
                 user.PassworSalt = passwordModel.PassworSalt;
                 user.PasswordHash = passwordModel.PasswordHash;
 
+                _applicationDbContext.Users.Update(user);
                 await _applicationDbContext.SaveChangesAsync(cancellationToken);
 
                 return new ResponseModel

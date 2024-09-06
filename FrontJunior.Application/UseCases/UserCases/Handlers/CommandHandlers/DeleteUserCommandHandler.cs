@@ -1,9 +1,7 @@
 ﻿using FrontJunior.Application.Abstractions;
 using FrontJunior.Application.UseCases.UserCases.Commands;
+using FrontJunior.Domain.Entities;
 using FrontJunior.Domain.Entities.Models;
-using FrontJunior.Domain.Entities.Views;
-using FrontJunior.Domain.MainModels;
-using Mapster;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 
@@ -22,8 +20,7 @@ namespace FrontJunior.Application.UseCases.UserCases.Handlers.CommandHandlers
         {
             try
             {
-                ActiveUser user = await _applicationDbContext.ActiveUsers.FirstOrDefaultAsync(u=> u.Id == request.Id);
-                DeletedUser deletedUser = user.Adapt<DeletedUser>();
+                User user = await _applicationDbContext.Users.FirstOrDefaultAsync(u=> u.Id == request.Id);
 
                 if (user == null)
                 {
@@ -35,29 +32,8 @@ namespace FrontJunior.Application.UseCases.UserCases.Handlers.CommandHandlers
                     };
                 }
 
-                List<ActiveTable> tables = await _applicationDbContext.ActiveTables.Where(t => t.User == user).ToListAsync();
-                List<DeletedTable> deletedTables = tables.Adapt<List<DeletedTable>>();
-
-                for(int i=0;i<tables.Count;i++)
-                {
-                    IEnumerable<ActiveDataStorage> dataStorages = await _applicationDbContext.ActiveDataStorage.Where(d => d.Table == tables[i]).ToListAsync();
-
-                    await _applicationDbContext.DeletedDataStorage.AddRangeAsync(dataStorages.Adapt<IEnumerable<DeletedDataStorage>>());
-                    _applicationDbContext.ActiveDataStorage.RemoveRange(dataStorages);
-
-                    deletedTables[i].IsDeleted=true;
-                    deletedTables[i].DeletedDate = DateTime.UtcNow;
-                }
-
-                await _applicationDbContext.DeletedTables.AddRangeAsync(deletedTables);
-                _applicationDbContext.ActiveTables.RemoveRange(tables);
-
-                deletedUser.IsDeleted=true;
-                deletedUser.DeletedDate = DateTime.UtcNow;
-
-                await _applicationDbContext.DeletedUsers.AddAsync(deletedUser);
-                _applicationDbContext.ActiveUsers.Remove(user);
-
+                user.IsDeleted=true;
+                user.DeletedDate = DateTime.UtcNow;
                 await _applicationDbContext.SaveChangesAsync(cancellationToken);
 
                 return new ResponseModel

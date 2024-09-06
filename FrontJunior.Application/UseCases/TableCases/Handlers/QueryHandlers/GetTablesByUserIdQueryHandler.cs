@@ -1,7 +1,6 @@
 ﻿using FrontJunior.Application.Abstractions;
 using FrontJunior.Application.UseCases.TableCases.Queries;
-using FrontJunior.Domain.Entities.Models;
-using FrontJunior.Domain.MainModels;
+using FrontJunior.Domain.Entities;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 using System.Reflection;
@@ -21,24 +20,24 @@ namespace FrontJunior.Application.UseCases.TableCases.Handlers.QueryHandlers
         {
             try
             {
-                List<ActiveTable> tablesByUserId = await _applicationDbContext.ActiveTables.Where(t => t.User.Id == request.UserId).ToListAsync();
+                List<Table> tablesByUserId = await _applicationDbContext.Tables.Where(t => t.User.Id == request.UserId).ToListAsync();
 
                 Dictionary<string,IEnumerable<string>> tables= new Dictionary<string,IEnumerable<string>>();
 
-                foreach(ActiveTable tableByUserId in tablesByUserId)
+                for (int i = 0; i < tablesByUserId.Count; i++)
                 {
                     List<string> columns = new List<string>();
 
-                    ActiveDataStorage dataStorage = await _applicationDbContext.ActiveDataStorage.FirstOrDefaultAsync(d => d.Table == tableByUserId && d.IsData == false);
+                    DataStorage dataStorage = await _applicationDbContext.DataStorage.FirstOrDefaultAsync(d => d.Table == tablesByUserId[i] && d.IsData == false);
 
                     PropertyInfo[] properties = dataStorage.GetType().GetProperties();
 
-                    foreach(PropertyInfo property in properties)
+                    for (int j = 0; j < tablesByUserId[i].ColumnCount; j++)
                     {
-                        columns.Add(property.GetValue(dataStorage)?.ToString());
+                        columns.Add(properties[j].GetValue(dataStorage)?.ToString());
                     }
-                    
-                    tables.Add(tableByUserId.Name, columns);
+
+                    tables.Add(tablesByUserId[i].Name, columns);
                 }
 
                 return tables;

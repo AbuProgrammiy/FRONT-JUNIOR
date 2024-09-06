@@ -1,6 +1,6 @@
 ﻿using FrontJunior.Application.UseCases.CRUDCases.Commands;
 using FrontJunior.Application.UseCases.CRUDCases.Queries;
-using FrontJunior.Domain.Entities.Views;
+using FrontJunior.Domain.Entities.Models;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 

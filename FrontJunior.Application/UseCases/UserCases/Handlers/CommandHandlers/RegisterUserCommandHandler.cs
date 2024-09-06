@@ -1,7 +1,8 @@
 ﻿using FrontJunior.Application.Abstractions;
 using FrontJunior.Application.Services.AuthServices;
 using FrontJunior.Application.UseCases.UserCases.Commands;
-using FrontJunior.Domain.Entities.Views;
+using FrontJunior.Domain.Entities;
+using FrontJunior.Domain.Entities.Models;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 
@@ -49,7 +50,7 @@ namespace FrontJunior.Application.UseCases.UserCases.Handlers.CommandHandlers
                 _applicationDbContext.Verifications.Remove(await _applicationDbContext.Verifications.FirstOrDefaultAsync(v=>v.Email==request.Email));
                 await _applicationDbContext.SaveChangesAsync(cancellationToken);
 
-                return _authService.GenerateToken(await _applicationDbContext.ActiveUsers.FirstOrDefaultAsync(u => u.Email == request.Email));
+                return _authService.GenerateToken(await _applicationDbContext.Users.FirstOrDefaultAsync(u => u.Email == request.Email));
             }
             catch (Exception ex)
             {

@@ -1,5 +1,5 @@
-﻿using FrontJunior.Domain.Entities.Views;
-using FrontJunior.Domain.MainModels;
+﻿using FrontJunior.Domain.Entities;
+using FrontJunior.Domain.Entities.Models;
 using MediatR;
 
 namespace FrontJunior.Application.UseCases.TableCases.Commands

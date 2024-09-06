@@ -1,4 +1,4 @@
-﻿namespace FrontJunior.Domain.Entities.Views
+﻿namespace FrontJunior.Domain.Entities.Models
 {
     public class TokenModel
     {

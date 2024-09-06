@@ -1,12 +1,12 @@
 ﻿using FrontJunior.Application.Abstractions;
 using FrontJunior.Application.UseCases.UserCases.Queries;
-using FrontJunior.Domain.Entities.Models;
+using FrontJunior.Domain.Entities;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 
 namespace FrontJunior.Application.UseCases.UserCases.Handlers.QueryHandlers
 {
-    public class GetAllUsersQueryHandler : IRequestHandler<GetAllUsersQuery, IEnumerable<ActiveUser>>
+    public class GetAllUsersQueryHandler : IRequestHandler<GetAllUsersQuery, IEnumerable<User>>
     {
         private readonly IApplicationDbContext _applicationDbContext;
 
@@ -15,14 +15,15 @@ namespace FrontJunior.Application.UseCases.UserCases.Handlers.QueryHandlers
             _applicationDbContext = applicationDbContext;
         }
 
-        public async Task<IEnumerable<ActiveUser>> Handle(GetAllUsersQuery request, CancellationToken cancellationToken)
+        public async Task<IEnumerable<User>> Handle(GetAllUsersQuery request, CancellationToken cancellationToken)
         {
             try
             {
-                return await _applicationDbContext.ActiveUsers.OrderBy(u=>u.CreatedDate)
-                                                              .Skip((request.Page-1)*request.Count)
-                                                              .Take(request.Count)
-                                                              .ToListAsync(cancellationToken);
+                return await _applicationDbContext.Users.Where(u=>u.IsDeleted==false)
+                                                        .OrderBy(u=>u.CreatedDate)
+                                                        .Skip((request.Page-1)*request.Count)
+                                                        .Take(request.Count)
+                                                        .ToListAsync(cancellationToken);
             }
             catch (Exception ex)
             {

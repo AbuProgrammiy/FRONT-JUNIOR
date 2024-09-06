@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "XNee7TW2q1wX50aV1Za/BMvLL8/q0yDZqOUPI3y1xzFE2Au3WrdMpALJL6xDM77MDEeP129lWF914FPXXq3OsA==",
+  "dgSpecHash": "JJbPl9q53O199woqZBn4l+U5tF4C24q5dVMNjQQRr04kW1aijo7vcoJtFBr4n6r9L6CVS0Sl8zDuT/bTS7rsIA==",
   "success": true,
-  "projectFilePath": "D:\\Confidential Station\\FrontJunior.API\\FrontJunior.API.csproj",
+  "projectFilePath": "D:\\Confidential Station\\FRONT-JUNIOR\\FrontJunior.API\\FrontJunior.API.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Hp\\.nuget\\packages\\castle.core\\5.1.1\\castle.core.5.1.1.nupkg.sha512",
     "C:\\Users\\Hp\\.nuget\\packages\\humanizer.core\\2.14.1\\humanizer.core.2.14.1.nupkg.sha512",

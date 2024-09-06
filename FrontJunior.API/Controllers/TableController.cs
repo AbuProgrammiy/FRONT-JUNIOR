@@ -1,7 +1,7 @@
 ﻿using FrontJunior.Application.UseCases.TableCases.Commands;
 using FrontJunior.Application.UseCases.TableCases.Queries;
+using FrontJunior.Domain.Entities;
 using FrontJunior.Domain.Entities.Models;
-using FrontJunior.Domain.Entities.Views;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
@@ -20,14 +20,14 @@ namespace FrontJunior.API.Controllers
 
         [HttpGet]
         [Route("{page}/{count}")]
-        public async Task<IEnumerable<ActiveTable>> GetAll(int page, int count)
+        public async Task<IEnumerable<Table>> GetAll(int page, int count)
         {
             return await _mediator.Send(new GetAllTableQuery { Page = page, Count = count });
         }
 
         [HttpGet]
         [Route("{id}")]
-        public async Task<ActiveTable> GetById(Guid id)
+        public async Task<Table> GetById(Guid id)
         {
             return await _mediator.Send(new GetTableByIdQuery { Id = id });
         }

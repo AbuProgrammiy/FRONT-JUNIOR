@@ -1,4 +1,4 @@
-﻿using FrontJunior.Domain.Entities.Views;
+﻿using FrontJunior.Domain.Entities.Models;
 
 namespace FrontJunior.Application.Services.PasswordServices
 {

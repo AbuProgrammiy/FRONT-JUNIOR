@@ -1,12 +1,13 @@
 ﻿using FrontJunior.Application.Abstractions;
 using FrontJunior.Application.Services.PasswordServices;
 using FrontJunior.Application.UseCases.UserCases.Commands;
+using FrontJunior.Domain.Entities;
 using FrontJunior.Domain.Entities.Models;
-using FrontJunior.Domain.Entities.Views;
-using FrontJunior.Domain.MainModels;
 using Mapster;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
+using System.Security.Cryptography;
+using System.Text;
 
 namespace FrontJunior.Application.UseCases.UserCases.Handlers.CommandHandlers
 {
@@ -25,7 +26,7 @@ namespace FrontJunior.Application.UseCases.UserCases.Handlers.CommandHandlers
         {
             try
             {
-                if (await _applicationDbContext.ActiveUsers.FirstOrDefaultAsync(u => u.Email == request.Email) != null)
+                if (await _applicationDbContext.Users.FirstOrDefaultAsync(u => u.Email == request.Email) != null)
                 {
                     return new ResponseModel
                     {
@@ -35,7 +36,7 @@ namespace FrontJunior.Application.UseCases.UserCases.Handlers.CommandHandlers
                     };
                 }
 
-                if (request.Username != null && await _applicationDbContext.ActiveUsers.FirstOrDefaultAsync(u => u.Username == request.Username) != null) 
+                if (request.Username != null && await _applicationDbContext.Users.FirstOrDefaultAsync(u => u.Username == request.Username) != null) 
                 {
                     return new ResponseModel
                     {
@@ -45,7 +46,7 @@ namespace FrontJunior.Application.UseCases.UserCases.Handlers.CommandHandlers
                     };
                 }
 
-                ActiveUser user = request.Adapt<ActiveUser>();
+                User user = request.Adapt<User>();
 
                 PasswordModel passwordModel = _passwordService.HashPassword(request.Password);
 
@@ -53,10 +54,11 @@ namespace FrontJunior.Application.UseCases.UserCases.Handlers.CommandHandlers
                 user.PasswordHash = passwordModel.PasswordHash;
 
                 user.CreatedDate=DateTime.UtcNow;
-                user.Role = user.Role == null ? "SimpleUser": user.Role;
+                user.Role = user.Role == null ? "SimpleUser":user.Role;
                 user.SecurityKey=Guid.NewGuid().ToString();
+                user.IsDeleted = false;
 
-                await _applicationDbContext.ActiveUsers.AddAsync(user);
+                await _applicationDbContext.Users.AddAsync(user);
                 await _applicationDbContext.SaveChangesAsync(cancellationToken);
 
                 return new ResponseModel

@@ -1,5 +1,5 @@
 ﻿using FrontJunior.Domain.Entities.DTOs;
-using FrontJunior.Domain.Entities.Views;
+using FrontJunior.Domain.Entities.Models;
 using Microsoft.Extensions.Configuration;
 using System.Net;
 using System.Net.Mail;

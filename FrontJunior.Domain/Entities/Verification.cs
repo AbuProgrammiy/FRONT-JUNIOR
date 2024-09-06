@@ -1,4 +1,4 @@
-﻿namespace FrontJunior.Domain.Entities.Models
+﻿namespace FrontJunior.Domain.Entities
 {
     public class Verification
     {

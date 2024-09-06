@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "D:\\Confidential Station\\FrontJunior.Domain\\FrontJunior.Domain.csproj": {}
+    "D:\\Confidential Station\\FRONT-JUNIOR\\FrontJunior.Domain\\FrontJunior.Domain.csproj": {}
   },
   "projects": {
-    "D:\\Confidential Station\\FrontJunior.Domain\\FrontJunior.Domain.csproj": {
+    "D:\\Confidential Station\\FRONT-JUNIOR\\FrontJunior.Domain\\FrontJunior.Domain.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\Confidential Station\\FrontJunior.Domain\\FrontJunior.Domain.csproj",
+        "projectUniqueName": "D:\\Confidential Station\\FRONT-JUNIOR\\FrontJunior.Domain\\FrontJunior.Domain.csproj",
         "projectName": "FrontJunior.Domain",
-        "projectPath": "D:\\Confidential Station\\FrontJunior.Domain\\FrontJunior.Domain.csproj",
+        "projectPath": "D:\\Confidential Station\\FRONT-JUNIOR\\FrontJunior.Domain\\FrontJunior.Domain.csproj",
         "packagesPath": "C:\\Users\\Hp\\.nuget\\packages\\",
-        "outputPath": "D:\\Confidential Station\\FrontJunior.Domain\\obj\\",
+        "outputPath": "D:\\Confidential Station\\FRONT-JUNIOR\\FrontJunior.Domain\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\Hp\\AppData\\Roaming\\NuGet\\NuGet.Config",

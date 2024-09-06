@@ -1,7 +1,7 @@
 ﻿using FrontJunior.Application.UseCases.DataStorageCases.Commands;
 using FrontJunior.Application.UseCases.DataStorageCases.Queries;
+using FrontJunior.Domain.Entities;
 using FrontJunior.Domain.Entities.Models;
-using FrontJunior.Domain.Entities.Views;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
@@ -20,21 +20,21 @@ namespace FrontJunior.API.Controllers
 
         [HttpGet]
         [Route("{page}/{count}")]
-        public async Task<IEnumerable<ActiveDataStorage>> GetAll(int page,int count)
+        public async Task<IEnumerable<DataStorage>> GetAll(int page,int count)
         {
             return await _mediator.Send(new GetAllDataStorageQuery { Page = page, Count = count });
         }
 
         [HttpGet]
         [Route("{page}/{count}")]
-        public async Task<IEnumerable<ActiveDataStorage>> GetAllColumns(int page, int count)
+        public async Task<IEnumerable<DataStorage>> GetAllColumns(int page, int count)
         {
             return await _mediator.Send(new GetAllDataStorageColumnsQuery { Page = page, Count = count });
         }
 
         [HttpGet]
         [Route("{id}")]
-        public async Task<ActiveDataStorage> GetById(Guid id)
+        public async Task<DataStorage> GetById(Guid id)
         {
             return await _mediator.Send(new GetDataStorageByIdQuery { Id = id });
         }

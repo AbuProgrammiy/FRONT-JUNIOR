@@ -1,11 +1,11 @@
-﻿using Microsoft.Extensions.Configuration;
+﻿using FrontJunior.Domain.Entities;
+using Microsoft.Extensions.Configuration;
 using System.Globalization;
 using System.Security.Claims;
 using System.Text;
 using System.IdentityModel.Tokens.Jwt;
 using Microsoft.IdentityModel.Tokens;
-using FrontJunior.Domain.Entities.Views;
-using FrontJunior.Domain.MainModels;
+using FrontJunior.Domain.Entities.Models;
 
 namespace FrontJunior.Application.Services.AuthServices
 {

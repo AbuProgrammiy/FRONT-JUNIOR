@@ -1,7 +1,7 @@
 ﻿using FrontJunior.Application.Abstractions;
 using FrontJunior.Application.UseCases.CRUDCases.Commands;
+using FrontJunior.Domain.Entities;
 using FrontJunior.Domain.Entities.Models;
-using FrontJunior.Domain.Entities.Views;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 using System.Reflection;
@@ -21,7 +21,7 @@ namespace FrontJunior.Application.UseCases.CRUDCases.Handlers.CommandHandlers
         {
             try
             {
-                ActiveUser user = await _applicationDbContext.ActiveUsers.FirstOrDefaultAsync(u => u.SecurityKey == request.SecurityKey);
+                User user = await _applicationDbContext.Users.FirstOrDefaultAsync(u => u.SecurityKey == request.SecurityKey);
 
                 if (user == null)
                 {
@@ -33,7 +33,7 @@ namespace FrontJunior.Application.UseCases.CRUDCases.Handlers.CommandHandlers
                     };
                 }
 
-                ActiveTable table = await _applicationDbContext.ActiveTables.Where(t => t.User == user).FirstOrDefaultAsync(t => t.Name == request.TableName);
+                Table table = await _applicationDbContext.Tables.Where(t => t.User == user).FirstOrDefaultAsync(t => t.Name == request.TableName);
 
                 if (table == null)
                 {
@@ -45,7 +45,7 @@ namespace FrontJunior.Application.UseCases.CRUDCases.Handlers.CommandHandlers
                     };
                 }
 
-                ActiveDataStorage columns = await _applicationDbContext.ActiveDataStorage.Where(d => d.IsData == false).FirstOrDefaultAsync(d => d.Table == table);
+                DataStorage columns = await _applicationDbContext.DataStorage.Where(d => d.IsData == false).FirstOrDefaultAsync(d => d.Table == table);
 
                 PropertyInfo[] properties = columns.GetType().GetProperties();
 
@@ -73,10 +73,10 @@ namespace FrontJunior.Application.UseCases.CRUDCases.Handlers.CommandHandlers
                     };
                 }
 
-                ActiveDataStorage dataStorage = _applicationDbContext.ActiveDataStorage.AsEnumerable().Where(d =>d.Table==table && d.IsData == true)
-                                                                                                .FirstOrDefault(d => d.GetType()
-                                                                                                .GetProperty(property.Name)
-                                                                                                .GetValue(d)?.ToString() == request.ColumnValue);
+                DataStorage dataStorage = _applicationDbContext.DataStorage.AsEnumerable().Where(d =>d.Table==table && d.IsData == true)
+                                                                                 .FirstOrDefault(d => d.GetType()
+                                                                                                                 .GetProperty(property.Name)
+                                                                                                                 .GetValue(d)?.ToString() == request.ColumnValue);
 
                 if (dataStorage == null)
                 {
@@ -88,7 +88,7 @@ namespace FrontJunior.Application.UseCases.CRUDCases.Handlers.CommandHandlers
                     };
                 }
 
-                _applicationDbContext.ActiveDataStorage.Remove(dataStorage);
+                _applicationDbContext.DataStorage.Remove(dataStorage);
                 await _applicationDbContext.SaveChangesAsync(cancellationToken);
 
                 return new ResponseModel

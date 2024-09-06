@@ -1,9 +1,9 @@
-﻿using FrontJunior.Domain.Entities.Models;
+﻿using FrontJunior.Domain.Entities;
 using MediatR;
 
 namespace FrontJunior.Application.UseCases.DataStorageCases.Queries
 {
-    public class GetDataStorageByIdQuery:IRequest<ActiveDataStorage>
+    public class GetDataStorageByIdQuery:IRequest<DataStorage>
     {
         public Guid Id { get; set; }
     }
