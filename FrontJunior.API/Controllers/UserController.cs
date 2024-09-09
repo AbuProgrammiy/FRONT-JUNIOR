@@ -69,6 +69,24 @@ namespace FrontJunior.API.Controllers
             return await _mediator.Send(request);
         }
 
+        [HttpPatch]
+        public async Task<ResponseModel> UpdateEmail(UpdateUserEmailCommand request)
+        {
+            return await _mediator.Send(request);
+        }
+
+        [HttpPatch]
+        public async Task<ResponseModel> UpdatePassword(UpdateUserPasswordCommand request)
+        {
+            return await _mediator.Send(request);
+        }
+
+        [HttpPatch]
+        public async Task<ResponseModel> UpdateSecurityKey(UpdateUserSecurityKeyCommand request)
+        {
+            return await _mediator.Send(request);
+        }
+
         [HttpPut]
         public async Task<ResponseModel> Update(UpdateUserCommand request)
         {
