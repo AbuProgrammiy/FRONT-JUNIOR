@@ -32,6 +32,13 @@ namespace FrontJunior.API.Controllers
             return await _mediator.Send(new GetUserByIdQuery { Id = id });
         }
 
+        [HttpGet]
+        [Route("{id}")]
+        public async Task<bool> IsUserExists(Guid id)
+        {
+            return await _mediator.Send(new IsUserExistsQuery { Id = id });
+        }
+
         [HttpPost]
         public async Task<ResponseModel> SendVerificationToUser(SendVerificationToUserCommand request)
         {
