@@ -1,0 +1,25 @@
+{
+  "Files": [
+    {
+      "Id": "D:\\Confidential Station\\FRONT-JUNIOR\\FrontJunior.API\\wwwroot\\Email\\message.html",
+      "PackagePath": "staticwebassets\\Email\\message.html"
+    },
+    {
+      "Id": "obj\\Release\\net8.0\\staticwebassets\\msbuild.FrontJunior.API.Microsoft.AspNetCore.StaticWebAssets.props",
+      "PackagePath": "build\\Microsoft.AspNetCore.StaticWebAssets.props"
+    },
+    {
+      "Id": "obj\\Release\\net8.0\\staticwebassets\\msbuild.build.FrontJunior.API.props",
+      "PackagePath": "build\\FrontJunior.API.props"
+    },
+    {
+      "Id": "obj\\Release\\net8.0\\staticwebassets\\msbuild.buildMultiTargeting.FrontJunior.API.props",
+      "PackagePath": "buildMultiTargeting\\FrontJunior.API.props"
+    },
+    {
+      "Id": "obj\\Release\\net8.0\\staticwebassets\\msbuild.buildTransitive.FrontJunior.API.props",
+      "PackagePath": "buildTransitive\\FrontJunior.API.props"
+    }
+  ],
+  "ElementsToRemove": []
+}

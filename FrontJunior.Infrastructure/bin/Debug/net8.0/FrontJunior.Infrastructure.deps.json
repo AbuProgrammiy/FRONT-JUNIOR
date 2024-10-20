@@ -738,12 +738,18 @@
           "System.IdentityModel.Tokens.Jwt": "7.6.2"
         },
         "runtime": {
-          "FrontJunior.Application.dll": {}
+          "FrontJunior.Application.dll": {
+            "assemblyVersion": "1.0.0",
+            "fileVersion": "1.0.0.0"
+          }
         }
       },
       "FrontJunior.Domain/1.0.0": {
         "runtime": {
-          "FrontJunior.Domain.dll": {}
+          "FrontJunior.Domain.dll": {
+            "assemblyVersion": "1.0.0",
+            "fileVersion": "1.0.0.0"
+          }
         }
       }
     }

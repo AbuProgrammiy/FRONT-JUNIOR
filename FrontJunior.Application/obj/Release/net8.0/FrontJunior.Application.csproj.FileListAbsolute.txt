@@ -1,0 +1,16 @@
+D:\Confidential Station\FRONT-JUNIOR\FrontJunior.Application\bin\Release\net8.0\FrontJunior.Application.deps.json
+D:\Confidential Station\FRONT-JUNIOR\FrontJunior.Application\bin\Release\net8.0\FrontJunior.Application.dll
+D:\Confidential Station\FRONT-JUNIOR\FrontJunior.Application\bin\Release\net8.0\FrontJunior.Application.pdb
+D:\Confidential Station\FRONT-JUNIOR\FrontJunior.Application\bin\Release\net8.0\FrontJunior.Domain.dll
+D:\Confidential Station\FRONT-JUNIOR\FrontJunior.Application\bin\Release\net8.0\FrontJunior.Domain.pdb
+D:\Confidential Station\FRONT-JUNIOR\FrontJunior.Application\obj\Release\net8.0\FrontJunior.Application.csproj.AssemblyReference.cache
+D:\Confidential Station\FRONT-JUNIOR\FrontJunior.Application\obj\Release\net8.0\FrontJunior.Application.GeneratedMSBuildEditorConfig.editorconfig
+D:\Confidential Station\FRONT-JUNIOR\FrontJunior.Application\obj\Release\net8.0\FrontJunior.Application.AssemblyInfoInputs.cache
+D:\Confidential Station\FRONT-JUNIOR\FrontJunior.Application\obj\Release\net8.0\FrontJunior.Application.AssemblyInfo.cs
+D:\Confidential Station\FRONT-JUNIOR\FrontJunior.Application\obj\Release\net8.0\FrontJunior.Application.csproj.CoreCompileInputs.cache
+D:\Confidential Station\FRONT-JUNIOR\FrontJunior.Application\obj\Release\net8.0\FrontJunior.Application.sourcelink.json
+D:\Confidential Station\FRONT-JUNIOR\FrontJunior.Application\obj\Release\net8.0\FrontJun.8C7282F6.Up2Date
+D:\Confidential Station\FRONT-JUNIOR\FrontJunior.Application\obj\Release\net8.0\FrontJunior.Application.dll
+D:\Confidential Station\FRONT-JUNIOR\FrontJunior.Application\obj\Release\net8.0\refint\FrontJunior.Application.dll
+D:\Confidential Station\FRONT-JUNIOR\FrontJunior.Application\obj\Release\net8.0\FrontJunior.Application.pdb
+D:\Confidential Station\FRONT-JUNIOR\FrontJunior.Application\obj\Release\net8.0\ref\FrontJunior.Application.dll

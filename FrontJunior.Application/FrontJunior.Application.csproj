@@ -21,4 +21,9 @@
     <ProjectReference Include="..\FrontJunior.Domain\FrontJunior.Domain.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="UseCases\StatisticsCases\Commands\" />
+    <Folder Include="UseCases\StatisticsCases\Handlers\CommandHandlers\" />
+  </ItemGroup>
+
 </Project>

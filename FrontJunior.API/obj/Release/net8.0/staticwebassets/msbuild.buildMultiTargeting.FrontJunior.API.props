@@ -1,0 +1,3 @@
+﻿<Project>
+  <Import Project="..\build\FrontJunior.API.props" />
+</Project>

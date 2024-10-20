@@ -13,6 +13,8 @@ namespace FrontJunior.API
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
 
+            builder.Services.AddMemoryCache();
+
             builder.Services.AddApplication();
             builder.Services.AddInfrastructure(builder.Configuration);
 
@@ -28,18 +30,14 @@ namespace FrontJunior.API
 
             var app = builder.Build();
 
-            if (app.Environment.IsDevelopment())
-            {
-                app.UseSwagger();
-                app.UseSwaggerUI();
-            }
+            app.UseSwagger();
+            app.UseSwaggerUI();
 
             app.UseCors();
 
             app.UseHttpsRedirection();
 
             app.UseAuthorization();
-
 
             app.MapControllers();
 

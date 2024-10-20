@@ -270,7 +270,10 @@
       },
       "FrontJunior.Domain/1.0.0": {
         "runtime": {
-          "FrontJunior.Domain.dll": {}
+          "FrontJunior.Domain.dll": {
+            "assemblyVersion": "1.0.0",
+            "fileVersion": "1.0.0.0"
+          }
         }
       }
     }
