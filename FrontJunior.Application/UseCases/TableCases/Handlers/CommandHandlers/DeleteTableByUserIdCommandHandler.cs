@@ -20,7 +20,19 @@ namespace FrontJunior.Application.UseCases.TableCases.Handlers.CommandHandlers
         {
             try
             {
-                Table table = _applicationDbContext.Tables.FirstOrDefault(t => t.Name == request.TableName && t.User.Id == request.UserId);
+                User user = await _applicationDbContext.Users.FirstOrDefaultAsync(u => u.Id == request.UserId);
+
+                if (user == null)
+                {
+                    return new ResponseModel
+                    {
+                        IsSuccess = false,
+                        StatusCode = 404,
+                        Response = "User not found to delete his/her table!"
+                    };
+                }
+
+                Table table = _applicationDbContext.Tables.FirstOrDefault(t => t.User == user && t.Name == request.TableName);
 
                 if (table == null)
                 {
@@ -28,7 +40,7 @@ namespace FrontJunior.Application.UseCases.TableCases.Handlers.CommandHandlers
                     {
                         IsSuccess = false,
                         StatusCode = 404,
-                        Response = "Table not found or UserId is incorret!"
+                        Response = "Table not found to delete"
                     };
                 }
 

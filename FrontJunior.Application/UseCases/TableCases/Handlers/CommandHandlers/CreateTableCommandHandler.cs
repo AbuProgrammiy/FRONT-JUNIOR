@@ -21,18 +21,6 @@ namespace FrontJunior.Application.UseCases.TableCases.Handlers.CommandHandlers
         {
             try
             {
-                Table table = await _applicationDbContext.Tables.Where(t => t.User.Id == request.UserId).FirstOrDefaultAsync(t => t.Name == request.Name);
-
-                if (table != null)
-                {
-                    return new ResponseModel
-                    {
-                        IsSuccess = false,
-                        StatusCode = 400,
-                        Response = "Table already exists!"
-                    };
-                }
-
                 User user = await _applicationDbContext.Users.FirstOrDefaultAsync(u => u.Id == request.UserId);
 
                 if (user == null)
@@ -45,8 +33,20 @@ namespace FrontJunior.Application.UseCases.TableCases.Handlers.CommandHandlers
                     };
                 }
 
-                table =request.Adapt<Table>();
-                table.CreatedDate=DateTime.UtcNow;
+                Table table = await _applicationDbContext.Tables.FirstOrDefaultAsync(t => t.User == user && t.Name == request.Name);
+
+                if (table != null)
+                {
+                    return new ResponseModel
+                    {
+                        IsSuccess = false,
+                        StatusCode = 400,
+                        Response = "Table already exists!"
+                    };
+                }
+
+                table = request.Adapt<Table>();
+                table.CreatedDate = DateTime.UtcNow;
                 table.User = user;
 
                 await _applicationDbContext.Tables.AddAsync(table);
