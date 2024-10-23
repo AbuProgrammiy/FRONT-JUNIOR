@@ -28,7 +28,7 @@ namespace FrontJunior.Application.UseCases.TableCases.Handlers.CommandHandlers
                     {
                         IsSuccess = false,
                         StatusCode = 404,
-                        Response = "User not found to delete his/her table!"
+                        Response = "User not found!"
                     };
                 }
 

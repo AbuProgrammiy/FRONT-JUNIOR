@@ -20,7 +20,19 @@ namespace FrontJunior.Application.UseCases.TableCases.Handlers.CommandHandlers
         {
             try
             {
-                Table table = _applicationDbContext.Tables.FirstOrDefault(t => t.Name == request.TableName && t.User.Id == request.UserId);
+                User user = await _applicationDbContext.Users.FirstOrDefaultAsync(u => u.Id == request.UserId);
+
+                if (user == null)
+                {
+                    return new ResponseModel
+                    {
+                        IsSuccess = false,
+                        StatusCode = 404,
+                        Response = "User not found!"
+                    };
+                }
+
+                Table table = _applicationDbContext.Tables.FirstOrDefault(t => t.User == user && t.Name == request.TableName);
 
                 if (table == null)
                 {
@@ -28,17 +40,13 @@ namespace FrontJunior.Application.UseCases.TableCases.Handlers.CommandHandlers
                     {
                         IsSuccess = false,
                         StatusCode = 404,
-                        Response = "Table not found or UserId is incorret!"
+                        Response = "Table not found truncate!"
                     };
                 }
 
-                List<DataStorage> dataStorages = await _applicationDbContext.DataStorage.Where(d => d.Table == table && d.IsData == true).ToListAsync();
+                IEnumerable<DataStorage> dataStorages = await _applicationDbContext.DataStorage.Where(d => d.Table == table && d.IsData == true).ToListAsync();
 
-                for (int i = 0;i<dataStorages.Count;i++)
-                {
-                    _applicationDbContext.DataStorage.Remove(dataStorages[i]);
-                }
-
+                _applicationDbContext.DataStorage.RemoveRange(dataStorages);
                 await _applicationDbContext.SaveChangesAsync(cancellationToken);
 
                 return new ResponseModel
