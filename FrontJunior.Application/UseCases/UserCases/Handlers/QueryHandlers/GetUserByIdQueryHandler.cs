@@ -1,12 +1,13 @@
 ﻿using FrontJunior.Application.Abstractions;
 using FrontJunior.Application.UseCases.UserCases.Queries;
-using FrontJunior.Domain.Entities;
+using FrontJunior.Domain.Entities.Models.PrimaryModels;
+using FrontJunior.Domain.Entities.Views;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 
 namespace FrontJunior.Application.UseCases.UserCases.Handlers.QueryHandlers
 {
-    public class GetUserByIdQueryHandler : IRequestHandler<GetUserByIdQuery, User>
+    public class GetUserByIdQueryHandler : IRequestHandler<GetUserByIdQuery, ResponseModel>
     {
         private readonly IApplicationDbContext _applicationDbContext;
 
@@ -15,23 +16,28 @@ namespace FrontJunior.Application.UseCases.UserCases.Handlers.QueryHandlers
             _applicationDbContext = applicationDbContext;
         }
 
-        public async Task<User> Handle(GetUserByIdQuery request, CancellationToken cancellationToken)
+        public async Task<ResponseModel> Handle(GetUserByIdQuery request, CancellationToken cancellationToken)
         {
             try
             {
                 User user = await _applicationDbContext.Users.FirstOrDefaultAsync(u => u.Id == request.Id);
 
-                if (user == null)
+                return new ResponseModel
                 {
-                    return null;
-                }
-
-                return user;
+                    IsSuccess = true,
+                    StatusCode = 200,
+                    Response = user
+                };
             }
 
             catch (Exception ex)
             {
-                throw new Exception(ex.Message, ex);
+                return new ResponseModel
+                {
+                    IsSuccess = false,
+                    StatusCode = 500,
+                    Response = $"Something went wrong: {ex.Message}"
+                };
             }
         }
     }

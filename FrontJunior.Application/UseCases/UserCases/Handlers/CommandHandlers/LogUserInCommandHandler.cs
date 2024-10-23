@@ -2,14 +2,15 @@
 using FrontJunior.Application.Services.AuthServices;
 using FrontJunior.Application.Services.PasswordServices;
 using FrontJunior.Application.UseCases.UserCases.Commands;
-using FrontJunior.Domain.Entities;
-using FrontJunior.Domain.Entities.Models;
+using FrontJunior.Domain.Entities.Models.OtherModels;
+using FrontJunior.Domain.Entities.Models.PrimaryModels;
+using FrontJunior.Domain.Entities.Views;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 
 namespace FrontJunior.Application.UseCases.UserCases.Handlers.CommandHandlers
 {
-    public class LogUserInCommandHandler : IRequestHandler<LogUserInCommand, object>
+    public class LogUserInCommandHandler : IRequestHandler<LogUserInCommand, ResponseModel>
     {
         private readonly IApplicationDbContext _applicationDbContext;
         private readonly IPasswordService _passwordService;
@@ -22,7 +23,7 @@ namespace FrontJunior.Application.UseCases.UserCases.Handlers.CommandHandlers
             _authService = authService;
         }
 
-        public async Task<object> Handle(LogUserInCommand request, CancellationToken cancellationToken)
+        public async Task<ResponseModel> Handle(LogUserInCommand request, CancellationToken cancellationToken)
         {
             try
             {
@@ -54,7 +55,14 @@ namespace FrontJunior.Application.UseCases.UserCases.Handlers.CommandHandlers
                     };
                 }
 
-                return _authService.GenerateToken(user);
+                string token = _authService.GenerateToken(user);
+
+                return new ResponseModel
+                {
+                    IsSuccess = true,
+                    StatusCode = 200,
+                    Response = token
+                };
             }
             catch (Exception ex)
             {

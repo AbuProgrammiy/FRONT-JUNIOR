@@ -1,8 +1,9 @@
 ﻿using FrontJunior.Application.Abstractions;
 using FrontJunior.Application.Services.PasswordServices;
 using FrontJunior.Application.UseCases.UserCases.Commands;
-using FrontJunior.Domain.Entities;
-using FrontJunior.Domain.Entities.Models;
+using FrontJunior.Domain.Entities.Models.OtherModels;
+using FrontJunior.Domain.Entities.Models.PrimaryModels;
+using FrontJunior.Domain.Entities.Views;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 
@@ -31,7 +32,7 @@ namespace FrontJunior.Application.UseCases.UserCases.Handlers.CommandHandlers
                     {
                         IsSuccess = false,
                         StatusCode = 404,
-                        Response = "User not found!"
+                        Response = "User not found to update password!"
                     };
                 }
 
@@ -71,7 +72,7 @@ namespace FrontJunior.Application.UseCases.UserCases.Handlers.CommandHandlers
                 {
                     IsSuccess = false,
                     StatusCode = 500,
-                    Response = "Something went wrong!"
+                    Response = $"Something went wrong: {ex.Message}"
                 };
             }
         }

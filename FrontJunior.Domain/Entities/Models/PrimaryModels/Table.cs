@@ -1,6 +1,6 @@
 ﻿using System.Text.Json.Serialization;
 
-namespace FrontJunior.Domain.Entities
+namespace FrontJunior.Domain.Entities.Models.PrimaryModels
 {
     public class Table
     {

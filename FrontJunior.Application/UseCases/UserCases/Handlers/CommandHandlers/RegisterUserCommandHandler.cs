@@ -1,56 +1,92 @@
 ﻿using FrontJunior.Application.Abstractions;
 using FrontJunior.Application.Services.AuthServices;
+using FrontJunior.Application.Services.PasswordServices;
 using FrontJunior.Application.UseCases.UserCases.Commands;
-using FrontJunior.Domain.Entities;
-using FrontJunior.Domain.Entities.Models;
+using FrontJunior.Domain.Entities.Enums;
+using FrontJunior.Domain.Entities.Models.OtherModels;
+using FrontJunior.Domain.Entities.Models.PrimaryModels;
+using FrontJunior.Domain.Entities.Models.SecondaryModels;
+using FrontJunior.Domain.Entities.Views;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 
 namespace FrontJunior.Application.UseCases.UserCases.Handlers.CommandHandlers
 {
-    public class RegisterUserCommandHandler : IRequestHandler<RegisterUserCommand, object>
+    public class RegisterUserCommandHandler : IRequestHandler<RegisterUserCommand, ResponseModel>
     {
         private readonly IApplicationDbContext _applicationDbContext;
         private readonly IAuthService _authService;
-        private readonly IMediator _mediator;
+        private readonly IPasswordService _passwordService;
 
-        public RegisterUserCommandHandler(IApplicationDbContext applicationDbContext, IAuthService authService, IMediator mediator)
+        public RegisterUserCommandHandler(IApplicationDbContext applicationDbContext, IAuthService authService, IPasswordService passwordService)
         {
             _applicationDbContext = applicationDbContext;
             _authService = authService;
-            _mediator = mediator;
+            _passwordService = passwordService;
         }
 
-        public async Task<object> Handle(RegisterUserCommand request, CancellationToken cancellationToken)
+        public async Task<ResponseModel> Handle(RegisterUserCommand request, CancellationToken cancellationToken)
         {
             try
             {
-                ResponseModel response = await _mediator.Send(new VerifyUserCommand
-                {
-                    Email = request.Email,
-                    SentPassword = request.SentPassword,
-                });
+                User user = await _applicationDbContext.Users.FirstOrDefaultAsync(u => u.Username == request.Username);
 
-                if(response.IsSuccess==false)
+                if (user != null)
                 {
-                    return response;
+                    return new ResponseModel
+                    {
+                        IsSuccess = false,
+                        StatusCode = 400,
+                        Response = "Username already taken!"
+                    };
                 }
 
-                response = await _mediator.Send(new CreateUserCommand
-                {
-                    Email = request.Email,
-                    Password = request.Password,
-                });
+                Verification verification = await _applicationDbContext.Verifications.FirstOrDefaultAsync(v => v.Email == request.Email);
 
-                if(response.IsSuccess==false)
+                if (verification == null)
                 {
-                    return response;
+                    return new ResponseModel
+                    {
+                        IsSuccess = false,
+                        StatusCode = 404,
+                        Response = "Email not found to verify!"
+                    };
                 }
 
-                _applicationDbContext.Verifications.Remove(await _applicationDbContext.Verifications.FirstOrDefaultAsync(v=>v.Email==request.Email));
+                if (verification.SentPassword != request.SentPassword)
+                {
+                    return new ResponseModel
+                    {
+                        IsSuccess = false,
+                        StatusCode = 400,
+                        Response = "Sent code is incorrect!"
+                    };
+                }
+
+                PasswordModel passwordModel = _passwordService.HashPassword(request.Password);
+
+                user = new User
+                {
+                    Username = request.Username,
+                    Email = request.Email,
+                    PasswordHash = passwordModel.PasswordHash,
+                    PassworSalt = passwordModel.PassworSalt,
+                    Role = Roles.SimpleUser
+                };
+
+                await _applicationDbContext.Users.AddAsync(user);
+                _applicationDbContext.Verifications.Remove(verification);
+
                 await _applicationDbContext.SaveChangesAsync(cancellationToken);
 
-                return _authService.GenerateToken(await _applicationDbContext.Users.FirstOrDefaultAsync(u => u.Email == request.Email));
+                string token = _authService.GenerateToken(user);
+
+                return new ResponseModel
+                {
+                    IsSuccess = true,
+                    StatusCode = 200,
+                    Response = token
+                };
             }
             catch (Exception ex)
             {

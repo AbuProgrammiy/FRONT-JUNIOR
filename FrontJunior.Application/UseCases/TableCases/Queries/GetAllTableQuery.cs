@@ -1,4 +1,4 @@
-﻿using FrontJunior.Domain.Entities;
+﻿using FrontJunior.Domain.Entities.Models.PrimaryModels;
 using MediatR;
 
 namespace FrontJunior.Application.UseCases.TableCases.Queries

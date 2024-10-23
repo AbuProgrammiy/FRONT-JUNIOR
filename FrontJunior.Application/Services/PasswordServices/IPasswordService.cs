@@ -1,4 +1,4 @@
-﻿using FrontJunior.Domain.Entities.Models;
+﻿using FrontJunior.Domain.Entities.Models.OtherModels;
 
 namespace FrontJunior.Application.Services.PasswordServices
 {

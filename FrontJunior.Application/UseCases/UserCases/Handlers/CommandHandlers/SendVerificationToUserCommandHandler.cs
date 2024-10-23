@@ -1,12 +1,13 @@
 ﻿using FrontJunior.Application.Abstractions;
 using FrontJunior.Application.Services.EmailServices;
 using FrontJunior.Application.UseCases.UserCases.Commands;
-using FrontJunior.Domain.Entities;
 using FrontJunior.Domain.Entities.DTOs;
-using FrontJunior.Domain.Entities.Models;
+using FrontJunior.Domain.Entities.Models.PrimaryModels;
+using FrontJunior.Domain.Entities.Models.SecondaryModels;
+using FrontJunior.Domain.Entities.Views;
 using MediatR;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Configuration;
 
 namespace FrontJunior.Application.UseCases.UserCases.Handlers.CommandHandlers
 {
@@ -14,40 +15,59 @@ namespace FrontJunior.Application.UseCases.UserCases.Handlers.CommandHandlers
     {
         private readonly IApplicationDbContext _applicationDbContext;
         private readonly ISendEmailService _sendEmailService;
-        private readonly IConfiguration _configuration;
+        private readonly IWebHostEnvironment _webHostEnvironment;
 
-        public SendVerificationToUserCommandHandler(IApplicationDbContext applicationDbContext, ISendEmailService sendEmailService, IConfiguration configuration)
+        public SendVerificationToUserCommandHandler(IApplicationDbContext applicationDbContext, ISendEmailService sendEmailService, IWebHostEnvironment webHostEnvironment)
         {
             _applicationDbContext = applicationDbContext;
             _sendEmailService = sendEmailService;
-            _configuration = configuration;
+            _webHostEnvironment = webHostEnvironment;
         }
 
         public async Task<ResponseModel> Handle(SendVerificationToUserCommand request, CancellationToken cancellationToken)
         {
             try
             {
-                User user = await _applicationDbContext.Users.FirstOrDefaultAsync(u => u.Email == request.Email);
-
-                if (request.IsPasswordForgotten == null && user != null || request.IsPasswordForgotten == false && user != null)
+                if (request.IsPasswordForgotten == false || request.IsPasswordForgotten == null)
                 {
-                    return new ResponseModel
-                    {
-                        IsSuccess = false,
-                        StatusCode = 400,
-                        Response = "Email is already taken!"
-                    };
-                }
-                else if (request.IsPasswordForgotten == true && user == null)
-                {
-                    return new ResponseModel
-                    {
-                        IsSuccess = false,
-                        StatusCode = 404,
-                        Response = "Email not resgistered yet!!"
-                    };
-                }
+                    User user = await _applicationDbContext.Users.FirstOrDefaultAsync(u => u.Username == request.Username);
 
+                    if (user != null)
+                    {
+                        return new ResponseModel
+                        {
+                            IsSuccess = false,
+                            StatusCode = 400,
+                            Response = "Username already taken!"
+                        };
+                    }
+
+                    user = await _applicationDbContext.Users.FirstOrDefaultAsync(u => u.Email == request.Email);
+
+                    if (user != null)
+                    {
+                        return new ResponseModel
+                        {
+                            IsSuccess = false,
+                            StatusCode = 400,
+                            Response = "Email already taken!"
+                        };
+                    }
+                }
+                else
+                {
+                    User user =await _applicationDbContext.Users.FirstOrDefaultAsync(u=>u.Email == request.Email);
+
+                    if (user == null)
+                    {
+                        return new ResponseModel
+                        {
+                            IsSuccess = false,
+                            StatusCode = 400,
+                            Response = "Email not registered yet!"
+                        };
+                    }
+                }
 
                 Verification verification = await _applicationDbContext.Verifications.FirstOrDefaultAsync(v => v.Email == request.Email);
 
@@ -62,7 +82,9 @@ namespace FrontJunior.Application.UseCases.UserCases.Handlers.CommandHandlers
 
                 string HTMLbody;
 
-                using (StreamReader stream = new StreamReader(_configuration["HTMLmessagePath"]))
+                string verificationMessagePath = $"{_webHostEnvironment.WebRootPath}/HTMLMessages/Verififcation.html";
+
+                using (StreamReader stream = new StreamReader(verificationMessagePath))
                 {
                     HTMLbody = (await stream.ReadToEndAsync()).Replace("verification-code", password);
                 }
@@ -94,7 +116,7 @@ namespace FrontJunior.Application.UseCases.UserCases.Handlers.CommandHandlers
                 {
                     IsSuccess = false,
                     StatusCode = 500,
-                    Response = "Something went wrong!"
+                    Response = $"Something went wrong: {ex.Message}"
                 };
             }
         }

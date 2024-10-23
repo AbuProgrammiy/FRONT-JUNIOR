@@ -1,4 +1,5 @@
-﻿using FrontJunior.Domain.Entities;
+﻿using FrontJunior.Domain.Entities.Models.PrimaryModels;
+using FrontJunior.Domain.Entities.Models.SecondaryModels;
 using Microsoft.EntityFrameworkCore;
 
 namespace FrontJunior.Application.Abstractions

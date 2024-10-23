@@ -1,5 +1,5 @@
 ﻿using FrontJunior.Domain.Entities.DTOs;
-using FrontJunior.Domain.Entities.Models;
+using FrontJunior.Domain.Entities.Views;
 
 namespace FrontJunior.Application.Services.EmailServices
 {

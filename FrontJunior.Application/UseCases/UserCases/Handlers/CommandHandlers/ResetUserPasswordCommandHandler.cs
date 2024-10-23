@@ -1,70 +1,63 @@
 ﻿using FrontJunior.Application.Abstractions;
 using FrontJunior.Application.Services.AuthServices;
+using FrontJunior.Application.Services.PasswordServices;
 using FrontJunior.Application.UseCases.UserCases.Commands;
-using FrontJunior.Domain.Entities;
-using FrontJunior.Domain.Entities.Models;
-using Mapster;
+using FrontJunior.Domain.Entities.Models.OtherModels;
+using FrontJunior.Domain.Entities.Models.PrimaryModels;
+using FrontJunior.Domain.Entities.Models.SecondaryModels;
+using FrontJunior.Domain.Entities.Views;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 
 namespace FrontJunior.Application.UseCases.UserCases.Handlers.CommandHandlers
 {
-    public class ResetUserPasswordCommandHandler : IRequestHandler<ResetUserPasswordCommand, object>
+    public class ResetUserPasswordCommandHandler : IRequestHandler<ResetUserPasswordCommand, ResponseModel>
     {
         private readonly IApplicationDbContext _applicationDbContext;
-        private readonly IMediator _mediator;
         private readonly IAuthService _authService;
+        private readonly IPasswordService _passwordService;
 
-        public ResetUserPasswordCommandHandler(IApplicationDbContext applicationDbContext, IMediator mediator, IAuthService authService)
+        public ResetUserPasswordCommandHandler(IApplicationDbContext applicationDbContext, IAuthService authService, IPasswordService passwordService)
         {
             _applicationDbContext = applicationDbContext;
-            _mediator = mediator;
             _authService = authService;
+            _passwordService = passwordService;
         }
 
-        public async Task<object> Handle(ResetUserPasswordCommand request, CancellationToken cancellationToken)
+        public async Task<ResponseModel> Handle(ResetUserPasswordCommand request, CancellationToken cancellationToken)
         {
             try
             {
+                Verification verification = await _applicationDbContext.Verifications.FirstOrDefaultAsync(v => v.Email == request.Email);
 
-                ResponseModel response = await _mediator.Send(new VerifyUserCommand
+                if (verification == null)
                 {
-                    Email = request.Email,
-                    SentPassword = request.SentPassword
-                });
-
-                if(response.IsSuccess==false)
-                {
-                    return response;
+                    return new ResponseModel
+                    {
+                        IsSuccess = false,
+                        StatusCode = 404,
+                        Response = "Email not found to verify!"
+                    };
                 }
 
-                User user = await _applicationDbContext.Users.AsNoTracking().FirstOrDefaultAsync(u => u.Email == request.Email); 
-
-                if(user == null)
+                if (verification.SentPassword != request.SentPassword)
                 {
                     return new ResponseModel
                     {
                         IsSuccess = false,
                         StatusCode = 400,
-                        Response = "User does not exist!"
+                        Response = "Sent code is incorret!"
                     };
                 }
 
-                UpdateUserCommand updateUserCommand = user.Adapt<UpdateUserCommand>();
-                updateUserCommand.Email = request.Email;
-                updateUserCommand.Password = request.NewPassword;
+                PasswordModel passwordModel = _passwordService.HashPassword(request.NewPassword);
 
-                response = await _mediator.Send(updateUserCommand);
+                User user = await _applicationDbContext.Users.FirstOrDefaultAsync(u => u.Email == request.Email);
 
-                if(response.IsSuccess==false)
-                {
-                    return response;
-                }
+                user.PasswordHash = passwordModel.PasswordHash;
+                user.PassworSalt = passwordModel.PassworSalt;
 
-                _applicationDbContext.Verifications.Remove(await _applicationDbContext.Verifications.FirstOrDefaultAsync(v => v.Email == request.Email));
                 await _applicationDbContext.SaveChangesAsync(cancellationToken);
-
-                return _authService.GenerateToken(await _applicationDbContext.Users.FirstOrDefaultAsync(u => u.Email == request.Email));
             }
             catch (Exception ex)
             {

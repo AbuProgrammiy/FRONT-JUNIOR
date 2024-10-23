@@ -1,10 +1,10 @@
-﻿using FrontJunior.Domain.Entities;
-using FrontJunior.Domain.Entities.Models;
+﻿using FrontJunior.Domain.Entities.Models;
+using FrontJunior.Domain.Entities.Models.PrimaryModels;
 
 namespace FrontJunior.Application.Services.AuthServices
 {
     public interface IAuthService
     {
-        public TokenModel GenerateToken(User user);
+        public string GenerateToken(User user);
     }
 }

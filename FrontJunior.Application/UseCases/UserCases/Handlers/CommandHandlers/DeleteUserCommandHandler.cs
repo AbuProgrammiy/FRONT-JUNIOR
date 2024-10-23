@@ -1,7 +1,7 @@
 ﻿using FrontJunior.Application.Abstractions;
 using FrontJunior.Application.UseCases.UserCases.Commands;
-using FrontJunior.Domain.Entities;
-using FrontJunior.Domain.Entities.Models;
+using FrontJunior.Domain.Entities.Models.PrimaryModels;
+using FrontJunior.Domain.Entities.Views;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 
@@ -33,14 +33,9 @@ namespace FrontJunior.Application.UseCases.UserCases.Handlers.CommandHandlers
                 }
 
                 IEnumerable<Table> tables = await _applicationDbContext.Tables.Where(t => t.User == user).ToListAsync();
+                IEnumerable<DataStorage> dataStorages = await _applicationDbContext.DataStorage.Where(d => tables.Contains(d.Table)).ToListAsync();
 
-                foreach (var table in tables)
-                {
-                    IEnumerable<DataStorage> dataStorages = await _applicationDbContext.DataStorage.Where(d => d.Table == table).ToListAsync();
-
-                    _applicationDbContext.DataStorage.RemoveRange(dataStorages);
-                }
-
+                _applicationDbContext.DataStorage.RemoveRange(dataStorages);
                 _applicationDbContext.Tables.RemoveRange(tables);
                 _applicationDbContext.Users.Remove(user);
 
