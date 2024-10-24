@@ -17,7 +17,7 @@ namespace FrontJunior.API.Controllers
         }
 
         [HttpGet]
-        public async Task<BasicStatistics> GetBasicStstistics()
+        public async Task<ResponseModel> GetBasicStstistics()
         {
             return await _mediator.Send(new GetBasicStatisticsQuery());
         }
