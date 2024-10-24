@@ -1,6 +1,5 @@
 ﻿using FrontJunior.Application.UseCases.DataStorageCases.Commands;
 using FrontJunior.Application.UseCases.DataStorageCases.Queries;
-using FrontJunior.Domain.Entities.Models.PrimaryModels;
 using FrontJunior.Domain.Entities.Views;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
