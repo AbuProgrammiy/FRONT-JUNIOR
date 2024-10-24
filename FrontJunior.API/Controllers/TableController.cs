@@ -20,21 +20,21 @@ namespace FrontJunior.API.Controllers
 
         [HttpGet]
         [Route("{page}/{count}")]
-        public async Task<IEnumerable<Table>> GetAll(int page, int count)
+        public async Task<ResponseModel> GetAll(int page, int count)
         {
             return await _mediator.Send(new GetAllTableQuery { Page = page, Count = count });
         }
 
         [HttpGet]
         [Route("{id}")]
-        public async Task<Table> GetById(Guid id)
+        public async Task<ResponseModel> GetById(Guid id)
         {
             return await _mediator.Send(new GetTableByIdQuery { Id = id });
         }
 
         [HttpGet]
         [Route("{userId}")]
-        public async Task<IDictionary<string,IEnumerable<string>>> GetTablesByUserId(Guid userId)
+        public async Task<ResponseModel> GetTablesByUserId(Guid userId)
         {
             return await _mediator.Send(new GetTablesByUserIdQuery
             {
@@ -44,7 +44,7 @@ namespace FrontJunior.API.Controllers
 
         [HttpGet]
         [Route("{userId}/{tableName}")]
-        public async Task<bool> IsTableNameExistsByUserId(Guid userId, string tableName)
+        public async Task<ResponseModel> IsTableNameExistsByUserId(Guid userId, string tableName)
         {
             return await _mediator.Send(new IsTableNameExistsByUserIdQuery { UserId = userId, TableName = tableName });
         }
