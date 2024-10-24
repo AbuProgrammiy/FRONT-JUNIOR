@@ -20,30 +20,30 @@ namespace FrontJunior.API.Controllers
 
         [HttpGet]
         [Route("{page}/{count}")]
-        public async Task<IEnumerable<DataStorage>> GetAll(int page,int count)
+        public async Task<ResponseModel> GetAll(int page,int count)
         {
             return await _mediator.Send(new GetAllDataStorageQuery { Page = page, Count = count });
         }
 
         [HttpGet]
         [Route("{page}/{count}")]
-        public async Task<IEnumerable<DataStorage>> GetAllColumns(int page, int count)
+        public async Task<ResponseModel> GetAllColumns(int page, int count)
         {
             return await _mediator.Send(new GetAllDataStorageColumnsQuery { Page = page, Count = count });
         }
 
         [HttpGet]
         [Route("{id}")]
-        public async Task<DataStorage> GetById(Guid id)
+        public async Task<ResponseModel> GetById(Guid id)
         {
             return await _mediator.Send(new GetDataStorageByIdQuery { Id = id });
         }
 
         [HttpGet]
-        [Route("{userId}/{tableName}")]
-        public async Task<IEnumerable<string>> GetColumnsByTableName(Guid userId, string tableName)
+        [Route("{tableId}")]
+        public async Task<ResponseModel> GetColumnsByTableId(Guid tableId)
         {
-            return await _mediator.Send(new GetColumnsByTableIdQuery { UserId = userId, TableName=tableName }) ;
+            return await _mediator.Send(new GetColumnsByTableIdQuery { TableId = tableId });
         }
 
         [HttpPost]
