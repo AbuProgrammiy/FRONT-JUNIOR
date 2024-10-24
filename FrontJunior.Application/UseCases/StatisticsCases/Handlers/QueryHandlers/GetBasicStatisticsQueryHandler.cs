@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace FrontJunior.Application.UseCases.StatisticsCases.Handlers.QueryHandlers
 {
-    public class GetBasicStatisticsQueryHandler : IRequestHandler<GetBasicStatisticsQuery, BasicStatistics>
+    public class GetBasicStatisticsQueryHandler : IRequestHandler<GetBasicStatisticsQuery, ResponseModel>
     {
         private readonly IApplicationDbContext _applicationDbContext;
 
@@ -15,7 +15,7 @@ namespace FrontJunior.Application.UseCases.StatisticsCases.Handlers.QueryHandler
             _applicationDbContext = applicationDbContext;
         }
 
-        public async Task<BasicStatistics> Handle(GetBasicStatisticsQuery request, CancellationToken cancellationToken)
+        public async Task<ResponseModel> Handle(GetBasicStatisticsQuery request, CancellationToken cancellationToken)
         {
             try
             {
@@ -25,11 +25,21 @@ namespace FrontJunior.Application.UseCases.StatisticsCases.Handlers.QueryHandler
                     TablesCount = (await _applicationDbContext.Tables.ToListAsync()).Count,
                 };
 
-                return basicStatistics;
+                return new ResponseModel
+                {
+                    IsSuccess = true,
+                    StatusCode = 200,
+                    Response = basicStatistics
+                };
             }
             catch (Exception ex)
             {
-                throw new Exception(ex.Message, ex);
+                return new ResponseModel
+                {
+                    IsSuccess = false,
+                    StatusCode = 500,
+                    Response = $"Something went wrong: {ex.Message}"
+                };
             }
         }
     }

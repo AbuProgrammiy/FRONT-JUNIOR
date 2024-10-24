@@ -8,6 +8,8 @@ namespace FrontJunior.Domain.Entities.Models.PrimaryModels
         [JsonIgnore]
         public virtual User User { get; set; }
         public string Name { get; set; }
+        public string? Description { get; set; }
+        public int Stars { get; set; }
         public byte ColumnCount { get; set; }
         public DateTime CreatedDate { get; set; }
     }

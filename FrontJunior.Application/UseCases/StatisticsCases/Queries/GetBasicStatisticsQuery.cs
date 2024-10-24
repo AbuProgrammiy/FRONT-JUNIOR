@@ -3,7 +3,7 @@ using MediatR;
 
 namespace FrontJunior.Application.UseCases.StatisticsCases.Queries
 {
-    public class GetBasicStatisticsQuery:IRequest<BasicStatistics>
+    public class GetBasicStatisticsQuery:IRequest<ResponseModel>
     {
     }
 }
