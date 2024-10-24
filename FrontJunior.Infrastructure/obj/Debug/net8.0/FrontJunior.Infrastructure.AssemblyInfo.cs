@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("FrontJunior.Infrastructure")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+ba3e3da6565645414f09339466d4d8b8f1ed0f33")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+c21d79c82da51b6ee809f213806cce404cfe731b")]
 [assembly: System.Reflection.AssemblyProductAttribute("FrontJunior.Infrastructure")]
 [assembly: System.Reflection.AssemblyTitleAttribute("FrontJunior.Infrastructure")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

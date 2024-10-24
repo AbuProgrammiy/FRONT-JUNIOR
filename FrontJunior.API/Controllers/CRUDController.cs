@@ -18,12 +18,12 @@ namespace FrontJunior.API.Controllers
         }
 
         [HttpGet]
-        [Route("{securityKey}/{tableName}")]
-        public async Task<object> GetAll(string securityKey,string tableName,int? page,int? count)
+        [Route("{username}/{tableName}")]
+        public async Task<object> GetAll(string username, string tableName,int? page,int? count)
         {
             return await _mediator.Send(new GetAllQuery
             {
-                SecurityKey = securityKey,
+                Username = username,
                 TableName = tableName,
                 Page = page,
                 Count = count
@@ -31,12 +31,12 @@ namespace FrontJunior.API.Controllers
         }
 
         [HttpGet]
-        [Route("{securityKey}/{tableName}/{columnName}/{columnValue}")]
-        public async Task<object> GetByAny(string securityKey, string tableName, string columnName, string columnValue)
+        [Route("{username}/{tableName}/{columnName}/{columnValue}")]
+        public async Task<object> GetByAny(string username, string tableName, string columnName, string columnValue)
         {
             return await _mediator.Send(new GetByAnyQuery
             {
-                SecurityKey = securityKey,
+                Username = username,
                 TableName = tableName,
                 ColumnName = columnName,
                 ColumnValue = columnValue
@@ -44,36 +44,36 @@ namespace FrontJunior.API.Controllers
         }
         
         [HttpGet]
-        [Route("{securityKey}/{tableName}/{columnName}")]
-        public async Task<object> GetByAny(string securityKey, string tableName, string columnName)
+        [Route("{username}/{tableName}/{columnName}")]
+        public async Task<object> GetByAny(string username, string tableName, string columnName)
         {
             return await _mediator.Send(new GetByAnyQuery
             {
-                SecurityKey = securityKey,
+                Username = username,
                 TableName = tableName,
                 ColumnName = columnName
             });
         }
 
         [HttpPost]
-        [Route("{securityKey}/{tableName}")]
-        public async Task<ResponseModel> Create(string securityKey, string tableName, object body)
+        [Route("{username}/{tableName}")]
+        public async Task<ResponseModel> Create(string username, string tableName, object body)
         {
             return await _mediator.Send(new CreateCommand
             {
-                SecurityKey = securityKey,
+                Username = username,
                 TableName = tableName,
                 Body = body,
             });
         }
 
         [HttpPut]
-        [Route("{securityKey}/{tableName}/{columnName}/{columnValue}")]
-        public async Task<ResponseModel> UpdateByAny(string securityKey, string tableName, string columnName, string columnValue, object body)
+        [Route("{username}/{tableName}/{columnName}/{columnValue}")]
+        public async Task<ResponseModel> UpdateByAny(string username, string tableName, string columnName, string columnValue, object body)
         {
             return await _mediator.Send(new UpdateByAnyCommand
             {
-                SecurityKey = securityKey,
+                Username = username,
                 TableName = tableName,
                 ColumnName = columnName,
                 ColumnValue = columnValue,
@@ -82,12 +82,12 @@ namespace FrontJunior.API.Controllers
         }
         
         [HttpPut]
-        [Route("{securityKey}/{tableName}/{columnName}")]
-        public async Task<ResponseModel> UpdateByAny(string securityKey, string tableName, string columnName, object body)
+        [Route("{username}/{tableName}/{columnName}")]
+        public async Task<ResponseModel> UpdateByAny(string username, string tableName, string columnName, object body)
         {
             return await _mediator.Send(new UpdateByAnyCommand
             {
-                SecurityKey = securityKey,
+                Username = username,
                 TableName = tableName,
                 ColumnName = columnName,
                 Body = body,
@@ -95,12 +95,12 @@ namespace FrontJunior.API.Controllers
         }
 
         [HttpDelete]
-        [Route("{securityKey}/{tableName}/{columnName}/{columnValue}")]
-        public async Task<ResponseModel> DeleteByAny(string securityKey, string tableName, string columnName, string columnValue)
+        [Route("{username}/{tableName}/{columnName}/{columnValue}")]
+        public async Task<ResponseModel> DeleteByAny(string username, string tableName, string columnName, string columnValue)
         {
             return await _mediator.Send(new DeleteByAnyCommand
             {
-                SecurityKey = securityKey,
+                Username = username,
                 TableName = tableName,
                 ColumnName = columnName,
                 ColumnValue = columnValue
@@ -108,12 +108,12 @@ namespace FrontJunior.API.Controllers
         }
         
         [HttpDelete]
-        [Route("{securityKey}/{tableName}/{columnName}")]
-        public async Task<ResponseModel> DeleteByAny(string securityKey, string tableName, string columnName)
+        [Route("{username}/{tableName}/{columnName}")]
+        public async Task<ResponseModel> DeleteByAny(string username, string tableName, string columnName)
         {
             return await _mediator.Send(new DeleteByAnyCommand
             {
-                SecurityKey = securityKey,
+                Username = username,
                 TableName = tableName,
                 ColumnName = columnName
             });
