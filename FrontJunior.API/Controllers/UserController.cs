@@ -1,6 +1,5 @@
 ﻿using FrontJunior.Application.UseCases.UserCases.Commands;
 using FrontJunior.Application.UseCases.UserCases.Queries;
-using FrontJunior.Domain.Entities.Models.PrimaryModels;
 using FrontJunior.Domain.Entities.Views;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
@@ -20,21 +19,21 @@ namespace FrontJunior.API.Controllers
 
         [HttpGet]
         [Route("{page}/{count}")]
-        public async Task<IEnumerable<User>> GetAll(int page,int count)
+        public async Task<ResponseModel> GetAll(int page,int count)
         {
             return await _mediator.Send(new GetAllUsersQuery { Page = page, Count = count });
         }
 
         [HttpGet]
         [Route("{id}")]
-        public async Task<User> GetById(Guid id)
+        public async Task<ResponseModel> GetById(Guid id)
         {
             return await _mediator.Send(new GetUserByIdQuery { Id = id });
         }
 
         [HttpGet]
         [Route("{id}")]
-        public async Task<bool> IsUserExists(Guid id)
+        public async Task<ResponseModel> IsUserExists(Guid id)
         {
             return await _mediator.Send(new IsUserExistsQuery { Id = id });
         }
@@ -63,12 +62,6 @@ namespace FrontJunior.API.Controllers
             return await _mediator.Send(request);
         }
 
-        [HttpPost]
-        public async Task<ResponseModel> Create(CreateUserCommand request)
-        {
-            return await _mediator.Send(request);
-        }
-
         [HttpPatch]
         public async Task<ResponseModel> UpdateEmail(UpdateUserEmailCommand request)
         {
@@ -77,18 +70,6 @@ namespace FrontJunior.API.Controllers
 
         [HttpPatch]
         public async Task<ResponseModel> UpdatePassword(UpdateUserPasswordCommand request)
-        {
-            return await _mediator.Send(request);
-        }
-
-        [HttpPatch]
-        public async Task<ResponseModel> UpdateSecurityKey(UpdateUserSecurityKeyCommand request)
-        {
-            return await _mediator.Send(request);
-        }
-
-        [HttpPut]
-        public async Task<ResponseModel> Update(UpdateUserCommand request)
         {
             return await _mediator.Send(request);
         }

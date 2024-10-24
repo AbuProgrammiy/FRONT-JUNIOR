@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("FrontJunior.API")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+0e54f410f2b2f98396560b46c06d022521b752a6")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+ddcca155644719f77193baa2c3b4fef835603043")]
 [assembly: System.Reflection.AssemblyProductAttribute("FrontJunior.API")]
 [assembly: System.Reflection.AssemblyTitleAttribute("FrontJunior.API")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
