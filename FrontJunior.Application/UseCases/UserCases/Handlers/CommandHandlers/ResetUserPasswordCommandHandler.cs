@@ -1,5 +1,4 @@
 ﻿using FrontJunior.Application.Abstractions;
-using FrontJunior.Application.Services.AuthServices;
 using FrontJunior.Application.Services.PasswordServices;
 using FrontJunior.Application.UseCases.UserCases.Commands;
 using FrontJunior.Domain.Entities.Models.OtherModels;
@@ -14,13 +13,11 @@ namespace FrontJunior.Application.UseCases.UserCases.Handlers.CommandHandlers
     public class ResetUserPasswordCommandHandler : IRequestHandler<ResetUserPasswordCommand, ResponseModel>
     {
         private readonly IApplicationDbContext _applicationDbContext;
-        private readonly IAuthService _authService;
         private readonly IPasswordService _passwordService;
 
-        public ResetUserPasswordCommandHandler(IApplicationDbContext applicationDbContext, IAuthService authService, IPasswordService passwordService)
+        public ResetUserPasswordCommandHandler(IApplicationDbContext applicationDbContext, IPasswordService passwordService)
         {
             _applicationDbContext = applicationDbContext;
-            _authService = authService;
             _passwordService = passwordService;
         }
 
@@ -58,6 +55,13 @@ namespace FrontJunior.Application.UseCases.UserCases.Handlers.CommandHandlers
                 user.PassworSalt = passwordModel.PassworSalt;
 
                 await _applicationDbContext.SaveChangesAsync(cancellationToken);
+
+                return new ResponseModel
+                {
+                    IsSuccess = true,
+                    StatusCode = 200,
+                    Response = "User password changed successfully!"
+                };
             }
             catch (Exception ex)
             {

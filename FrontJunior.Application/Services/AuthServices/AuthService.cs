@@ -1,11 +1,10 @@
-﻿using Microsoft.Extensions.Configuration;
+﻿using FrontJunior.Domain.Entities.Models.PrimaryModels;
+using Microsoft.Extensions.Configuration;
+using Microsoft.IdentityModel.Tokens;
 using System.Globalization;
+using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
-using System.IdentityModel.Tokens.Jwt;
-using Microsoft.IdentityModel.Tokens;
-using FrontJunior.Domain.Entities.Models;
-using FrontJunior.Domain.Entities.Models.PrimaryModels;
 
 namespace FrontJunior.Application.Services.AuthServices
 {
@@ -30,8 +29,8 @@ namespace FrontJunior.Application.Services.AuthServices
 
                 new Claim("Id",user.Id.ToString()),
                 new Claim("Email",user.Email),
-                new Claim("SecurityKey",user.SecurityKey),
-                new Claim("Role",user.Role),
+                new Claim("Username",user.Username),
+                new Claim("Role",user.Role.ToString()),
             };
 
             JwtSecurityToken token = new JwtSecurityToken(
@@ -41,11 +40,7 @@ namespace FrontJunior.Application.Services.AuthServices
                 expires: DateTime.UtcNow.AddMinutes(expirePeriod),
                 signingCredentials: credentials);
 
-            return new TokenModel
-            {
-                Token = new JwtSecurityTokenHandler().WriteToken(token)
-            };
-
+            return new JwtSecurityTokenHandler().WriteToken(token);
         }
     }
 }
