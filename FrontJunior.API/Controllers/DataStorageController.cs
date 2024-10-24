@@ -43,7 +43,7 @@ namespace FrontJunior.API.Controllers
         [Route("{userId}/{tableName}")]
         public async Task<IEnumerable<string>> GetColumnsByTableName(Guid userId, string tableName)
         {
-            return await _mediator.Send(new GetColumnsByTableNameQuery { UserId = userId, TableName=tableName }) ;
+            return await _mediator.Send(new GetColumnsByTableIdQuery { UserId = userId, TableName=tableName }) ;
         }
 
         [HttpPost]

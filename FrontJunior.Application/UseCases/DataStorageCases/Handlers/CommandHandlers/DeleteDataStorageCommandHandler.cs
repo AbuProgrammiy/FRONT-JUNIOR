@@ -28,7 +28,7 @@ namespace FrontJunior.Application.UseCases.DataStorageCases.Handlers.CommandHand
                     {
                         IsSuccess = false,
                         StatusCode = 404,
-                        Response = "DataStorage is not found!"
+                        Response = "DataStorage is not found to delete!"
                     };
                 }
 
