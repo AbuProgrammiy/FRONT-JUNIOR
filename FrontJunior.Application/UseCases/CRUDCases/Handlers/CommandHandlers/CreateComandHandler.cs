@@ -5,6 +5,7 @@ using FrontJunior.Domain.Entities.Views;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json.Linq;
+using System.Collections.Generic;
 using System.Reflection;
 
 namespace FrontJunior.Application.UseCases.CRUDCases.Handlers.CommandHandlers
@@ -22,7 +23,7 @@ namespace FrontJunior.Application.UseCases.CRUDCases.Handlers.CommandHandlers
         {
             try
             {
-                User user = await _applicationDbContext.Users.FirstOrDefaultAsync(u => u.SecurityKey == request.SecurityKey);
+                User user = await _applicationDbContext.Users.FirstOrDefaultAsync(u => u.Username == request.Username);
 
                 if (user == null)
                 {
@@ -34,7 +35,7 @@ namespace FrontJunior.Application.UseCases.CRUDCases.Handlers.CommandHandlers
                     };
                 }
 
-                Table table = await _applicationDbContext.Tables.Where(t => t.User == user).FirstOrDefaultAsync(t => t.Name == request.TableName);
+                Table table = await _applicationDbContext.Tables.FirstOrDefaultAsync(t => t.User == user && t.Name == request.TableName);
 
                 if (table == null)
                 {
@@ -53,12 +54,12 @@ namespace FrontJunior.Application.UseCases.CRUDCases.Handlers.CommandHandlers
                     return new ResponseModel
                     {
                         IsSuccess = false,
-                        StatusCode = 201,
+                        StatusCode = 400,
                         Response = "Body is not filled!"
                     };
                 }
 
-                DataStorage columns=await _applicationDbContext.DataStorage.Where(d=>d.IsData==false).FirstOrDefaultAsync(d=>d.Table==table);
+                DataStorage columns = await _applicationDbContext.DataStorage.FirstOrDefaultAsync(d => d.Table == table && d.IsData == false);
 
                 DataStorage dataStorage = new DataStorage
                 {
@@ -96,7 +97,7 @@ namespace FrontJunior.Application.UseCases.CRUDCases.Handlers.CommandHandlers
                 {
                     IsSuccess = false,
                     StatusCode = 500,
-                    Response = $"Something went wrong!: {ex.Message}"
+                    Response = $"Something went wrong: {ex.Message}"
                 };
             }
         }

@@ -22,7 +22,7 @@ namespace FrontJunior.Application.UseCases.CRUDCases.Handlers.CommandHandlers
         {
             try
             {
-                User user = await _applicationDbContext.Users.FirstOrDefaultAsync(u => u.SecurityKey == request.SecurityKey);
+                User user = await _applicationDbContext.Users.FirstOrDefaultAsync(u => u.Username == request.Username);
 
                 if (user == null)
                 {
@@ -119,7 +119,7 @@ namespace FrontJunior.Application.UseCases.CRUDCases.Handlers.CommandHandlers
                 {
                     IsSuccess = false,
                     StatusCode = 500,
-                    Response = $"Something went wrong!: {ex.Message}"
+                    Response = $"Something went wrong: {ex.Message}"
                 };
             }
         }

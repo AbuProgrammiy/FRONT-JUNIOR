@@ -4,6 +4,7 @@ using FrontJunior.Domain.Entities.Models.PrimaryModels;
 using FrontJunior.Domain.Entities.Views;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
+using System.Collections.Generic;
 using System.Reflection;
 
 namespace FrontJunior.Application.UseCases.CRUDCases.Handlers.CommandHandlers
@@ -21,7 +22,7 @@ namespace FrontJunior.Application.UseCases.CRUDCases.Handlers.CommandHandlers
         {
             try
             {
-                User user = await _applicationDbContext.Users.FirstOrDefaultAsync(u => u.SecurityKey == request.SecurityKey);
+                User user = await _applicationDbContext.Users.FirstOrDefaultAsync(u => u.Username == request.Username);
 
                 if (user == null)
                 {
@@ -33,7 +34,7 @@ namespace FrontJunior.Application.UseCases.CRUDCases.Handlers.CommandHandlers
                     };
                 }
 
-                Table table = await _applicationDbContext.Tables.Where(t => t.User == user).FirstOrDefaultAsync(t => t.Name == request.TableName);
+                Table table = await _applicationDbContext.Tables.FirstOrDefaultAsync(t => t.User == user && t.Name == request.TableName);
 
                 if (table == null)
                 {
@@ -74,9 +75,9 @@ namespace FrontJunior.Application.UseCases.CRUDCases.Handlers.CommandHandlers
                 }
 
                 DataStorage dataStorage = _applicationDbContext.DataStorage.AsEnumerable().Where(d =>d.Table==table && d.IsData == true)
-                                                                                 .FirstOrDefault(d => d.GetType()
-                                                                                                                 .GetProperty(property.Name)
-                                                                                                                 .GetValue(d)?.ToString() == request.ColumnValue);
+                                                                                          .FirstOrDefault(d => d.GetType()
+                                                                                                                         .GetProperty(property.Name)
+                                                                                                                         .GetValue(d)?.ToString() == request.ColumnValue);
 
                 if (dataStorage == null)
                 {
@@ -104,7 +105,7 @@ namespace FrontJunior.Application.UseCases.CRUDCases.Handlers.CommandHandlers
                 {
                     IsSuccess = false,
                     StatusCode = 500,
-                    Response = $"Something went wrong!: {ex.Message}"
+                    Response = $"Something went wrong: {ex.Message}"
                 };
             }
         }

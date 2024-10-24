@@ -1,7 +1,7 @@
 ﻿using FrontJunior.Application.Abstractions;
 using FrontJunior.Application.UseCases.CRUDCases.Queries;
-using FrontJunior.Domain.Entities.Models;
 using FrontJunior.Domain.Entities.Models.PrimaryModels;
+using FrontJunior.Domain.Entities.Views;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 using System.Reflection;
@@ -21,7 +21,7 @@ namespace FrontJunior.Application.UseCases.CRUDCases.Handlers.QueryHandlers
         {
             try
             {
-                User user = await _applicationDbContext.Users.FirstOrDefaultAsync(u => u.SecurityKey == request.SecurityKey);
+                User user = await _applicationDbContext.Users.FirstOrDefaultAsync(u => u.Username == request.Username);
 
                 if (user == null)
                 {
@@ -88,7 +88,7 @@ namespace FrontJunior.Application.UseCases.CRUDCases.Handlers.QueryHandlers
                 {
                     IsSuccess = false,
                     StatusCode = 500,
-                    Response = $"Something went wrong!: {ex.Message}"
+                    Response = $"Something went wrong: {ex.Message}"
                 };
             }
         }
