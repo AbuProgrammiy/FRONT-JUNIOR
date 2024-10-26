@@ -1,8 +1,8 @@
 {
   "Files": [
     {
-      "Id": "D:\\Confidential Station\\FRONT-JUNIOR\\FrontJunior.API\\wwwroot\\Email\\message.html",
-      "PackagePath": "staticwebassets\\Email\\message.html"
+      "Id": "D:\\Confidential Station\\FRONT-JUNIOR\\FrontJunior.API\\wwwroot\\HTMLMessages\\Verification.html",
+      "PackagePath": "staticwebassets\\HTMLMessages\\Verification.html"
     },
     {
       "Id": "obj\\Release\\net8.0\\staticwebassets\\msbuild.FrontJunior.API.Microsoft.AspNetCore.StaticWebAssets.props",

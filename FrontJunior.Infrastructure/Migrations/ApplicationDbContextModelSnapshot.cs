@@ -22,13 +22,14 @@ namespace FrontJunior.Infrastructure.Migrations
 
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
 
-            modelBuilder.Entity("FrontJunior.Domain.Entities.DataStorage", b =>
+            modelBuilder.Entity("FrontJunior.Domain.Entities.Models.PrimaryModels.DataStorage", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uuid");
 
                     b.Property<string>("Column1")
+                        .IsRequired()
                         .HasColumnType("text");
 
                     b.Property<string>("Column10")
@@ -101,7 +102,7 @@ namespace FrontJunior.Infrastructure.Migrations
                     b.ToTable("DataStorage");
                 });
 
-            modelBuilder.Entity("FrontJunior.Domain.Entities.Table", b =>
+            modelBuilder.Entity("FrontJunior.Domain.Entities.Models.PrimaryModels.Table", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -113,9 +114,15 @@ namespace FrontJunior.Infrastructure.Migrations
                     b.Property<DateTime>("CreatedDate")
                         .HasColumnType("timestamp with time zone");
 
+                    b.Property<string>("Description")
+                        .HasColumnType("text");
+
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("text");
+
+                    b.Property<int>("Stars")
+                        .HasColumnType("integer");
 
                     b.Property<Guid>("UserId")
                         .HasColumnType("uuid");
@@ -127,7 +134,7 @@ namespace FrontJunior.Infrastructure.Migrations
                     b.ToTable("Tables");
                 });
 
-            modelBuilder.Entity("FrontJunior.Domain.Entities.User", b =>
+            modelBuilder.Entity("FrontJunior.Domain.Entities.Models.PrimaryModels.User", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -154,15 +161,11 @@ namespace FrontJunior.Infrastructure.Migrations
                         .IsRequired()
                         .HasColumnType("text");
 
-                    b.Property<string>("Role")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.Property<string>("SecurityKey")
-                        .IsRequired()
-                        .HasColumnType("text");
+                    b.Property<int>("Role")
+                        .HasColumnType("integer");
 
                     b.Property<string>("Username")
+                        .IsRequired()
                         .HasColumnType("text");
 
                     b.HasKey("Id");
@@ -170,7 +173,7 @@ namespace FrontJunior.Infrastructure.Migrations
                     b.ToTable("Users");
                 });
 
-            modelBuilder.Entity("FrontJunior.Domain.Entities.Verification", b =>
+            modelBuilder.Entity("FrontJunior.Domain.Entities.Models.SecondaryModels.Verification", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -189,9 +192,9 @@ namespace FrontJunior.Infrastructure.Migrations
                     b.ToTable("Verifications");
                 });
 
-            modelBuilder.Entity("FrontJunior.Domain.Entities.DataStorage", b =>
+            modelBuilder.Entity("FrontJunior.Domain.Entities.Models.PrimaryModels.DataStorage", b =>
                 {
-                    b.HasOne("FrontJunior.Domain.Entities.Table", "Table")
+                    b.HasOne("FrontJunior.Domain.Entities.Models.PrimaryModels.Table", "Table")
                         .WithMany()
                         .HasForeignKey("TableId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -200,9 +203,9 @@ namespace FrontJunior.Infrastructure.Migrations
                     b.Navigation("Table");
                 });
 
-            modelBuilder.Entity("FrontJunior.Domain.Entities.Table", b =>
+            modelBuilder.Entity("FrontJunior.Domain.Entities.Models.PrimaryModels.Table", b =>
                 {
-                    b.HasOne("FrontJunior.Domain.Entities.User", "User")
+                    b.HasOne("FrontJunior.Domain.Entities.Models.PrimaryModels.User", "User")
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)

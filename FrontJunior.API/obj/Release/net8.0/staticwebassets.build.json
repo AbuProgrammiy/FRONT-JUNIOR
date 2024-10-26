@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "AwEt/7ufS+++jfKwp4yyInugFM5EY3SA3iwaDUeaDJc=",
+  "Hash": "g11rT8CuSo34DCk+EK+unBhHH5FKkN01X4IdxayHxa8=",
   "Source": "FrontJunior.API",
   "BasePath": "_content/FrontJunior.API",
   "Mode": "Default",
@@ -17,12 +17,12 @@
   ],
   "Assets": [
     {
-      "Identity": "D:\\Confidential Station\\FRONT-JUNIOR\\FrontJunior.API\\wwwroot\\Email\\message.html",
+      "Identity": "D:\\Confidential Station\\FRONT-JUNIOR\\FrontJunior.API\\wwwroot\\HTMLMessages\\Verification.html",
       "SourceId": "FrontJunior.API",
       "SourceType": "Discovered",
       "ContentRoot": "D:\\Confidential Station\\FRONT-JUNIOR\\FrontJunior.API\\wwwroot\\",
       "BasePath": "_content/FrontJunior.API",
-      "RelativePath": "Email/message.html",
+      "RelativePath": "HTMLMessages/Verification.html",
       "AssetKind": "All",
       "AssetMode": "All",
       "AssetRole": "Primary",
@@ -33,7 +33,7 @@
       "AssetTraitValue": "",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot\\Email\\message.html"
+      "OriginalItemSpec": "wwwroot\\HTMLMessages\\Verification.html"
     }
   ]
 }

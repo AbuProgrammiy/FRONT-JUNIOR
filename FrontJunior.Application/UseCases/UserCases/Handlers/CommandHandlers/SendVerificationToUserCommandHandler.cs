@@ -84,6 +84,8 @@ namespace FrontJunior.Application.UseCases.UserCases.Handlers.CommandHandlers
 
                 string verificationMessagePath = $"{_webHostEnvironment.WebRootPath}/HTMLMessages/Verififcation.html";
 
+                Console.WriteLine($"\n\n{_webHostEnvironment.WebRootPath}\n\n");
+
                 using (StreamReader stream = new StreamReader(verificationMessagePath))
                 {
                     HTMLbody = (await stream.ReadToEndAsync()).Replace("verification-code", password);
