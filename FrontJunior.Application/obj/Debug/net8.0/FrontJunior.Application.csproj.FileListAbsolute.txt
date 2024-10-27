@@ -30,3 +30,19 @@ D:\Confidential Station\FRONT-JUNIOR\FrontJunior.Application\obj\Debug\net8.0\Fr
 D:\Confidential Station\FRONT-JUNIOR\FrontJunior.Application\obj\Debug\net8.0\refint\FrontJunior.Application.dll
 D:\Confidential Station\FRONT-JUNIOR\FrontJunior.Application\obj\Debug\net8.0\FrontJunior.Application.pdb
 D:\Confidential Station\FRONT-JUNIOR\FrontJunior.Application\obj\Debug\net8.0\ref\FrontJunior.Application.dll
+C:\Users\Hp\Desktop\Important\APICraft\FRONT-JUNIOR\FrontJunior.Application\bin\Debug\net8.0\FrontJunior.Application.deps.json
+C:\Users\Hp\Desktop\Important\APICraft\FRONT-JUNIOR\FrontJunior.Application\bin\Debug\net8.0\FrontJunior.Application.dll
+C:\Users\Hp\Desktop\Important\APICraft\FRONT-JUNIOR\FrontJunior.Application\bin\Debug\net8.0\FrontJunior.Application.pdb
+C:\Users\Hp\Desktop\Important\APICraft\FRONT-JUNIOR\FrontJunior.Application\bin\Debug\net8.0\FrontJunior.Domain.dll
+C:\Users\Hp\Desktop\Important\APICraft\FRONT-JUNIOR\FrontJunior.Application\bin\Debug\net8.0\FrontJunior.Domain.pdb
+C:\Users\Hp\Desktop\Important\APICraft\FRONT-JUNIOR\FrontJunior.Application\obj\Debug\net8.0\FrontJunior.Application.csproj.AssemblyReference.cache
+C:\Users\Hp\Desktop\Important\APICraft\FRONT-JUNIOR\FrontJunior.Application\obj\Debug\net8.0\FrontJunior.Application.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Hp\Desktop\Important\APICraft\FRONT-JUNIOR\FrontJunior.Application\obj\Debug\net8.0\FrontJunior.Application.AssemblyInfoInputs.cache
+C:\Users\Hp\Desktop\Important\APICraft\FRONT-JUNIOR\FrontJunior.Application\obj\Debug\net8.0\FrontJunior.Application.AssemblyInfo.cs
+C:\Users\Hp\Desktop\Important\APICraft\FRONT-JUNIOR\FrontJunior.Application\obj\Debug\net8.0\FrontJunior.Application.csproj.CoreCompileInputs.cache
+C:\Users\Hp\Desktop\Important\APICraft\FRONT-JUNIOR\FrontJunior.Application\obj\Debug\net8.0\FrontJunior.Application.sourcelink.json
+C:\Users\Hp\Desktop\Important\APICraft\FRONT-JUNIOR\FrontJunior.Application\obj\Debug\net8.0\FrontJun.8C7282F6.Up2Date
+C:\Users\Hp\Desktop\Important\APICraft\FRONT-JUNIOR\FrontJunior.Application\obj\Debug\net8.0\FrontJunior.Application.dll
+C:\Users\Hp\Desktop\Important\APICraft\FRONT-JUNIOR\FrontJunior.Application\obj\Debug\net8.0\refint\FrontJunior.Application.dll
+C:\Users\Hp\Desktop\Important\APICraft\FRONT-JUNIOR\FrontJunior.Application\obj\Debug\net8.0\FrontJunior.Application.pdb
+C:\Users\Hp\Desktop\Important\APICraft\FRONT-JUNIOR\FrontJunior.Application\obj\Debug\net8.0\ref\FrontJunior.Application.dll

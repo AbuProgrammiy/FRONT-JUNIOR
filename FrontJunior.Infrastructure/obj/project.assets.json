@@ -3466,11 +3466,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\Confidential Station\\FRONT-JUNIOR\\FrontJunior.Infrastructure\\FrontJunior.Infrastructure.csproj",
+      "projectUniqueName": "C:\\Users\\Hp\\Desktop\\Important\\APICraft\\FRONT-JUNIOR\\FrontJunior.Infrastructure\\FrontJunior.Infrastructure.csproj",
       "projectName": "FrontJunior.Infrastructure",
-      "projectPath": "D:\\Confidential Station\\FRONT-JUNIOR\\FrontJunior.Infrastructure\\FrontJunior.Infrastructure.csproj",
+      "projectPath": "C:\\Users\\Hp\\Desktop\\Important\\APICraft\\FRONT-JUNIOR\\FrontJunior.Infrastructure\\FrontJunior.Infrastructure.csproj",
       "packagesPath": "C:\\Users\\Hp\\.nuget\\packages\\",
-      "outputPath": "D:\\Confidential Station\\FRONT-JUNIOR\\FrontJunior.Infrastructure\\obj\\",
+      "outputPath": "C:\\Users\\Hp\\Desktop\\Important\\APICraft\\FRONT-JUNIOR\\FrontJunior.Infrastructure\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\Hp\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -3489,8 +3489,8 @@
         "net8.0": {
           "targetAlias": "net8.0",
           "projectReferences": {
-            "D:\\Confidential Station\\FRONT-JUNIOR\\FrontJunior.Application\\FrontJunior.Application.csproj": {
-              "projectPath": "D:\\Confidential Station\\FRONT-JUNIOR\\FrontJunior.Application\\FrontJunior.Application.csproj"
+            "C:\\Users\\Hp\\Desktop\\Important\\APICraft\\FRONT-JUNIOR\\FrontJunior.Application\\FrontJunior.Application.csproj": {
+              "projectPath": "C:\\Users\\Hp\\Desktop\\Important\\APICraft\\FRONT-JUNIOR\\FrontJunior.Application\\FrontJunior.Application.csproj"
             }
           }
         }

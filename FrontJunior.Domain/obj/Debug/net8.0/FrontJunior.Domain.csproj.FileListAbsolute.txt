@@ -22,3 +22,15 @@ D:\Confidential Station\FRONT-JUNIOR\FrontJunior.Domain\obj\Debug\net8.0\FrontJu
 D:\Confidential Station\FRONT-JUNIOR\FrontJunior.Domain\obj\Debug\net8.0\refint\FrontJunior.Domain.dll
 D:\Confidential Station\FRONT-JUNIOR\FrontJunior.Domain\obj\Debug\net8.0\FrontJunior.Domain.pdb
 D:\Confidential Station\FRONT-JUNIOR\FrontJunior.Domain\obj\Debug\net8.0\ref\FrontJunior.Domain.dll
+C:\Users\Hp\Desktop\Important\APICraft\FRONT-JUNIOR\FrontJunior.Domain\bin\Debug\net8.0\FrontJunior.Domain.deps.json
+C:\Users\Hp\Desktop\Important\APICraft\FRONT-JUNIOR\FrontJunior.Domain\bin\Debug\net8.0\FrontJunior.Domain.dll
+C:\Users\Hp\Desktop\Important\APICraft\FRONT-JUNIOR\FrontJunior.Domain\bin\Debug\net8.0\FrontJunior.Domain.pdb
+C:\Users\Hp\Desktop\Important\APICraft\FRONT-JUNIOR\FrontJunior.Domain\obj\Debug\net8.0\FrontJunior.Domain.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Hp\Desktop\Important\APICraft\FRONT-JUNIOR\FrontJunior.Domain\obj\Debug\net8.0\FrontJunior.Domain.AssemblyInfoInputs.cache
+C:\Users\Hp\Desktop\Important\APICraft\FRONT-JUNIOR\FrontJunior.Domain\obj\Debug\net8.0\FrontJunior.Domain.AssemblyInfo.cs
+C:\Users\Hp\Desktop\Important\APICraft\FRONT-JUNIOR\FrontJunior.Domain\obj\Debug\net8.0\FrontJunior.Domain.csproj.CoreCompileInputs.cache
+C:\Users\Hp\Desktop\Important\APICraft\FRONT-JUNIOR\FrontJunior.Domain\obj\Debug\net8.0\FrontJunior.Domain.sourcelink.json
+C:\Users\Hp\Desktop\Important\APICraft\FRONT-JUNIOR\FrontJunior.Domain\obj\Debug\net8.0\FrontJunior.Domain.dll
+C:\Users\Hp\Desktop\Important\APICraft\FRONT-JUNIOR\FrontJunior.Domain\obj\Debug\net8.0\refint\FrontJunior.Domain.dll
+C:\Users\Hp\Desktop\Important\APICraft\FRONT-JUNIOR\FrontJunior.Domain\obj\Debug\net8.0\FrontJunior.Domain.pdb
+C:\Users\Hp\Desktop\Important\APICraft\FRONT-JUNIOR\FrontJunior.Domain\obj\Debug\net8.0\ref\FrontJunior.Domain.dll

@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "g11rT8CuSo34DCk+EK+unBhHH5FKkN01X4IdxayHxa8=",
+  "Hash": "CRuDviecgbGchBnVYs0N+8x2hDm5C4YeW/dzTwRccHs=",
   "Source": "FrontJunior.API",
   "BasePath": "_content/FrontJunior.API",
   "Mode": "Default",
@@ -10,17 +10,17 @@
     {
       "Name": "FrontJunior.API\\wwwroot",
       "Source": "FrontJunior.API",
-      "ContentRoot": "D:\\Confidential Station\\FRONT-JUNIOR\\FrontJunior.API\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\Hp\\Desktop\\Important\\APICraft\\FRONT-JUNIOR\\FrontJunior.API\\wwwroot\\",
       "BasePath": "_content/FrontJunior.API",
       "Pattern": "**"
     }
   ],
   "Assets": [
     {
-      "Identity": "D:\\Confidential Station\\FRONT-JUNIOR\\FrontJunior.API\\wwwroot\\HTMLMessages\\Verification.html",
+      "Identity": "C:\\Users\\Hp\\Desktop\\Important\\APICraft\\FRONT-JUNIOR\\FrontJunior.API\\wwwroot\\HTMLMessages\\Verification.html",
       "SourceId": "FrontJunior.API",
       "SourceType": "Discovered",
-      "ContentRoot": "D:\\Confidential Station\\FRONT-JUNIOR\\FrontJunior.API\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\Hp\\Desktop\\Important\\APICraft\\FRONT-JUNIOR\\FrontJunior.API\\wwwroot\\",
       "BasePath": "_content/FrontJunior.API",
       "RelativePath": "HTMLMessages/Verification.html",
       "AssetKind": "All",

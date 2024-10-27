@@ -30,6 +30,16 @@ namespace FrontJunior.Application.UseCases.UserCases.Handlers.CommandHandlers
             {
                 if (request.IsPasswordForgotten == false || request.IsPasswordForgotten == null)
                 {
+                    if(request.Username == null)
+                    {
+                        return new ResponseModel
+                        {
+                            IsSuccess = false,
+                            StatusCode = 400,
+                            Response = "Username required!"
+                        };
+                    }
+
                     User user = await _applicationDbContext.Users.FirstOrDefaultAsync(u => u.Username == request.Username);
 
                     if (user != null)
@@ -82,7 +92,7 @@ namespace FrontJunior.Application.UseCases.UserCases.Handlers.CommandHandlers
 
                 string HTMLbody;
 
-                string verificationMessagePath = $"{_webHostEnvironment.WebRootPath}/HTMLMessages/Verififcation.html";
+                string verificationMessagePath = $"{_webHostEnvironment.WebRootPath}/HTMLMessages/Verification.html";
 
                 Console.WriteLine($"\n\n{_webHostEnvironment.WebRootPath}\n\n");
 

@@ -38,3 +38,23 @@ D:\Confidential Station\FRONT-JUNIOR\FrontJunior.Infrastructure\obj\Debug\net8.0
 D:\Confidential Station\FRONT-JUNIOR\FrontJunior.Infrastructure\obj\Debug\net8.0\FrontJunior.Infrastructure.pdb
 D:\Confidential Station\FRONT-JUNIOR\FrontJunior.Infrastructure\obj\Debug\net8.0\FrontJunior.Infrastructure.genruntimeconfig.cache
 D:\Confidential Station\FRONT-JUNIOR\FrontJunior.Infrastructure\obj\Debug\net8.0\ref\FrontJunior.Infrastructure.dll
+C:\Users\Hp\Desktop\Important\APICraft\FRONT-JUNIOR\FrontJunior.Infrastructure\bin\Debug\net8.0\FrontJunior.Infrastructure.deps.json
+C:\Users\Hp\Desktop\Important\APICraft\FRONT-JUNIOR\FrontJunior.Infrastructure\bin\Debug\net8.0\FrontJunior.Infrastructure.runtimeconfig.json
+C:\Users\Hp\Desktop\Important\APICraft\FRONT-JUNIOR\FrontJunior.Infrastructure\bin\Debug\net8.0\FrontJunior.Infrastructure.dll
+C:\Users\Hp\Desktop\Important\APICraft\FRONT-JUNIOR\FrontJunior.Infrastructure\bin\Debug\net8.0\FrontJunior.Infrastructure.pdb
+C:\Users\Hp\Desktop\Important\APICraft\FRONT-JUNIOR\FrontJunior.Infrastructure\bin\Debug\net8.0\FrontJunior.Application.dll
+C:\Users\Hp\Desktop\Important\APICraft\FRONT-JUNIOR\FrontJunior.Infrastructure\bin\Debug\net8.0\FrontJunior.Domain.dll
+C:\Users\Hp\Desktop\Important\APICraft\FRONT-JUNIOR\FrontJunior.Infrastructure\bin\Debug\net8.0\FrontJunior.Application.pdb
+C:\Users\Hp\Desktop\Important\APICraft\FRONT-JUNIOR\FrontJunior.Infrastructure\bin\Debug\net8.0\FrontJunior.Domain.pdb
+C:\Users\Hp\Desktop\Important\APICraft\FRONT-JUNIOR\FrontJunior.Infrastructure\obj\Debug\net8.0\FrontJunior.Infrastructure.csproj.AssemblyReference.cache
+C:\Users\Hp\Desktop\Important\APICraft\FRONT-JUNIOR\FrontJunior.Infrastructure\obj\Debug\net8.0\FrontJunior.Infrastructure.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Hp\Desktop\Important\APICraft\FRONT-JUNIOR\FrontJunior.Infrastructure\obj\Debug\net8.0\FrontJunior.Infrastructure.AssemblyInfoInputs.cache
+C:\Users\Hp\Desktop\Important\APICraft\FRONT-JUNIOR\FrontJunior.Infrastructure\obj\Debug\net8.0\FrontJunior.Infrastructure.AssemblyInfo.cs
+C:\Users\Hp\Desktop\Important\APICraft\FRONT-JUNIOR\FrontJunior.Infrastructure\obj\Debug\net8.0\FrontJunior.Infrastructure.csproj.CoreCompileInputs.cache
+C:\Users\Hp\Desktop\Important\APICraft\FRONT-JUNIOR\FrontJunior.Infrastructure\obj\Debug\net8.0\FrontJunior.Infrastructure.sourcelink.json
+C:\Users\Hp\Desktop\Important\APICraft\FRONT-JUNIOR\FrontJunior.Infrastructure\obj\Debug\net8.0\FrontJun.D02A88FB.Up2Date
+C:\Users\Hp\Desktop\Important\APICraft\FRONT-JUNIOR\FrontJunior.Infrastructure\obj\Debug\net8.0\FrontJunior.Infrastructure.dll
+C:\Users\Hp\Desktop\Important\APICraft\FRONT-JUNIOR\FrontJunior.Infrastructure\obj\Debug\net8.0\refint\FrontJunior.Infrastructure.dll
+C:\Users\Hp\Desktop\Important\APICraft\FRONT-JUNIOR\FrontJunior.Infrastructure\obj\Debug\net8.0\FrontJunior.Infrastructure.pdb
+C:\Users\Hp\Desktop\Important\APICraft\FRONT-JUNIOR\FrontJunior.Infrastructure\obj\Debug\net8.0\FrontJunior.Infrastructure.genruntimeconfig.cache
+C:\Users\Hp\Desktop\Important\APICraft\FRONT-JUNIOR\FrontJunior.Infrastructure\obj\Debug\net8.0\ref\FrontJunior.Infrastructure.dll
