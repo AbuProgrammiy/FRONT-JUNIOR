@@ -63,6 +63,13 @@ namespace FrontJunior.API.Controllers
         }
 
         [HttpPatch]
+        public async Task<ResponseModel> UpdateUsername(UpdateUserUsernameCommand request)
+        {
+            return await _mediator.Send(request);
+        }
+
+
+        [HttpPatch]
         public async Task<ResponseModel> UpdateEmail(UpdateUserEmailCommand request)
         {
             return await _mediator.Send(request);
