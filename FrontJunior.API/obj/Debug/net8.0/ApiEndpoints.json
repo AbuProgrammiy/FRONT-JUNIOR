@@ -987,5 +987,31 @@
         "StatusCode": 200
       }
     ]
+  },
+  {
+    "ContainingType": "FrontJunior.API.Controllers.UserController",
+    "Method": "UpdateUsername",
+    "RelativePath": "api/User/UpdateUsername",
+    "HttpMethod": "PATCH",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "request",
+        "Type": "FrontJunior.Application.UseCases.UserCases.Commands.UpdateUserUsernameCommand",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "FrontJunior.Domain.Entities.Views.ResponseModel",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
   }
 ]

@@ -11,72 +11,34 @@ using Microsoft.EntityFrameworkCore;
 
 namespace FrontJunior.Application.UseCases.UserCases.Handlers.CommandHandlers
 {
-    public class SendVerificationToUserCommandHandler : IRequestHandler<SendVerificationToUserCommand, ResponseModel>
+    public class SendVerificationToChangePasswordCommandHandler : IRequestHandler<SendVerificationToChangePasswordCommand, ResponseModel>
     {
         private readonly IApplicationDbContext _applicationDbContext;
         private readonly ISendEmailService _sendEmailService;
         private readonly IWebHostEnvironment _webHostEnvironment;
 
-        public SendVerificationToUserCommandHandler(IApplicationDbContext applicationDbContext, ISendEmailService sendEmailService, IWebHostEnvironment webHostEnvironment)
+        public SendVerificationToChangePasswordCommandHandler(IApplicationDbContext applicationDbContext, ISendEmailService sendEmailService, IWebHostEnvironment webHostEnvironment)
         {
             _applicationDbContext = applicationDbContext;
             _sendEmailService = sendEmailService;
             _webHostEnvironment = webHostEnvironment;
         }
 
-        public async Task<ResponseModel> Handle(SendVerificationToUserCommand request, CancellationToken cancellationToken)
+        public async Task<ResponseModel> Handle(SendVerificationToChangePasswordCommand request, CancellationToken cancellationToken)
         {
             try
             {
-                if (request.IsPasswordForgotten == false || request.IsPasswordForgotten == null)
+
+                User user = await _applicationDbContext.Users.FirstOrDefaultAsync(u => u.Email == request.Email);
+
+                if (user == null)
                 {
-                    if(request.Username == null)
+                    return new ResponseModel
                     {
-                        return new ResponseModel
-                        {
-                            IsSuccess = false,
-                            StatusCode = 400,
-                            Response = "Username required!"
-                        };
-                    }
-
-                    User user = await _applicationDbContext.Users.FirstOrDefaultAsync(u => u.Username == request.Username);
-
-                    if (user != null)
-                    {
-                        return new ResponseModel
-                        {
-                            IsSuccess = false,
-                            StatusCode = 400,
-                            Response = "Username already taken!"
-                        };
-                    }
-
-                    user = await _applicationDbContext.Users.FirstOrDefaultAsync(u => u.Email == request.Email);
-
-                    if (user != null)
-                    {
-                        return new ResponseModel
-                        {
-                            IsSuccess = false,
-                            StatusCode = 400,
-                            Response = "Email already taken!"
-                        };
-                    }
-                }
-                else
-                {
-                    User user =await _applicationDbContext.Users.FirstOrDefaultAsync(u=>u.Email == request.Email);
-
-                    if (user == null)
-                    {
-                        return new ResponseModel
-                        {
-                            IsSuccess = false,
-                            StatusCode = 400,
-                            Response = "Email not registered yet!"
-                        };
-                    }
+                        IsSuccess = false,
+                        StatusCode = 404,
+                        Response = "Email not registered yet!"
+                    };
                 }
 
                 Verification verification = await _applicationDbContext.Verifications.FirstOrDefaultAsync(v => v.Email == request.Email);

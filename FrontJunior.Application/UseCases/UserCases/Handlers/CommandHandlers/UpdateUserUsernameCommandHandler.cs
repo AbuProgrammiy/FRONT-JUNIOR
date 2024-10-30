@@ -1,4 +1,5 @@
 ﻿using FrontJunior.Application.Abstractions;
+using FrontJunior.Application.Services.AuthServices;
 using FrontJunior.Application.UseCases.UserCases.Commands;
 using FrontJunior.Domain.Entities.Models.PrimaryModels;
 using FrontJunior.Domain.Entities.Views;
@@ -10,10 +11,12 @@ namespace FrontJunior.Application.UseCases.UserCases.Handlers.CommandHandlers
     public class UpdateUserUsernameCommandHandler : IRequestHandler<UpdateUserUsernameCommand, ResponseModel>
     {
         private readonly IApplicationDbContext _applicationDbContext;
+        private readonly IAuthService _authService;
 
-        public UpdateUserUsernameCommandHandler(IApplicationDbContext applicationDbContext)
+        public UpdateUserUsernameCommandHandler(IApplicationDbContext applicationDbContext, IAuthService authService)
         {
             _applicationDbContext = applicationDbContext;
+            _authService = authService;
         }
 
         public async Task<ResponseModel> Handle(UpdateUserUsernameCommand request, CancellationToken cancellationToken)
@@ -48,11 +51,13 @@ namespace FrontJunior.Application.UseCases.UserCases.Handlers.CommandHandlers
 
                 await _applicationDbContext.SaveChangesAsync(cancellationToken);
 
+                string token = _authService.GenerateToken(user);
+
                 return new ResponseModel
                 {
                     IsSuccess = true,
                     StatusCode = 200,
-                    Response = "Username successfully updated!"
+                    Response = token
                 };
             }
             catch (Exception ex)

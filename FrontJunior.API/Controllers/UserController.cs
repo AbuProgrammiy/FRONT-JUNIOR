@@ -39,7 +39,19 @@ namespace FrontJunior.API.Controllers
         }
 
         [HttpPost]
-        public async Task<ResponseModel> SendVerificationToUser(SendVerificationToUserCommand request)
+        public async Task<ResponseModel> SendVerificationToRegister(SendVerificationToRegisterCommand request)
+        {
+            return await _mediator.Send(request);
+        }
+
+        [HttpPost]
+        public async Task<ResponseModel> SendVerificationToChangePassword(SendVerificationToChangePasswordCommand request)
+        {
+            return await _mediator.Send(request);
+        }
+
+        [HttpPost]
+        public async Task<ResponseModel> SendVerificationToUpdateEmail(SendVerificationToUpdateEmailCommand request)
         {
             return await _mediator.Send(request);
         }
