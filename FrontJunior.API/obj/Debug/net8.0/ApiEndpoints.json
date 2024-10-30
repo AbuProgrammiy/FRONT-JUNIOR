@@ -912,15 +912,67 @@
   },
   {
     "ContainingType": "FrontJunior.API.Controllers.UserController",
-    "Method": "SendVerificationToUser",
-    "RelativePath": "api/User/SendVerificationToUser",
+    "Method": "SendVerificationToChangePassword",
+    "RelativePath": "api/User/SendVerificationToChangePassword",
     "HttpMethod": "POST",
     "IsController": true,
     "Order": 0,
     "Parameters": [
       {
         "Name": "request",
-        "Type": "FrontJunior.Application.UseCases.UserCases.Commands.SendVerificationToUserCommand",
+        "Type": "FrontJunior.Application.UseCases.UserCases.Commands.SendVerificationToChangePasswordCommand",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "FrontJunior.Domain.Entities.Views.ResponseModel",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "FrontJunior.API.Controllers.UserController",
+    "Method": "SendVerificationToRegister",
+    "RelativePath": "api/User/SendVerificationToRegister",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "request",
+        "Type": "FrontJunior.Application.UseCases.UserCases.Commands.SendVerificationToRegisterCommand",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "FrontJunior.Domain.Entities.Views.ResponseModel",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "FrontJunior.API.Controllers.UserController",
+    "Method": "SendVerificationToUpdateEmail",
+    "RelativePath": "api/User/SendVerificationToUpdateEmail",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "request",
+        "Type": "FrontJunior.Application.UseCases.UserCases.Commands.SendVerificationToUpdateEmailCommand",
         "IsRequired": true
       }
     ],

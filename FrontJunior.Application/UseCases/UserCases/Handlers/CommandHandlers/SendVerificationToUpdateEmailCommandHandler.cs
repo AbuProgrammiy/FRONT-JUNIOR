@@ -30,7 +30,7 @@ namespace FrontJunior.Application.UseCases.UserCases.Handlers.CommandHandlers
             {
                 User user = await _applicationDbContext.Users.FirstOrDefaultAsync(u => u.Email == request.NewEmail);
 
-                if (user == null)
+                if (user != null)
                 {
                     return new ResponseModel
                     {
